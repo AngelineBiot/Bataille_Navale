@@ -7,7 +7,7 @@ public class Coordonnees {
     private int y;
     private boolean touche;
 
-    public Coordonnees(){}
+    public Coordonnees(int x, int y){}
 
     public int getX(){
         return x;
