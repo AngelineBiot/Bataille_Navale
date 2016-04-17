@@ -49,7 +49,7 @@ public class Grille {
             @Override
             public void mouseReleased(MouseEvent e) {
                 //remet la case de la couleur originelle
-                gridButton[coord1D].setBackground(Color.RED);
+                gridButton[coord1D].setBackground(background);
             }
         });
         grille.add(afficheButton);
