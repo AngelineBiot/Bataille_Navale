@@ -24,6 +24,10 @@ public class Case{
         return coordoneY;
     }
 
+    public int getCoord1D(){
+        return coordoneX+coordoneY*10;
+    }
+
     public Bateaux getBat() {
         return bat;
     }
