@@ -2,13 +2,11 @@
  * Created by angel on 16/04/2016.
  */
 public class Coordonnees {
-
     private int x;
     private int y;
     private boolean touche;
 
-    public Coordonnees(int x, int y){}
-
+    public Coordonnees(int x,int y){}
     public int getX(){
         return x;
     }
