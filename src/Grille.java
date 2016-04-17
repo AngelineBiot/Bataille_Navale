@@ -16,17 +16,20 @@ public class Grille {
 
     int dimensionCarre=50;
     private int coord1D;
-    Grille(){}
+    private Case[] grille;
+    Grille(){
+        grille=new Case[100];
+    }
 
     public JPanel affiche(){
         JPanel grille = new JPanel();
         JPanel afficheButton = new JPanel(new GridLayout(10,10));
-        JPanel[] gridButton = new JPanel[100];
-        for (int i=0;i<gridButton.length;i++){
-            gridButton[i]=new JPanel();
-            gridButton[i].setPreferredSize(new Dimension(dimensionCarre, dimensionCarre));
-            gridButton[i].setBorder(BorderFactory.createLineBorder(Color.black));
-            afficheButton.add(gridButton[i]);
+        JPanel[] gridPanel = new JPanel[100];
+        for (int i=0;i<gridPanel.length;i++){
+            gridPanel[i]=new JPanel();
+            gridPanel[i].setPreferredSize(new Dimension(dimensionCarre, dimensionCarre));
+            gridPanel[i].setBorder(BorderFactory.createLineBorder(Color.black));
+            afficheButton.add(gridPanel[i]);
         }
         afficheButton.addMouseListener(new MouseAdapter() {
             private Color background;
@@ -40,16 +43,16 @@ public class Grille {
                 coord1D=(int)(coordX+coordY*10);
                 //permet de tester en changeant la couleur
                 System.out.println(coordX+" "+coordY+" "+coord1D);
-                background = gridButton[coord1D].getBackground();
-                gridButton[coord1D].setBackground(Color.RED);
-                gridButton[coord1D].repaint();
+                background = gridPanel[coord1D].getBackground();
+                gridPanel[coord1D].setBackground(Color.RED);
+                gridPanel[coord1D].repaint();
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 //remet la case de la couleur originelle
-                gridButton[coord1D].setBackground(background);
+                gridPanel[coord1D].setBackground(background);
             }
         });
         grille.add(afficheButton);
