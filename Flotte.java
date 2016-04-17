@@ -5,9 +5,11 @@ public class Flotte {
 
     private Bateaux[] flotte;
     private int nbBateaux;
+    private int nbBateauxCoule;
 
     public Flotte() {
         nbBateaux = 6;
+        nbBateauxCoule = 0;
         initFlotte(nbBateaux);
     }
 
