@@ -5,7 +5,9 @@ import java.util.Scanner;
  * Created by angel on 16/04/2016.
  */
 class Bateaux{
+
     static final Scanner input = new Scanner(System.in);
+
     private int taille;
     private ArrayList<Case> position;
     private boolean coule;
@@ -13,7 +15,7 @@ class Bateaux{
 
     public Bateaux(){}
 
-    public Bateaux(String typeDeBateau){
+    Bateaux(String typeDeBateau){
         if (typeDeBateau.equals("Porte-avion")){
             this.taille=5;
         }
