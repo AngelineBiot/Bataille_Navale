@@ -14,12 +14,17 @@ public class Flotte {
     }
 
     public void initFlotte(int nbBateaux){
-        Bateaux[] flotte = new Bateaux[nbBateaux];
-        flotte[0] = new Bateaux("Porte-avion");
-        flotte[1] = new Bateaux("Croiseur");
-        flotte[2] = new Bateaux("Sous-marin");
-        flotte[3] = new Bateaux("Sous-marin");
-        flotte[4] = new Bateaux("Torpilleur");
-        flotte[5] = new Bateaux("Torpilleur");
+        flotte = new Bateaux[nbBateaux];
+        flotte[0] = new Bateaux("porte-avion");
+        flotte[1] = new Bateaux("croiseur");
+        flotte[2] = new Bateaux("sous-marin");
+        flotte[3] = new Bateaux("sous-marin");
+        flotte[4] = new Bateaux("torpilleur");
+        flotte[5] = new Bateaux("torpilleur");
+
+    }
+
+    public Bateaux[] getFlotte(){
+        return flotte;
     }
 }
