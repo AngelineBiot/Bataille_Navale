@@ -24,7 +24,7 @@ public class Verdict extends JFrame {
   }
    public void creerDialog(String s) {
        	jop = new JOptionPane();
-        jop.showMessageDialog(null, s, "Erreur", JOptionPane.INFORMATION_MESSAGE);
+        jop.showMessageDialog(null, s, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
    public static void main(String[] args) {
  
