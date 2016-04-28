@@ -3,7 +3,6 @@ import java.awt.*;
 
 /**
  * Created by Florian on 18/04/2016.
- * Updated today
  */
 public class ConteneurPlacement extends JPanel {
 
@@ -13,21 +12,21 @@ public class ConteneurPlacement extends JPanel {
     private JLabel infoPlacement;
     private JLabel imageBateau;
     private JButton boutonValidation;
+    JRadioButton placerBateauVertical;
+    JRadioButton placerBateauHorizontal;
 
 
-
-
-    public ConteneurPlacement(EcouteurConteneurGrillePhasePlacement ecouteur){
-
+    public ConteneurPlacement(){
+//prend de Joueur
         grille = new Grille();
-        flotte = Flotte.creerFlotte6bateaux();
+        flotte = new Flotte();
 
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         setLayout(layout);
-        addWidgets(ecouteur);
+        addWidgets();
     }
 
-    private void addWidgets(EcouteurConteneurGrillePhasePlacement ecouteur){
+    private void addWidgets(){
         infoPlacement = new JLabel("Veuillez placer votre "+flotte.getFlotte()[0].getTypeBateau());
         infoPlacement.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
@@ -36,8 +35,8 @@ public class ConteneurPlacement extends JPanel {
         imageBateau.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 
-        JRadioButton placerBateauVertical = new JRadioButton("Placer le bateau verticalement");
-        JRadioButton placerBateauHorizontal = new JRadioButton("Placer le bateau horizontalement");
+        placerBateauVertical = new JRadioButton("Placer le bateau verticalement");
+        placerBateauHorizontal = new JRadioButton("Placer le bateau horizontalement");;
 
         ButtonGroup groupeBoutonChoixDirection = new ButtonGroup();
         groupeBoutonChoixDirection.add(placerBateauVertical);
@@ -45,11 +44,11 @@ public class ConteneurPlacement extends JPanel {
         placerBateauVertical.setSelected(true);
 
         placerBateauVertical.setActionCommand("changementDirection");
-        placerBateauVertical.addActionListener(ecouteur);
+
 
 
         placerBateauHorizontal.setActionCommand("changementDirection");
-        placerBateauHorizontal.addActionListener(ecouteur);
+
 
 
         JPanel conteneurChoixDirection = new JPanel();
@@ -62,7 +61,7 @@ public class ConteneurPlacement extends JPanel {
 
         boutonValidation = new JButton("Valider le placement du bateau");
         boutonValidation.setActionCommand("validation");
-        boutonValidation.addActionListener(ecouteur);
+
         boutonValidation.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         add(infoPlacement);
@@ -90,4 +89,11 @@ public class ConteneurPlacement extends JPanel {
     public JLabel getImageBateau(){
         return imageBateau;
     }
+    public void setControlTire(EcouteurConteneurGrillePhasePlacement ecouteur){
+        placerBateauVertical.addActionListener(ecouteur);
+        placerBateauHorizontal.addActionListener(ecouteur);
+        boutonValidation.addActionListener(ecouteur);
+
+    }
 }
+
