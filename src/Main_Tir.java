@@ -1,15 +1,18 @@
 import javax.swing.*;
 
-public class Main_Grille_test {
+/**
+ * Created by michael on 28/04/2016.
+ */
+public class Main_Tir {
     public static void main(String[] args) {
         //juste pour tester
         ImageBateau.initTableauImagesBateau();
-        ModelConteneurPlacement model = new ModelConteneurPlacement();
-        ConteneurPlacement placeurDeBateaux = new ConteneurPlacement();
+        Model_ConteneurTire model = new Model_ConteneurTire();
+        ConteneurTire placeurDeBateaux = new ConteneurTire();
         ConteneurGrille J1 = new ConteneurGrille();
         Grille grille_J1 = new Grille();
-        EcouteurConteneurGrillePhasePlacement ecouteur = new EcouteurConteneurGrillePhasePlacement(50,J1,placeurDeBateaux,model);
-
+        EcouteurConteneurGrillePhaseTire ecouteur = new EcouteurConteneurGrillePhaseTire(50,J1,placeurDeBateaux,model);
+        model.setGrille(grille_J1);
         JPanel conteneur = new JPanel();
         conteneur.add(J1);
         conteneur.add(placeurDeBateaux);
@@ -18,5 +21,4 @@ public class Main_Grille_test {
         test.setContentPane(conteneur);
         test.pack();
         test.setVisible(true);}
-
 }

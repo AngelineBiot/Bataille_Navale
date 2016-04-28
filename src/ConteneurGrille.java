@@ -12,9 +12,9 @@ public class ConteneurGrille extends JPanel {
 
     private static int dimensionCarre=50;
 
-    public ConteneurGrille(EcouteurConteneurGrillePhasePlacement ecouteur){
+    public ConteneurGrille(){
         initAttribut();
-        addWidget(ecouteur);
+        addWidget();
     }
 
 
@@ -29,16 +29,25 @@ public class ConteneurGrille extends JPanel {
         }
     }
 
-    private void addWidget(EcouteurConteneurGrillePhasePlacement ecouteur) {
+    private void addWidget() {
         for (int i=0;i<gridPanel.length;i++){
             afficheButton.add(gridPanel[i]);
 
         }
-        afficheButton.addMouseListener(ecouteur);
         this.add(afficheButton);
     }
 
     public JLabel[] getGridPanel(){
         return gridPanel;
     }
+
+    public void setBackgroundCase(int coord,Color couleur){
+        gridPanel[coord].setBackground(couleur);
+        gridPanel[coord].setOpaque(false);
+    }
+    public void setControl(MouseAdapter ecouteur){
+        afficheButton.addMouseListener(ecouteur);
+
+    }
+
 }

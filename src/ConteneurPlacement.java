@@ -19,7 +19,7 @@ public class ConteneurPlacement extends JPanel {
     public ConteneurPlacement(){
 //prend de Joueur
         grille = new Grille();
-        flotte = new Flotte();
+        flotte = Flotte.creerFlotte6bateaux();
 
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         setLayout(layout);
