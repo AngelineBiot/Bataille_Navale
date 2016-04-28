@@ -27,6 +27,7 @@
             pano.add(pret, BorderLayout.SOUTH);
             setContentPane(pano);
         }
+
         public static void main(String[] args) {
 
             javax.swing.SwingUtilities.invokeLater( new Runnable() {
