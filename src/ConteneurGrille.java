@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
  * Created by Michael on 17/04/2016.
  */
 public class ConteneurGrille extends JPanel {
+
     JPanel afficheButton;
     JPanel[] gridPanel;
     int dimensionCarre=50;
