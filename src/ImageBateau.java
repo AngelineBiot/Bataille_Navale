@@ -6,7 +6,6 @@ import java.io.IOException;
 
 /**
  * Created by Florian on 20/04/2016.
- * Updated today
  */
 public class ImageBateau{
     private static BufferedImage[] tableauImagesBateauVertical;
@@ -49,19 +48,17 @@ public class ImageBateau{
     private static int recupereIndexBateau(String typeBateau){
         int resultat =0;
 
-        switch (typeBateau) {
-            case "torpilleur":
-                resultat = 3;
-                break;
-            case "sous-marin":
-                resultat = 2;
-                break;
-            case "croiseur":
-                resultat = 1;
-                break;
-            case "porte-avion":
-                resultat = 0;
-                break;
+        if(typeBateau.equals("torpilleur")){
+            resultat = 3;
+        }
+        else if(typeBateau.equals("sous-marin")){
+            resultat = 2;
+        }
+        else if(typeBateau.equals("croiseur")){
+            resultat = 1;
+        }
+        else if(typeBateau.equals("porte-avion")){
+            resultat = 0;
         }
 
         return resultat;
@@ -75,15 +72,15 @@ public class ImageBateau{
 
         try{
 
-            tableauImagesBateauVertical[3] = ImageIO.read(new File("images/TorpilleurVertical.png"));
-            tableauImagesBateauVertical[2] = ImageIO.read(new File("images/SousMarinVertical.png"));
-            tableauImagesBateauVertical[1] = ImageIO.read(new File("images/CroiseurVertical.png"));
-            tableauImagesBateauVertical[0] = ImageIO.read(new File("images/PorteAvionVertical.png"));
+            tableauImagesBateauVertical[3] = ImageIO.read(new File("src/images/TorpilleurVertical.png"));
+            tableauImagesBateauVertical[2] = ImageIO.read(new File("src/images/SousMarinVertical.png"));
+            tableauImagesBateauVertical[1] = ImageIO.read(new File("src/images/CroiseurVertical.png"));
+            tableauImagesBateauVertical[0] = ImageIO.read(new File("src/images/PorteAvionVertical.png"));
 
-            tableauImagesBateauHorizontal[3] = ImageIO.read(new File("images/TorpilleurHorizontal.png"));
-            tableauImagesBateauHorizontal[2] = ImageIO.read(new File("images/SousMarinHorizontal.png"));
-            tableauImagesBateauHorizontal[1] = ImageIO.read(new File("images/CroiseurHorizontal.png"));
-            tableauImagesBateauHorizontal[0] = ImageIO.read(new File("images/PorteAvionHorizontal.png"));
+            tableauImagesBateauHorizontal[3] = ImageIO.read(new File("src/images/TorpilleurHorizontal.png"));
+            tableauImagesBateauHorizontal[2] = ImageIO.read(new File("src/images/SousMarinHorizontal.png"));
+            tableauImagesBateauHorizontal[1] = ImageIO.read(new File("src/images/CroiseurHorizontal.png"));
+            tableauImagesBateauHorizontal[0] = ImageIO.read(new File("src/images/PorteAvionHorizontal.png"));
         }
         catch(IOException e){
             e.printStackTrace();
