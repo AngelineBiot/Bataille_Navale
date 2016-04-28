@@ -1,10 +1,7 @@
-import java.util.List;
-
 /**
  * Created by angel on 17/04/2016.
- * Updated by angel on 25/04/2016.
  */
-class Flotte {
+public class Flotte {
 
     private Bateaux[] flotte;
     private int nbBateaux;
@@ -18,12 +15,12 @@ class Flotte {
 
     public static Flotte creerFlotte6bateaux(){
         Bateaux[] flotte = new Bateaux[6];
-        flotte[0] = new Bateaux("Porte-avion");
-        flotte[1] = new Bateaux("Croiseur");
-        flotte[2] = new Bateaux("Sous-marin");
-        flotte[3] = new Bateaux("Sous-marin");
-        flotte[4] = new Bateaux("Torpilleur");
-        flotte[5] = new Bateaux("Torpilleur");
+        flotte[0] = new Bateaux("porte-avion");
+        flotte[1] = new Bateaux("croiseur");
+        flotte[2] = new Bateaux("sous-marin");
+        flotte[3] = new Bateaux("sous-marin");
+        flotte[4] = new Bateaux("torpilleur");
+        flotte[5] = new Bateaux("torpilleur");
         return new Flotte(flotte);
     }
 
@@ -33,5 +30,9 @@ class Flotte {
 
     public boolean flotteCoulee(){
         return nbBateauxCoule == nbBateaux;
+    }
+
+    public Bateaux[] getFlotte(){
+        return flotte;
     }
 }

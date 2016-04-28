@@ -12,17 +12,19 @@ import static java.awt.MouseInfo.getPointerInfo;
 
 
 public class Grille {
-    final static Scanner input= new Scanner(System.in);
-
 
     private Case[] grille;
-    Grille(){
+    public Grille(){
         grille=new Case[100];
         for (int i=0;i<100;i++){
             int x=i%10;
             int y=i/10;
             grille[i]=new Case(x,y);
         }
+    }
+
+    public Case[] getGrille(){
+        return grille;
     }
 }
 

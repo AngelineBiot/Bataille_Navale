@@ -7,12 +7,14 @@ public class Case{
     Bateaux bat;
     boolean toucher;
     Case(int x,int y){
+        this.toucher = false;
         this.coordoneX=x;
         this.coordoneY=y;
     }
     Case(int x, int y, Bateaux b ){
         this.coordoneX=x;
         this.coordoneY=y;
+        this.toucher = false;
         this.bat=b;
     }
 
