@@ -50,6 +50,7 @@ public class Bateaux{
             this.taille=2;
         }
     }
+
     public int getTaille() {
         return taille;
     }
