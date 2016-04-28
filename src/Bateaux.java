@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 /**
  * Created by angel on 16/04/2016.
+ * Updated today
  */
 public class Bateaux{
 
@@ -19,17 +20,19 @@ public class Bateaux{
 
         typeBateau = typeDeBateau;
 
-        if (typeBateau.equals("porte-avion")){
-            this.taille=5;
-        }
-        else if (typeBateau.equals("croiseur")){
-            this.taille=4;
-        }
-        else if (typeBateau.equals("sous-marin")){
-            this.taille=3;
-        }
-        else if (typeBateau.equals("torpilleur")){
-            this.taille=2;
+        switch (typeBateau) {
+            case "porte-avion":
+                this.taille = 5;
+                break;
+            case "croiseur":
+                this.taille = 4;
+                break;
+            case "sous-marin":
+                this.taille = 3;
+                break;
+            case "torpilleur":
+                this.taille = 2;
+                break;
         }
     }
 
@@ -53,9 +56,6 @@ public class Bateaux{
     public boolean getCoule(){
         return coule;
     }
-    public void getEstOrienteVerticalement(){
-        position.forEach(System.out::println);
-    }
     public boolean getEstOrienteVerticalement(){
         return this.estOrienteVerticalement;
     }
@@ -73,8 +73,6 @@ public class Bateaux{
         return i == this.taille;
     }
 
-    }*/
-
     public void setPosition(Case[] tabCases, boolean estVertical){
         position = tabCases;
         estOrienteVerticalement = estVertical;
@@ -82,4 +80,5 @@ public class Bateaux{
 
     public String getTypeBateau(){
         return typeBateau;
+    }
 }
