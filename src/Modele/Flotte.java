@@ -26,8 +26,8 @@ public class Flotte {
         return new Flotte(flotte);
     }
 
-    public void setNbBateauxCoule(Flotte f){
-
+    public void setNbBateauxCoules(int i){
+        nbBateauxCoule += i;
     }
 
     public boolean flotteCoulee(){
