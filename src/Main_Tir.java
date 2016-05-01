@@ -1,3 +1,10 @@
+import Controleur.EcouteurConteneurGrillePhaseTire;
+import Modele.Grille;
+import Modele.ModelConteneurTire;
+import Vue.ConteneurGrille;
+import Vue.ConteneurTire;
+import Vue.ImageBateau;
+
 import javax.swing.*;
 
 /**
@@ -7,7 +14,7 @@ public class Main_Tir {
     public static void main(String[] args) {
         //juste pour tester
         ImageBateau.initTableauImagesBateau();
-        Model_ConteneurTire model = new Model_ConteneurTire();
+        ModelConteneurTire model = new ModelConteneurTire();
         ConteneurTire placeurDeBateaux = new ConteneurTire();
         ConteneurGrille J1 = new ConteneurGrille();
         Grille grille_J1 = new Grille();
