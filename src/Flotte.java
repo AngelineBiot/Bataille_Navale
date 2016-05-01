@@ -1,19 +1,20 @@
 /**
  * Created by angel on 17/04/2016.
+ * Updated 01/05/2016
  */
-public class Flotte {
+class Flotte {
 
     private Bateaux[] flotte;
     private int nbBateaux;
     private int nbBateauxCoule;
 
-    public Flotte(Bateaux[] flotte) {
+    private Flotte(Bateaux[] flotte) {
         this.flotte = flotte;
         nbBateaux = flotte.length;
         nbBateauxCoule = 0;
     }
 
-    public static Flotte creerFlotte6bateaux(){
+    static Flotte creerFlotte6bateaux(){
         Bateaux[] flotte = new Bateaux[6];
         flotte[0] = new Bateaux("porte-avion");
         flotte[1] = new Bateaux("croiseur");
@@ -24,15 +25,15 @@ public class Flotte {
         return new Flotte(flotte);
     }
 
-    public void setNbBateauxCoule(Flotte f){
-
+    public void setNbBateauxCoules(Flotte f, int i){
+        f.nbBateauxCoule += i;
     }
 
     public boolean flotteCoulee(){
         return nbBateauxCoule == nbBateaux;
     }
 
-    public Bateaux[] getFlotte(){
+    Bateaux[] getFlotte(){
         return flotte;
     }
 }
