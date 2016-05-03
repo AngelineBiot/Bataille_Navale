@@ -3,6 +3,7 @@ package Controleur;
 import Vue.*;
 import Modele.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,14 +42,13 @@ public class EcouteurConteneurGrillePhaseTire extends MouseAdapter implements Ac
     @Override
     public void mousePressed(MouseEvent e) {
         if (model_tire.getCaseOuEstTire()!=null){
-            panelTire.getConteneurGrille().setBackgroundCase(model_tire.getCoord1D(),model_tire.getBackground());
+            panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.black));
         }
         model_tire.setCoordX((e.getX()) / model_tire.getDimensionCarre());
         model_tire.setCoordY((e.getY()) / model_tire.getDimensionCarre());
         model_tire.setCoord1D(model_tire.getCoordX() + model_tire.getCoordY() * 10);
         model_tire.setCaseOuEstTire(model_tire.getGrille().getGrille()[model_tire.getCoord1D()]);
-        model_tire.setBackground(panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].getBackground());
-        panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setBackground(Color.red);
+        panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
         panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setOpaque(true);
 
     }

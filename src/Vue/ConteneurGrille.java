@@ -1,8 +1,6 @@
 package Vue;
 
-import Modele.Bateaux;
-import Modele.Flotte;
-import Modele.Joueur;
+import Modele.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,6 +79,21 @@ public class ConteneurGrille extends JPanel {
                 }
 
                 i++;
+            }
+        }
+    }
+
+    public void afficherCaseTouche(int numeroJoueur){
+        Grille grille = Joueur.getJoueur(numeroJoueur).getGrille();
+
+        for(Case currentCase : grille.getGrille()){
+
+            if (currentCase.getToucher()){
+                if (currentCase.getBat()!=null){
+                    gridPanel[currentCase.getCoord1D()].setBackground(Color.red);
+                }else {
+                    setBackgroundCase(currentCase.getCoord1D(),Color.RED);
+                }
             }
         }
     }

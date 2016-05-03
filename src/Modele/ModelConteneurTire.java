@@ -11,7 +11,6 @@ public class ModelConteneurTire {
     private int coordY;
     private int coord1D;
     private int dimensionCarre;
-    private Color background;
     private Case caseOuEstTire;
     private Grille grille;
     private Flotte flotte;
@@ -67,14 +66,6 @@ public class ModelConteneurTire {
 
     public void setDimensionCarre(int dimensionCarre) {
         this.dimensionCarre = dimensionCarre;
-    }
-
-    public Color getBackground() {
-        return background;
-    }
-
-    public void setBackground(Color background) {
-        this.background = background;
     }
 
 
