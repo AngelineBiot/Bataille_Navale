@@ -1,55 +1,54 @@
 package Modele;
 
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
 /**
  * Created by angel on 16/04/2016.
- * Updated today
  */
 public class Bateaux{
 
+    static final Scanner input = new Scanner(System.in);
+
     private int taille;
-    private Case[] position;
+    protected Case[] position;
     private boolean coule;
     private boolean estOrienteVerticalement;
     private String typeBateau;
 
     public Bateaux(){}
 
-    public Bateaux(String typeDeBateau){
-        coule = false;
-
-        typeBateau = typeDeBateau;
-
-        switch (typeBateau) {
-            case "porte-avion":
-                this.taille = 5;
-                break;
-            case "croiseur":
-                this.taille = 4;
-                break;
-            case "sous-marin":
-                this.taille = 3;
-                break;
-            case "torpilleur":
-                this.taille = 2;
-                break;
-        }
-    }
-
-    public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
-        if (typeDeBateau.equals("porte-avion")){
+    Bateaux(String typeDeBateau){
+        if (typeDeBateau.equals("Porte-avion")){
             this.taille=5;
         }
-        if (typeDeBateau.equals("croiseur")){
+        if (typeDeBateau.equals("Croiseur")){
             this.taille=4;
         }
-        if (typeDeBateau.equals("sous-marin")){
+        if (typeDeBateau.equals("Sous-marin")){
             this.taille=3;
         }
-        if (typeDeBateau.equals("torpilleur")){
+        if (typeDeBateau.equals("Torpilleur")){
             this.taille=2;
         }
     }
 
+    public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
+        if (typeDeBateau.equals("Porte-avion")){
+            this.taille=5;
+        }
+        if (typeDeBateau.equals("Croiseur")){
+            this.taille=4;
+        }
+        if (typeDeBateau.equals("Sous-marin")){
+            this.taille=3;
+        }
+        if (typeDeBateau.equals("Torpilleur")){
+            this.taille=2;
+        }
+    }
     public int getTaille() {
         return taille;
     }
@@ -62,12 +61,22 @@ public class Bateaux{
     public void setEstOrienteVerticalement(boolean orientation){
         this.estOrienteVerticalement=orientation;
     }
+
     public boolean estCoule(){
         int i = 0;
         for (Case coordonnees : position) {
-                if (coordonnees.getToucher()) i++;
+            if (coordonnees.getToucher()) i++;
         }
         return i == this.taille;
+    }
+    public boolean estTouche(){
+        boolean estTouche = false;
+        for(Case coordonnees : position){
+            if(coordonnees.getToucher()){
+                estTouche = true;
+            }
+        }
+        return estTouche;
     }
 
     public void setPosition(Case[] tabCases, boolean estVertical){

@@ -27,18 +27,17 @@ public class Verdict extends JFrame {
     }
 
 
-   public void toucher(Case c){
-   		if (c.getToucher()) {
-        	creerDialog("touche");
-        }
-        else {
-        	creerDialog("miss!!");
-        }
-   }
+
    public void coule(Bateaux b){
-   		if(b.estCoule()){
-   			creerDialog("coule!");
-   		}
+       if(b.estCoule()){
+           creerDialog("coule!");
+       }
+       else if (b.estTouche()) {
+           creerDialog("touche");
+       }
+       else {
+           creerDialog("miss!!");
+       }
    }
 
    public static void main(String[] args) {
