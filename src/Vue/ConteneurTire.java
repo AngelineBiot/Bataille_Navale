@@ -15,8 +15,13 @@ public class ConteneurTire extends JTabbedPane {
     private JLabel infoTire;
     private JLabel imageBateau;
     private JButton boutonValidation;
+    private ConteneurGrille conteneurGrilleJoueur;
+    private ConteneurGrille conteneurGrilleAutreJoueur;
 
-    public ConteneurTire(){
+    private ModelConteneurTire modelConteneurTire;
+
+    public ConteneurTire(ModelConteneurTire modele){
+        modelConteneurTire = modele;
         addWidgets();
 
 
@@ -25,7 +30,7 @@ public class ConteneurTire extends JTabbedPane {
 
     }
     private void addWidgets(){
-        infoTire = new JLabel("Veuillez choisir ou vous tirez");
+        infoTire = new JLabel("Veuillez choisir où vous tirez");
         infoTire.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         boutonValidation = new JButton("Valider le tire");
@@ -40,23 +45,29 @@ public class ConteneurTire extends JTabbedPane {
         conteneurChoixTir.add(boutonValidation);
 
         conteneurGrilleTir.add(conteneurChoixTir);
-        ConteneurGrille J1 = new ConteneurGrille();   //Avant d'y prendre dans Joueur
-        conteneurGrilleTir.add(J1);
+        conteneurGrilleAutreJoueur = new ConteneurGrille();   //Avant d'y prendre dans Joueur
+        conteneurGrilleTir.add(conteneurGrilleAutreJoueur);
 
         addTab("À l'attaque !", conteneurGrilleTir);
 
 
 
-        J1 = new ConteneurGrille();
-        addTab("Voir sa grille", J1);
-        addTab("rr",new JPanel());
-
-
+        conteneurGrilleJoueur = new ConteneurGrille();
+        conteneurGrilleJoueur.afficherBateauxDeSaFlotte(modelConteneurTire.getNumeroJoueur());
+        addTab("Voir ma grille", conteneurGrilleJoueur);
 
 
     }
     public void setControlTire(EcouteurConteneurGrillePhaseTire ecouteur){
         boutonValidation.addActionListener(ecouteur);
 
+        conteneurGrilleAutreJoueur.setControl(ecouteur);
+
     }
+
+    public ConteneurGrille getConteneurGrille(){
+        return conteneurGrilleAutreJoueur;
+    }
+
+
 }

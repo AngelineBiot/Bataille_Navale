@@ -25,20 +25,37 @@ public class EcouteurConteneurAttente implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(modelAttente.getConcernePhasePlacement()){
-            ModelConteneurPlacement modele;
+            ModelConteneurPlacement modelConteneurPlacement;
             if(modelAttente.getConcerneJoueur1()){
-                modele = new ModelConteneurPlacement(1);
+                modelConteneurPlacement = new ModelConteneurPlacement(1);
             }
             else{
-                modele = new ModelConteneurPlacement(2);
+                modelConteneurPlacement = new ModelConteneurPlacement(2);
             }
 
-            modele.setDimensionCarre(50);
+            modelConteneurPlacement.setDimensionCarre(50);
 
-            ConteneurPlacement conteneur = new ConteneurPlacement(modele);
-            EcouteurConteneurGrillePhasePlacement ecouteur = new EcouteurConteneurGrillePhasePlacement(modele, conteneur);
+            ConteneurPlacement conteneur = new ConteneurPlacement(modelConteneurPlacement);
+            EcouteurConteneurGrillePhasePlacement ecouteur = new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur);
 
             Fenetre.getFenetre().setContentPane(conteneur);
+            Fenetre.getFenetre().validate();
+
+        }
+        else{
+            ModelConteneurTire modelConteneurTire;
+            int numeroJoueur= 1 ;
+            if(!modelAttente.getConcerneJoueur1()){
+                numeroJoueur = 2;
+
+            }
+            modelConteneurTire = new ModelConteneurTire(numeroJoueur);
+
+            ConteneurTire conteneurTire = new ConteneurTire(modelConteneurTire);
+
+            EcouteurConteneurGrillePhaseTire ecouteur= new EcouteurConteneurGrillePhaseTire(numeroJoueur, conteneurTire, modelConteneurTire);
+
+            Fenetre.getFenetre().setContentPane(conteneurTire);
             Fenetre.getFenetre().validate();
 
         }

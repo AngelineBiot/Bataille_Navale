@@ -9,7 +9,7 @@ public class Bateaux{
     private int taille;
     private Case[] position;
     private boolean coule;
-    private boolean estOrienteVerticalement; //v ou h
+    private boolean estOrienteVerticalement;
     private String typeBateau;
 
     public Bateaux(){}
@@ -73,6 +73,11 @@ public class Bateaux{
     public void setPosition(Case[] tabCases, boolean estVertical){
         position = tabCases;
         estOrienteVerticalement = estVertical;
+    }
+
+    public int getCoordonneesPremiereCase(){
+        int coord = position[0].getCoord1D();
+        return coord;
     }
 
     public String getTypeBateau(){

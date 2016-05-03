@@ -24,10 +24,10 @@ public class Main_Tir {
         conteneur.add(J1);
         conteneur.add(placeurDeBateaux);*/
 
-        ConteneurTire placeurDeBateaux = new ConteneurTire();
+        //ConteneurTire placeurDeBateaux = new ConteneurTire();
 
         JFrame test = new JFrame();
-        test.setContentPane(placeurDeBateaux);
+        //test.setContentPane(placeurDeBateaux);
         test.pack();
         test.setVisible(true);}
 }

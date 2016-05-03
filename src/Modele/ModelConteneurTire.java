@@ -16,7 +16,15 @@ public class ModelConteneurTire {
     private Grille grille;
     private Flotte flotte;
 
+    private int numeroJoueur;
+
     //Utilisation du constructeur vide par defaut
+
+    public ModelConteneurTire(int numero){
+        numeroJoueur = numero;
+        grille = Joueur.getJoueur(numeroJoueur).getGrille();
+        flotte = Joueur.getJoueur(numeroJoueur).getFlotte();
+    }
 
 
 
@@ -87,4 +95,11 @@ public class ModelConteneurTire {
     }
 
 
+    public int getNumeroJoueur() {
+        return numeroJoueur;
+    }
+
+    public void setNumeroJoueur(int numeroJoueur) {
+        this.numeroJoueur = numeroJoueur;
+    }
 }

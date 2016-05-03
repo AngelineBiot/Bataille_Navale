@@ -1,5 +1,9 @@
 package Vue;
 
+import Modele.Bateaux;
+import Modele.Flotte;
+import Modele.Joueur;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -51,6 +55,34 @@ public class ConteneurGrille extends JPanel {
     public void setControl(MouseAdapter ecouteur){
         afficheButton.addMouseListener(ecouteur);
 
+    }
+
+    public void afficherBateauxDeSaFlotte(int numeroJoueur){
+        Flotte flotte = Joueur.getJoueur(numeroJoueur).getFlotte();
+
+
+        for(Bateaux bat : flotte.getFlotte()){
+            int coord = bat.getCoordonneesPremiereCase();
+
+            int i=0;
+            boolean estVertical = bat.getEstOrienteVerticalement();
+
+            while(i<bat.getTaille()){
+                ImageIcon image = ImageBateau.getImageBateau(bat.getTypeBateau(), estVertical, i);
+                gridPanel[coord].setIcon(image);
+                //System.out.println(coord);
+
+
+                if(estVertical){
+                    coord+=10;
+                }
+                else{
+                    coord++;
+                }
+
+                i++;
+            }
+        }
     }
 
 }
