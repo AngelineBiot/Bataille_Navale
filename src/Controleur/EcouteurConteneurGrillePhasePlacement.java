@@ -187,9 +187,17 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                         Fenetre.getFenetre().validate();
                     }
                     else{
-                        panelPlacement.getInfoPlacement().setText("Vous avez fini de placer vos bateaux");
-                        panelPlacement.getImageBateau().setIcon(null);
+                        /*panelPlacement.getInfoPlacement().setText("Vous avez fini de placer vos bateaux");
+                        panelPlacement.getImageBateau().setIcon(null);*/
                         //Mettre ici traitement à faire quand fini de placer les bateaux
+
+                        ModelAttente modele= new ModelAttente(true, false, Joueur.getJoueur(1).getNomJoueur());
+                        ConteneurAttente conteneurAttente = new ConteneurAttente(modele);
+
+                        EcouteurConteneurAttente ecouteurConteneurAttente = new EcouteurConteneurAttente(conteneurAttente, modele);
+
+                        Fenetre.getFenetre().setContentPane(conteneurAttente);
+                        Fenetre.getFenetre().validate();
                     }
 
                 }

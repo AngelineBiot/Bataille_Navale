@@ -12,9 +12,10 @@ public class Fenetre extends JFrame{
     private Fenetre(String nomFenetre){
         setTitle(nomFenetre);
         //setSize(400,150);
-        setSize(800,800);
+        setSize(900,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
+        setResizable(false);
         /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
         setContentPane(conteneur);*/
 

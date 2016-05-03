@@ -14,7 +14,7 @@ public class Main_Tir {
     public static void main(String[] args) {
         //juste pour tester
         ImageBateau.initTableauImagesBateau();
-        ModelConteneurTire model = new ModelConteneurTire();
+        /*ModelConteneurTire model = new ModelConteneurTire();
         ConteneurTire placeurDeBateaux = new ConteneurTire();
         ConteneurGrille J1 = new ConteneurGrille();
         Grille grille_J1 = new Grille();
@@ -22,10 +22,12 @@ public class Main_Tir {
         model.setGrille(grille_J1);
         JPanel conteneur = new JPanel();
         conteneur.add(J1);
-        conteneur.add(placeurDeBateaux);
+        conteneur.add(placeurDeBateaux);*/
+
+        ConteneurTire placeurDeBateaux = new ConteneurTire();
 
         JFrame test = new JFrame();
-        test.setContentPane(conteneur);
+        test.setContentPane(placeurDeBateaux);
         test.pack();
         test.setVisible(true);}
 }

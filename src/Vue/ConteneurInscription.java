@@ -17,7 +17,6 @@ public class ConteneurInscription extends JPanel{
 
 
     public ConteneurInscription(){
-
         initAttributs();
         addwidgets();
 
