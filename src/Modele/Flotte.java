@@ -1,5 +1,7 @@
 package Modele;
 
+import Modele.Bateaux;
+
 /**
  * Created by angel on 17/04/2016.
  */
@@ -8,6 +10,7 @@ public class Flotte {
     private Bateaux[] flotte;
     private int nbBateaux;
     private int nbBateauxCoule;
+    private int nbTouches;
 
     public Flotte(Bateaux[] flotte) {
         this.flotte = flotte;
@@ -26,15 +29,25 @@ public class Flotte {
         return new Flotte(flotte);
     }
 
-    public void setNbBateauxCoules(int i){
-        nbBateauxCoule += i;
+    public void setNbBateauxCoule(Flotte f){
+
     }
 
     public boolean flotteCoulee(){
         return nbBateauxCoule == nbBateaux;
     }
 
+    public static int getFlotteCoulee(){
+        int nbBateauxCoule=0;
+        return nbBateauxCoule;
+    }
+
     public Bateaux[] getFlotte(){
         return flotte;
+    }
+
+    public static int getNbTouches(){
+        int nbTouches=0;
+        return nbTouches;
     }
 }

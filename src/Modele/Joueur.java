@@ -12,6 +12,8 @@ public class Joueur {
     private static Joueur joueur2;
 
 
+
+
     private Joueur(){
         flotte = Flotte.creerFlotte6bateaux();
         grille = new Grille();
@@ -27,6 +29,11 @@ public class Joueur {
 
     public Flotte getFlotte(){
         return flotte;
+    }
+
+    public static int getNbCoups(){
+        int nbcoups=0;
+        return nbcoups;
     }
 
     public Grille getGrille(){
