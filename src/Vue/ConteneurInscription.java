@@ -12,7 +12,6 @@ public class ConteneurInscription extends JPanel{
     private JTextField labelJoueur1;
     private JTextField labelJoueur2;
     private JButton valider;
-
     
 
 
@@ -29,8 +28,6 @@ public class ConteneurInscription extends JPanel{
 
         labelJoueur1.setColumns(15);
         labelJoueur2.setColumns(15);
-
-
     }
 
     public void addwidgets(){
@@ -51,9 +48,7 @@ public class ConteneurInscription extends JPanel{
         valider.setAlignmentX(Component.CENTER_ALIGNMENT);
         placementGeneral.add(valider);
 
-
         add(placementGeneral);
-
     }
 
     public JTextField getlabelJoueur1(){

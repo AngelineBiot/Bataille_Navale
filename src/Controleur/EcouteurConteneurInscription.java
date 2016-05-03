@@ -3,6 +3,7 @@ package Controleur;
 import Modele.*;
 import Vue.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,6 +38,10 @@ public class EcouteurConteneurInscription implements ActionListener{
             Fenetre.getFenetre().setContentPane(conteneur);
             Fenetre.getFenetre().validate();
 
+        }
+        else {
+            JOptionPane jopErreurInscription = new JOptionPane();
+            jopErreurInscription.showMessageDialog(null,"Veuillez entrez un pseudo pour chaque joueur","Erreur",JOptionPane.ERROR_MESSAGE);
         }
 
 

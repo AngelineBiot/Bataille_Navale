@@ -5,5 +5,7 @@
 # IntelliJ project files
 .idea
 out
+Bataille_Navale.iml
+src/Vue/TorpilleurHorizontal.png
 gen
 test
