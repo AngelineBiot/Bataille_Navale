@@ -21,31 +21,32 @@ public class Bateaux{
     public Bateaux(){}
 
     Bateaux(String typeDeBateau){
-        if (typeDeBateau.equals("Porte-avion")){
+        typeBateau=typeDeBateau;
+        if (typeDeBateau.equals("porte-avion")){
             this.taille=5;
         }
-        if (typeDeBateau.equals("Croiseur")){
+        if (typeDeBateau.equals("croiseur")){
             this.taille=4;
         }
-        if (typeDeBateau.equals("Sous-marin")){
+        if (typeDeBateau.equals("sous-marin")){
             this.taille=3;
         }
-        if (typeDeBateau.equals("Torpilleur")){
+        if (typeDeBateau.equals("torpilleur")){
             this.taille=2;
         }
     }
 
     public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
-        if (typeDeBateau.equals("Porte-avion")){
+        if (typeDeBateau.equals("porte-avion")){
             this.taille=5;
         }
-        if (typeDeBateau.equals("Croiseur")){
+        if (typeDeBateau.equals("croiseur")){
             this.taille=4;
         }
-        if (typeDeBateau.equals("Sous-marin")){
+        if (typeDeBateau.equals("sous-marin")){
             this.taille=3;
         }
-        if (typeDeBateau.equals("Torpilleur")){
+        if (typeDeBateau.equals("torpilleur")){
             this.taille=2;
         }
     }
