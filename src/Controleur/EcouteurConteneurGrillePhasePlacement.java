@@ -10,15 +10,21 @@ import java.awt.event.*;
  * Created by Florian on 18/04/2016.
  */
 public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implements ActionListener {
+    /*Note : il est possible que certains traitements soient à deplacer dans le modele*/
 
-    ModelConteneurPlacement model_place;
+
+    private ModelConteneurPlacement model_place;
 
     private ConteneurPlacement panelPlacement;
     private ConteneurGrille conteneurGrille;
+    private Fenetre fenetre;
+    private Jeu jeu;
 
 
-    public EcouteurConteneurGrillePhasePlacement(ModelConteneurPlacement model, ConteneurPlacement panPlace) {
+    public EcouteurConteneurGrillePhasePlacement(ModelConteneurPlacement model, ConteneurPlacement panPlace, Fenetre fen, Jeu j) {
         model_place=model;
+        fenetre = fen;
+        jeu = j;
 
         panelPlacement=panPlace;
         model.setDirectionVerticale(true);
@@ -37,9 +43,8 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
         model_place.setCoordX((e.getX())/model_place.getDimensionCarre());
         model_place.setCoordY((e.getY())/model_place.getDimensionCarre());
         model_place.setCoord1D(model_place.getCoordX()+model_place.getCoordY()*10);
-        int longueur = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
 
-
+        int longueur = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
         boolean xBon = model_place.getCoordX()>=0 && ((model_place.isDirectionVerticale() && model_place.getCoordX()<10) || (model_place.getCoordX()<=10-longueur));
         boolean yBon = model_place.getCoordY()>=0 && ((!model_place.isDirectionVerticale() && model_place.getCoordY()<10) || (model_place.getCoordY()<=10-longueur));
         boolean bon = xBon && yBon;
@@ -55,8 +60,8 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
             }
 
 
-            model_place.setCaseOuEstBateauEnCoursPlacement(panelPlacement.getGrille().getGrille()[model_place.getCoord1D()]);
-            String typeBateau = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
+            model_place.setCaseOuEstBateauEnCoursPlacement(jeu.getJoueurConcerne().getGrille().getGrille()[model_place.getCoord1D()]);
+            String typeBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
 
             int x = model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneX();
             int y =model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneY();
@@ -88,7 +93,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                 if(model_place.getCaseOuEstBateauEnCoursPlacement() != null){
                     model_place.setCoordX(model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneX());
                     model_place.setCoordY(model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneY());
-                    int longueur = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
+                    int longueur = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
 
                     boolean xBon = model_place.getCoordX()>=0 && ((!model_place.isDirectionVerticale() && model_place.getCoordX()<10) || (model_place.getCoordX()<=10-longueur));
                     boolean yBon = model_place.getCoordY()>=0 && ((model_place.isDirectionVerticale() && model_place.getCoordY()<10) || (model_place.getCoordY()<=10-longueur));
@@ -115,7 +120,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
                     System.out.println(x+" "+y+" "+!model_place.isDirectionVerticale()+" "+longueur);
                     if(verifAucuneCaseDejaPrise(x, y, !model_place.isDirectionVerticale(), longueur)){
-                        String typeBateau = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
+                        String typeBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
                         if(model_place.isDirectionVerticale()){
                             for(i=0 ; i<longueur ; i++){
                                 conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i));
@@ -128,7 +133,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
                         }
 
-                        model_place.setCaseOuEstBateauEnCoursPlacement(panelPlacement.getGrille().getGrille()[x+y*10]);
+                        model_place.setCaseOuEstBateauEnCoursPlacement(jeu.getJoueurConcerne().getGrille().getGrille()[x+y*10]);
                     }
                     else{
                         model_place.setCaseOuEstBateauEnCoursPlacement(null);
@@ -143,24 +148,24 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
         }
         else if(e.getActionCommand().equals("validation")){
             if(model_place.getCaseOuEstBateauEnCoursPlacement() != null){
-                int longueur = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
+                int longueur = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTaille();
                 Case[] tabCasesDuBateau = new Case[longueur];
                 int i;
 
                 int x = model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneX();
                 int y = model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneY();
 
-                Bateaux bateauPlace = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()];
+                Bateaux bateauPlace = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()];
 
                 if(model_place.isDirectionVerticale()){
                     for(i=0 ; i<longueur ; i++){
-                        tabCasesDuBateau[i] = panelPlacement.getGrille().getGrille()[x+(i+y)*10];
+                        tabCasesDuBateau[i] = jeu.getJoueurConcerne().getGrille().getGrille()[x+(i+y)*10];
                         tabCasesDuBateau[i].setBat(bateauPlace);
                     }
                 }
                 else{
                     for(i=0 ; i<longueur ; i++){
-                        tabCasesDuBateau[i] = panelPlacement.getGrille().getGrille()[x+i+y*10];
+                        tabCasesDuBateau[i] = jeu.getJoueurConcerne().getGrille().getGrille()[x+i+y*10];
                         tabCasesDuBateau[i].setBat(bateauPlace);
                     }
                 }
@@ -170,35 +175,20 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
                 model_place.setIndiceBateauEnCours(model_place.getIndiceBateauEnCours()+1);
 
-                if(model_place.getIndiceBateauEnCours()<panelPlacement.getFlotte().getFlotte().length){
-                    String typeNouvBateau = panelPlacement.getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
+                if(model_place.getIndiceBateauEnCours()<jeu.getJoueurConcerne().getFlotte().getFlotte().length){
+                    String typeNouvBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
                     panelPlacement.getInfoPlacement().setText("Veuillez placer votre "+typeNouvBateau);
                     panelPlacement.getImageBateau().setIcon(ImageBateau.getImageBateau(typeNouvBateau,false));
                     panelPlacement.getImageBateau().updateUI();
                 }
                 else{
-                    if(model_place.getNumeroJoueur() == 1){
-                        ModelAttente modele= new ModelAttente(false, true, Joueur.getJoueur(2).getNomJoueur());
-                        ConteneurAttente conteneurAttente = new ConteneurAttente(modele);
 
-                        EcouteurConteneurAttente ecouteurConteneurAttente = new EcouteurConteneurAttente(conteneurAttente, modele);
+                    ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
+                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
 
-                        Fenetre.getFenetre().setContentPane(conteneurAttente);
-                        Fenetre.getFenetre().validate();
-                    }
-                    else{
-                        /*panelPlacement.getInfoPlacement().setText("Vous avez fini de placer vos bateaux");
-                        panelPlacement.getImageBateau().setIcon(null);*/
-                        //Mettre ici traitement à faire quand fini de placer les bateaux
+                    fenetre.setContentPane(conteneurAttente);
+                    fenetre.validate();
 
-                        ModelAttente modele= new ModelAttente(true, false, Joueur.getJoueur(1).getNomJoueur());
-                        ConteneurAttente conteneurAttente = new ConteneurAttente(modele);
-
-                        EcouteurConteneurAttente ecouteurConteneurAttente = new EcouteurConteneurAttente(conteneurAttente, modele);
-
-                        Fenetre.getFenetre().setContentPane(conteneurAttente);
-                        Fenetre.getFenetre().validate();
-                    }
 
                 }
 
@@ -211,7 +201,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
         boolean resultat = true;
         int i;
 
-        Case[] grilleModele = panelPlacement.getGrille().getGrille();
+        Case[] grilleModele = jeu.getJoueurConcerne().getGrille().getGrille();
 
         if(vertical){
             int j;

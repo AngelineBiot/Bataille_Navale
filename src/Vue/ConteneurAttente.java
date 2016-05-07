@@ -10,19 +10,17 @@ import Modele.*;
  * Created by ANTOINE on 17/04/2016.
  */
 public class ConteneurAttente extends JPanel {
-    ModelAttente modelAttente;
-    JButton pret;
+    private JButton pret;
 
-    public ConteneurAttente(ModelAttente model) {
+    public ConteneurAttente(Jeu j) {
 
-        modelAttente = model;
-        creerWidgetJoueur();
+        creerWidgetJoueur(j.getJoueurConcerne().getNomJoueur());
 
     }
 
-    public void creerWidgetJoueur() {
+    public void creerWidgetJoueur(String nomJoueur) {
         //Message
-        JLabel lab = new JLabel(modelAttente.getNomJoueur()+" à toi de jouer",SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
+        JLabel lab = new JLabel(nomJoueur+" à toi de jouer",SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
 
         // Affichage du bouton prêt
         pret = new JButton("Prêt ?");;
@@ -36,16 +34,4 @@ public class ConteneurAttente extends JPanel {
         pret.addActionListener(ecouteur);
     }
 
-
-    /*public static void main(String[] args) {
-
-        javax.swing.SwingUtilities.invokeLater( new Runnable() {
-
-            public void run() {
-                Vue.ConteneurAttente f = new Vue.ConteneurAttente("Nom_fictif");
-            }
-
-        });
-    }*/
 }
-

@@ -1,6 +1,5 @@
 package Modele;
 
-import Modele.Bateaux;
 
 /**
  * Created by angel on 17/04/2016.

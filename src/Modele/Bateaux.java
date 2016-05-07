@@ -1,7 +1,5 @@
 package Modele;
 
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -10,7 +8,6 @@ import java.util.Scanner;
  */
 public class Bateaux{
 
-    static final Scanner input = new Scanner(System.in);
 
     private int taille;
     protected Case[] position;
@@ -18,7 +15,6 @@ public class Bateaux{
     private boolean estOrienteVerticalement;
     private String typeBateau;
 
-    public Bateaux(){}
 
     Bateaux(String typeDeBateau){
         typeBateau=typeDeBateau;
@@ -36,20 +32,7 @@ public class Bateaux{
         }
     }
 
-    public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
-        if (typeDeBateau.equals("porte-avion")){
-            this.taille=5;
-        }
-        if (typeDeBateau.equals("croiseur")){
-            this.taille=4;
-        }
-        if (typeDeBateau.equals("sous-marin")){
-            this.taille=3;
-        }
-        if (typeDeBateau.equals("torpilleur")){
-            this.taille=2;
-        }
-    }
+
     public int getTaille() {
         return taille;
     }

@@ -6,7 +6,8 @@ import Modele.Case;
 import javax.swing.*;
 
 public class Verdict extends JFrame {
-  JOptionPane jop;
+  private JOptionPane jop;
+
   public Verdict() {
  
     creerWidget();

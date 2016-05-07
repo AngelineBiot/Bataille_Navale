@@ -1,6 +1,6 @@
 package Vue;
 
-import Controleur.ControlMenu;
+import Controleur.EcouteurMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +9,6 @@ import java.awt.*;
  * Created by Florian on 14/04/2016.
  */
 public class Fenetre extends JFrame{
-
-    private static Fenetre fenetre;
 
     private JMenuBar 		menuBar;
     private JMenu 			partie;
@@ -22,44 +20,13 @@ public class Fenetre extends JFrame{
     protected JMenuItem		reprendrePartie;
 
 
-    public JMenuItem getItemApropos() {
-        return itemApropos;
-    }
-
-
-    public JMenuItem getItemAide() {
-        return itemAide;
-    }
-
-
-    public JMenuItem getReprendrePartie() {
-        return reprendrePartie;
-    }
-
-
-    public JMenuItem getQuitterPartie() {
-        return quitterPartie;
-    }
-
-
-    public JMenuItem getSauvegarderPartie() {
-        return sauvegarderPartie;
-    }
-
-
-    public JMenuItem getNouvellePartie() {
-        return nouvellePartie;
-    }
-
 
     protected JMenuItem		itemAide;
     protected JMenuItem		itemApropos;
 
-    private Fenetre(String nomFenetre){
+    public Fenetre(String nomFenetre){
         setTitle(nomFenetre);
 
-        //Image img = new Image("TorpilleurHorizontal.png");
-        //setIconImage(img);
 
         Image im = Toolkit.getDefaultToolkit().getImage("TorpilleurHorizontal.png");
         setIconImage(im);
@@ -69,10 +36,8 @@ public class Fenetre extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         creerMenu();
-        new ControlMenu(this);
+        new EcouteurMenu(this);
 
-        /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
-        setContentPane(conteneur);*/
 
         setVisible(true);
     }
@@ -104,17 +69,40 @@ public class Fenetre extends JFrame{
         setJMenuBar(menuBar);
     }
 
-    public void setControlMenu(ControlMenu control){
+    public void setControlMenu(EcouteurMenu control){
 
         itemAide.addActionListener(control);
         itemApropos.addActionListener(control);
     }
 
-    public static void initFenetre(){
-        fenetre = new Fenetre("Inscription");
+
+
+    public JMenuItem getItemApropos() {
+        return itemApropos;
     }
 
-    public static Fenetre getFenetre(){
-        return fenetre;
+
+    public JMenuItem getItemAide() {
+        return itemAide;
+    }
+
+
+    public JMenuItem getReprendrePartie() {
+        return reprendrePartie;
+    }
+
+
+    public JMenuItem getQuitterPartie() {
+        return quitterPartie;
+    }
+
+
+    public JMenuItem getSauvegarderPartie() {
+        return sauvegarderPartie;
+    }
+
+
+    public JMenuItem getNouvellePartie() {
+        return nouvellePartie;
     }
 }

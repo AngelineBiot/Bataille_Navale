@@ -13,11 +13,15 @@ import java.awt.event.ActionListener;
 public class EcouteurConteneurInscription implements ActionListener{
 
     private ConteneurInscription conteneurInscription;
+    private Fenetre fenetre;
+    private Jeu jeu;
 
 
 
-    public EcouteurConteneurInscription(ConteneurInscription conteneur) {
+    public EcouteurConteneurInscription(ConteneurInscription conteneur, Jeu j, Fenetre fen) {
         conteneurInscription = conteneur;
+        jeu = j;
+        fenetre = fen;
 
         conteneurInscription.setEcouteurConteneurInscription(this);
     }
@@ -27,16 +31,14 @@ public class EcouteurConteneurInscription implements ActionListener{
         String pseudoJoueur2 = conteneurInscription.getlabelJoueur2().getText();
 
         if(!(pseudoJoueur1.equals("")) && !(pseudoJoueur2.equals(""))){
-            Joueur.getJoueur(1).setNomJoueur(pseudoJoueur1);
-            Joueur.getJoueur(2).setNomJoueur(pseudoJoueur2);
+            jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
+            jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
 
-            ModelAttente modele = new ModelAttente(true, true, pseudoJoueur1);
-            ConteneurAttente conteneur = new ConteneurAttente(modele);
+            ConteneurAttente conteneur = new ConteneurAttente(jeu);
+            new EcouteurConteneurAttente(conteneur, fenetre, jeu);
 
-            EcouteurConteneurAttente ecouteur = new EcouteurConteneurAttente(conteneur, modele);
-
-            Fenetre.getFenetre().setContentPane(conteneur);
-            Fenetre.getFenetre().validate();
+            fenetre.setContentPane(conteneur);
+            fenetre.validate();
 
         }
         else {

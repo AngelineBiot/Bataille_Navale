@@ -1,7 +1,5 @@
 package Modele;
 
-import Modele.Case;
-
 
 /**
  * Created by michael on 31/03/2016.

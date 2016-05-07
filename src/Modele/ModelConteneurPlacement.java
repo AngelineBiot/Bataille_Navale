@@ -7,7 +7,6 @@ public class ModelConteneurPlacement {
     private int coordX;
     private int coordY;
     private int coord1D;
-    private int numeroJoueur;
 
     private int dimensionCarre;
 
@@ -15,8 +14,7 @@ public class ModelConteneurPlacement {
     private int indiceBateauEnCours;
     private Case caseOuEstBateauEnCoursPlacement;
 
-    public ModelConteneurPlacement(int numero){
-        numeroJoueur = numero;
+    public ModelConteneurPlacement(){
 
     }
 
@@ -76,11 +74,6 @@ public class ModelConteneurPlacement {
         this.indiceBateauEnCours = indiceBateauEnCours;
     }
 
-    /*public Modele.Joueur getJoueur() {
-        return joueur;
-    }*/
 
-    public int getNumeroJoueur(){
-        return numeroJoueur;
-    }
+
 }

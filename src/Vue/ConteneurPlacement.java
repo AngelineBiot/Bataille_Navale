@@ -11,24 +11,23 @@ import Modele.*;
  */
 public class ConteneurPlacement extends JPanel {
 
-    private Grille grille;
     private Flotte flotte;
 
     private JLabel infoPlacement;
     private JLabel imageBateau;
     private JButton boutonValidation;
-    JRadioButton placerBateauVertical;
-    JRadioButton placerBateauHorizontal;
-    ConteneurGrille conteneurGrille;
+    private JRadioButton placerBateauVertical;
+    private JRadioButton placerBateauHorizontal;
+    private ConteneurGrille conteneurGrille;
 
     private ModelConteneurPlacement modelConteneurPlacement;
 
 
-    public ConteneurPlacement(ModelConteneurPlacement modele){
+    public ConteneurPlacement(ModelConteneurPlacement modele, Flotte f, ConteneurGrille contGr){
 
+        conteneurGrille = contGr;
         modelConteneurPlacement = modele;
-        grille = Joueur.getJoueur(modele.getNumeroJoueur()).getGrille();
-        flotte = Joueur.getJoueur(modele.getNumeroJoueur()).getFlotte();
+        flotte = f;
 
         setLayout(new FlowLayout());
         addWidgets();
@@ -36,7 +35,6 @@ public class ConteneurPlacement extends JPanel {
     }
 
     private void addWidgets(){
-        conteneurGrille = new ConteneurGrille();
         add(conteneurGrille);
 
 
@@ -98,13 +96,6 @@ public class ConteneurPlacement extends JPanel {
 
     }
 
-    public Flotte getFlotte(){
-        return flotte;
-    }
-
-    public Grille getGrille(){
-        return grille;
-    }
 
     public JLabel getInfoPlacement(){
         return infoPlacement;

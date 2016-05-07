@@ -8,15 +8,10 @@ public class Joueur {
     private Flotte flotte;
     private Grille grille;
 
-    private static Joueur joueur1;
-    private static Joueur joueur2;
 
-
-
-
-    private Joueur(){
-        flotte = Flotte.creerFlotte6bateaux();
-        grille = new Grille();
+    public Joueur(Flotte fl, Grille gr){
+        flotte = fl;
+        grille = gr;
     }
 
     public void setNomJoueur(String nom){
@@ -40,19 +35,5 @@ public class Joueur {
         return grille;
     }
 
-    public static void initJoueurs(){
-        joueur1 = new Joueur();
-        joueur2 = new Joueur();
-    }
 
-    public static Joueur getJoueur(int numeroJoueur){
-        Joueur joueur;
-        if(numeroJoueur == 1){
-            joueur = joueur1;
-        }
-        else{
-            joueur = joueur2;
-        }
-        return joueur;
-    }
 }

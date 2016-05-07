@@ -11,12 +11,15 @@ import java.awt.event.ActionListener;
  */
 public class EcouteurConteneurAttente implements ActionListener {
     private ConteneurAttente conteneurAttente;
-    private ModelAttente modelAttente;
 
-    public EcouteurConteneurAttente(ConteneurAttente conteneur, ModelAttente model){
+    private Fenetre fenetre;
+    private Jeu jeu;
+
+    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j){
 
         conteneurAttente =conteneur;
-        modelAttente=model;
+        fenetre = fen;
+        jeu = j;
 
         conteneurAttente.setEcouteurConteneurAttente(this);
 
@@ -24,39 +27,41 @@ public class EcouteurConteneurAttente implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(modelAttente.getConcernePhasePlacement()){
-            ModelConteneurPlacement modelConteneurPlacement;
-            if(modelAttente.getConcerneJoueur1()){
-                modelConteneurPlacement = new ModelConteneurPlacement(1);
-            }
-            else{
-                modelConteneurPlacement = new ModelConteneurPlacement(2);
+        if(jeu.getEstPhasePlacement()){
+
+            if(!jeu.getConcerneJoueur1()){
+                jeu.echangeEstPhasePlacement();
             }
 
+            jeu.echangeConcerneJoueur1();
+
+            ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
             modelConteneurPlacement.setDimensionCarre(50);
 
-            ConteneurPlacement conteneur = new ConteneurPlacement(modelConteneurPlacement);
-            EcouteurConteneurGrillePhasePlacement ecouteur = new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur);
+            ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
+            ConteneurPlacement conteneur = new ConteneurPlacement(modelConteneurPlacement, jeu.getJoueurConcerne().getFlotte(), conteneurGrille);
+            new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
 
-            Fenetre.getFenetre().setContentPane(conteneur);
-            Fenetre.getFenetre().validate();
+            fenetre.setContentPane(conteneur);
+            fenetre.validate();
 
         }
         else{
-            ModelConteneurTire modelConteneurTire;
-            int numeroJoueur= 1 ;
-            if(!modelAttente.getConcerneJoueur1()){
-                numeroJoueur = 2;
 
-            }
-            modelConteneurTire = new ModelConteneurTire(numeroJoueur);
+            jeu.echangeConcerneJoueur1();
 
-            ConteneurTire conteneurTire = new ConteneurTire(modelConteneurTire);
+            ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
+            ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
 
-            EcouteurConteneurGrillePhaseTire ecouteur= new EcouteurConteneurGrillePhaseTire(numeroJoueur, conteneurTire, modelConteneurTire);
+            ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
 
-            Fenetre.getFenetre().setContentPane(conteneurTire);
-            Fenetre.getFenetre().validate();
+            ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur);
+            conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
+
+            new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu);
+
+            fenetre.setContentPane(conteneurTir);
+            fenetre.validate();
 
         }
 

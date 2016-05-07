@@ -11,11 +11,11 @@ import java.util.Objects;
  * Created by angel on 03/05/2016.
  * Updated by angel ON 03/05/2016.
  */
-public class ControlMenu implements ActionListener{
+public class EcouteurMenu implements ActionListener{
 
     private Fenetre fenetre;
 
-    public ControlMenu(Fenetre fenetre){
+    public EcouteurMenu(Fenetre fenetre){
         this.fenetre = fenetre;
         fenetre.setControlMenu(this);
     }
@@ -32,14 +32,14 @@ public class ControlMenu implements ActionListener{
             JOptionPane jopAide = new JOptionPane();
             jopAide.showMessageDialog(null,msgAide,"Aide",JOptionPane.INFORMATION_MESSAGE);
 
-            JDialog fenErrAide = jopAide.createDialog(null,"Aide");
+            jopAide.createDialog(null,"Aide");
         }
         else
         {
             JOptionPane jopApropos = new JOptionPane();
             jopApropos.showMessageDialog(null,msgApropos,"A propos",JOptionPane.INFORMATION_MESSAGE);
 
-            JDialog fenErrApropos = jopApropos.createDialog(null,"A propos");
+            jopApropos.createDialog(null,"A propos");
 
 
         }

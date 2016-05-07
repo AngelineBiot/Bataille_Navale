@@ -6,8 +6,9 @@ package Modele;
 public class Case{
     public int coordoneX;
     public int coordoneY;
-    Bateaux bat;
+    private Bateaux bat;
     boolean toucher;
+
     Case(int x,int y){
         this.toucher = false;
         this.coordoneX=x;

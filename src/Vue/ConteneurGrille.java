@@ -13,10 +13,12 @@ import java.awt.event.MouseEvent;
 public class ConteneurGrille extends JPanel {
     private JPanel afficheButton;
     private JLabel[] gridPanel;
+    private Joueur joueur;
 
     private static int dimensionCarre=50;
 
-    public ConteneurGrille(){
+    public ConteneurGrille(Joueur j){
+        joueur = j;
         initAttribut();
         addWidget();
     }
@@ -55,11 +57,10 @@ public class ConteneurGrille extends JPanel {
 
     }
 
-    public void afficherBateauxDeSaFlotte(int numeroJoueur){
-        Flotte flotte = Joueur.getJoueur(numeroJoueur).getFlotte();
+    public void afficherBateauxDeSaFlotte(){
 
 
-        for(Bateaux bat : flotte.getFlotte()){
+        for(Bateaux bat : joueur.getFlotte().getFlotte()){
             int coord = bat.getCoordonneesPremiereCase();
 
             int i=0;
@@ -68,7 +69,6 @@ public class ConteneurGrille extends JPanel {
             while(i<bat.getTaille()){
                 ImageIcon image = ImageBateau.getImageBateau(bat.getTypeBateau(), estVertical, i);
                 gridPanel[coord].setIcon(image);
-                //System.out.println(coord);
 
 
                 if(estVertical){
@@ -83,10 +83,9 @@ public class ConteneurGrille extends JPanel {
         }
     }
 
-    public void afficherCaseTouche(int numeroJoueur){
-        Grille grille = Joueur.getJoueur(numeroJoueur).getGrille();
+    public void afficherCaseTouche(){
 
-        for(Case currentCase : grille.getGrille()){
+        for(Case currentCase : joueur.getGrille().getGrille()){
 
             if (currentCase.getToucher()){
                 if (currentCase.getBat()!=null){
