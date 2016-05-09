@@ -32,7 +32,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (model_tire.getCaseOuEstTire()!=null){
+        if (model_tire.getCaseOuEstTire() != null) {
             panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.black));
         }
         model_tire.setCoordX((e.getX()) / model_tire.getDimensionCarre());
@@ -48,10 +48,13 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
         if (e.getActionCommand().equals("validation")) {
             if (model_tire.getCaseOuEstTire() != null) {
                 model_tire.getCaseOuEstTire().setToucher();
+
                 if (model_tire.getCaseOuEstTire().getBat() != null) {
-                    System.out.println("toucher");
-                }else {
-                    System.out.println("rater");
+                    JOptionPane jop = new JOptionPane();
+                    jop.showMessageDialog(null, "Toucher! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane jop = new JOptionPane();
+                    jop.showMessageDialog(null, "Rater! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

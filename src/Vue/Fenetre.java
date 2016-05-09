@@ -1,9 +1,12 @@
 package Vue;
 
+
 import Controleur.EcouteurMenu;
+
 
 import javax.swing.*;
 import java.awt.*;
+
 
 /**
  * Created by Florian on 14/04/2016.
@@ -38,6 +41,8 @@ public class Fenetre extends JFrame{
         creerMenu();
         new EcouteurMenu(this);
 
+        /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
+        setContentPane(conteneur);*/
 
         setVisible(true);
     }
@@ -73,6 +78,7 @@ public class Fenetre extends JFrame{
 
         itemAide.addActionListener(control);
         itemApropos.addActionListener(control);
+        nouvellePartie.addActionListener(control);
     }
 
 
