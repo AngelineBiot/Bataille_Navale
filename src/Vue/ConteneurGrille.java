@@ -49,7 +49,6 @@ public class ConteneurGrille extends JPanel {
 
     public void setBackgroundCase(int coord,Color couleur){
         gridPanel[coord].setBackground(couleur);
-        gridPanel[coord].setOpaque(false);
     }
 
     public void setControl(MouseAdapter ecouteur){
@@ -89,10 +88,13 @@ public class ConteneurGrille extends JPanel {
 
             if (currentCase.getToucher()){
                 if (currentCase.getBat()!=null){
+                    System.out.println(1);
                     gridPanel[currentCase.getCoord1D()].setBackground(Color.RED);
                 }else {
+                    System.out.println(2);
                     setBackgroundCase(currentCase.getCoord1D(),Color.BLUE);
                 }
+                gridPanel[currentCase.getCoord1D()].setOpaque(true);
                 gridPanel[currentCase.getCoord1D()].updateUI();
 
             }
