@@ -15,13 +15,16 @@ public class ConteneurTir extends JTabbedPane {
     private JButton boutonValidation;
     private ConteneurGrille conteneurGrilleJoueur;
     private ConteneurGrille conteneurGrilleAutreJoueur;
+    private Tableau_Score_2 score;
+
 
     private ModelConteneurTir modelConteneurTir;    //Servira peut etre plus tard
 
-    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur){
+    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur,Tableau_Score_2 sc){
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
         modelConteneurTir = modele;
+        score=sc;
         addWidgets();
 
     }
@@ -56,6 +59,7 @@ public class ConteneurTir extends JTabbedPane {
 
         conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
         addTab("Voir ma grille", conteneurGrilleJoueur);
+        addTab("Voir le tableau des scores", score);
 
 
     }

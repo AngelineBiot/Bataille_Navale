@@ -54,8 +54,9 @@ public class EcouteurConteneurAttente implements ActionListener {
             ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
 
             ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
+            Tableau_Score_2 score = new Tableau_Score_2(jeu);
 
-            ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur);
+            ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score);
             conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
 
             new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu);

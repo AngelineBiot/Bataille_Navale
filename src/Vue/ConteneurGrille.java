@@ -89,7 +89,7 @@ public class ConteneurGrille extends JPanel {
 
             if (currentCase.getToucher()){
                 if (currentCase.getBat()!=null){
-                    gridPanel[currentCase.getCoord1D()].setBackground(Color.red);
+                    gridPanel[currentCase.getCoord1D()].setBackground(Color.GREEN);
                 }else {
                     setBackgroundCase(currentCase.getCoord1D(),Color.RED);
                 }

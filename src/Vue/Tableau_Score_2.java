@@ -8,28 +8,29 @@ import Modele.Joueur;
 
 import javax.swing.*;
 
-public class Tableau_Score_2 {
+public class Tableau_Score_2 extends JPanel{
     public Tableau_Score_2(Jeu jeu){
         creerWidget(jeu);
-        //this.setSize(300, 120);
     }
     public void creerWidget(Jeu jeu){
+        this.setSize(300, 120);
         //double efficacite=(Flotte.getFlotteCoulee()/Joueur.getNbCoups());
 
         //Les données du tableau
         Object[][] data = {
-                {jeu.getJoueur1(),Joueur.getNbCoups(),Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
-                {jeu.getJoueur2(),Joueur.getNbCoups(), Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
+                {jeu.getJoueur1(),String.valueOf(Joueur.getNbCoups()),String.valueOf(Flotte.getFlotteCoulee()),String.valueOf(Flotte.getNbTouches()),"efficacite"},
+                {jeu.getJoueur2(),String.valueOf(Joueur.getNbCoups()),String.valueOf(Flotte.getFlotteCoulee()),String.valueOf(Flotte.getNbTouches()),"efficacite"},
         };
 
         //Les titres des colonnes
-        String  title[] = {"Nom", "Nombre de tours", "Bateaux ennemis coulés","Bateaux ennemis touchés","Efficacité"};
+        String  title[] = {"Nom", "Nombre de tours", "Nombre de bateaux ennemis coulés","nombre de touchés","efficacité"};
         JTable tableau = new JTable(data, title);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-        //this.getContentPane().add(new JScrollPane(tableau));
+        JScrollPane pano = new JScrollPane(tableau);
+        this.add(pano);
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
 
@@ -46,8 +47,11 @@ public class Tableau_Score_2 {
 
                 Jeu jeu = new Jeu(j1, j2);
                 Tableau_Score_2 f = new Tableau_Score_2(jeu);
+                JFrame test = new JFrame();
+                test.setContentPane(f);
+                test.setVisible(true);
             }
 
         });
-    }*/
+    }
 }
