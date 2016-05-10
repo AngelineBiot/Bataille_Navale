@@ -7,15 +7,20 @@ public class Joueur {
     private String nomJoueur;
     private Flotte flotte;
     private Grille grille;
-
+    private int nbcoups;
 
     public Joueur(Flotte fl, Grille gr){
         flotte = fl;
         grille = gr;
+        nbcoups = 0;
     }
 
     public void setNomJoueur(String nom){
         nomJoueur = nom;
+    }
+
+    public void setNbcoups() {
+        nbcoups++;
     }
 
     public String getNomJoueur(){
@@ -27,7 +32,6 @@ public class Joueur {
     }
 
     public int getNbCoups(){
-        int nbcoups=0;
         return nbcoups;
     }
 

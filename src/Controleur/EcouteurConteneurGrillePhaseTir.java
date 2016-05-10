@@ -54,9 +54,11 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jeu.getJoueurNonConcerne().setNbcoups();
                 } else {
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jeu.getJoueurNonConcerne().setNbcoups();
                 }
 
                 ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);

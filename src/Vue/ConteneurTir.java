@@ -15,12 +15,12 @@ public class ConteneurTir extends JTabbedPane {
     private JButton boutonValidation;
     private ConteneurGrille conteneurGrilleJoueur;
     private ConteneurGrille conteneurGrilleAutreJoueur;
-    private Tableau_Score_2 score;
+    private Tableau_Score score;
 
 
     private ModelConteneurTir modelConteneurTir;    //Servira peut etre plus tard
 
-    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur,Tableau_Score_2 sc){
+    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, Tableau_Score sc){
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
         modelConteneurTir = modele;

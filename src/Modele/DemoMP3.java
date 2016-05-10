@@ -36,7 +36,7 @@ public class DemoMP3 {
                     public void run() {
                         //URL url = DemoMP3.class.getResource("ressource/sons/Slipknot.mp3");
                         try {
-                            FileInputStream fis = new FileInputStream("ressource/sons/Slipknot.mp3");
+                            FileInputStream fis = new FileInputStream("ressource/sons/eau.mp3");
                             //on laisse Slipknot pour compiler en attendant le bon mp3 (2952.mp3)
                             Player fil = new Player(fis);
                             fil.play();

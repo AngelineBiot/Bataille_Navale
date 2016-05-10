@@ -2,9 +2,7 @@ package Vue;
 
 
 import Controleur.EcouteurMenu;
-import Modele.Flotte;
 import Modele.Jeu;
-import Modele.Joueur;
 
 
 import javax.swing.*;
@@ -30,7 +28,7 @@ public class Fenetre extends JFrame{
     protected JMenuItem		itemAide;
     protected JMenuItem		itemApropos;
 
-    protected Tableau_Score_2 tableauScore;
+    protected Tableau_Score tableauScore;
 
     protected Jeu jeu;
 
