@@ -1,10 +1,12 @@
 package Modele;
 
 
+import java.io.Serializable;
+
 /**
  * Created by angel on 17/04/2016.
  */
-public class Flotte {
+public class Flotte implements Serializable{
 
     private Bateaux[] flotte;
     private int nbBateaux;

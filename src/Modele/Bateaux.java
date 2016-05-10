@@ -1,12 +1,13 @@
 package Modele;
 
 
+import java.io.Serializable;
 
 
 /**
  * Created by angel on 16/04/2016.
  */
-public class Bateaux{
+public class Bateaux implements Serializable{
 
 
     private int taille;

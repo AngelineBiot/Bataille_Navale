@@ -1,10 +1,12 @@
 package Modele;
 
 
+import java.io.Serializable;
+
 /**
  * Created by michael on 31/03/2016.
  */
-public class Grille {
+public class Grille implements Serializable{
 
     private Case[] grille;
     public Grille(){

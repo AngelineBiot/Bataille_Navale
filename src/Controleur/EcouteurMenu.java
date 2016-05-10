@@ -20,9 +20,11 @@ import java.util.Objects;
 public class EcouteurMenu implements ActionListener{
 
     private Fenetre fenetre;
+    private Jeu jeu;
 
-    public EcouteurMenu(Fenetre fenetre){
+    public EcouteurMenu(Fenetre fenetre,Jeu jeu){
         this.fenetre = fenetre;
+        this.jeu=jeu;
         fenetre.setControlMenu(this);
     }
 
@@ -59,6 +61,10 @@ public class EcouteurMenu implements ActionListener{
             jopApropos.createDialog(null,"A propos");
 
 
+        }
+        else if (source.equals(fenetre.getSauvegarderPartie())){
+            jeu.Sauvegarde();
+            System.out.println("Sauvegarde");
         }
         // nouvelle partie
         if (e.getSource() ==fenetre.getNouvellePartie())

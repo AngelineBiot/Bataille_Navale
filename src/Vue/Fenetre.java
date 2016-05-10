@@ -45,7 +45,7 @@ public class Fenetre extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         creerMenu();
-        new EcouteurMenu(this);
+        new EcouteurMenu(this,jeu);
 
         /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
         setContentPane(conteneur);*/
@@ -106,6 +106,7 @@ public class Fenetre extends JFrame{
         itemAide.addActionListener(control);
         itemApropos.addActionListener(control);
         nouvellePartie.addActionListener(control);
+        sauvegarderPartie.addActionListener(control);
     }
 
 

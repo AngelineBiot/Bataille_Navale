@@ -1,9 +1,11 @@
 package Modele;
 
+import java.io.Serializable;
+
 /**
  * Created by michael on 31/03/2016.
  */
-public class Case{
+public class Case implements Serializable{
     public int coordoneX;
     public int coordoneY;
     private Bateaux bat;

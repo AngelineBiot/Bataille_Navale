@@ -1,9 +1,11 @@
 package Modele;
 
+import java.io.Serializable;
+
 /**
  * Created by fparty2 on 28/04/16.
  */
-public class Joueur {
+public class Joueur implements Serializable{
     private String nomJoueur;
     private Flotte flotte;
     private Grille grille;
