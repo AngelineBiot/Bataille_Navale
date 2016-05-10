@@ -60,12 +60,12 @@ public class Bateaux{
         this.estOrienteVerticalement=orientation;
     }
 
-    public boolean estCoule(){
+    public void updateEstCoule(){
         int i = 0;
         for (Case coordonnees : position) {
             if (coordonnees.getToucher()) i++;
         }
-        return i == this.taille;
+        coule = (i == this.taille);
     }
     public boolean estTouche(){
         boolean estTouche = false;
@@ -80,6 +80,10 @@ public class Bateaux{
     public void setPosition(Case[] tabCases, boolean estVertical){
         position = tabCases;
         estOrienteVerticalement = estVertical;
+    }
+
+    public Case[] getPosition(){
+        return position;
     }
 
     public int getCoordonneesPremiereCase(){

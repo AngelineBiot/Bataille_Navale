@@ -48,24 +48,55 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("validation")) {
             if (model_tire.getCaseOuEstTire() != null) {
+                boolean dejaTirSurCase = model_tire.getCaseOuEstTire().getToucher();
+
                 model_tire.getCaseOuEstTire().setToucher();
 
-                if (model_tire.getCaseOuEstTire().getBat() != null) {
+
+                if (model_tire.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
-                    JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                    jeu.getJoueurNonConcerne().setNbcoups();
+                    model_tire.getCaseOuEstTire().getBat().updateEstCoule();
+                    jeu.getJoueurConcerne().setNbcoups();
+
+                    if(model_tire.getCaseOuEstTire().getBat().getCoule()){
+                        jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
+                        JOptionPane jop = new JOptionPane();
+                        jop.showMessageDialog(null, "Coulé ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        JOptionPane jop = new JOptionPane();
+                        jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
                 } else {
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                     jeu.getJoueurNonConcerne().setNbcoups();
                 }
 
-                ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-                new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+                if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
 
-                fenetre.setContentPane(conteneurAttente);
-                fenetre.validate();
+                    JPanel conteneurVictoire = new JPanel();
+                    conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
+
+                    JLabel messageVictoire = new JLabel("Bravo "+jeu.getJoueurConcerne().getNomJoueur()+", vous avez gagne !");
+                    conteneurVictoire.add(messageVictoire);
+
+                    Tableau_Score_2 tableauScore = new Tableau_Score_2(jeu);
+                    conteneurVictoire.add(tableauScore);
+
+                    fenetre.setContentPane(conteneurVictoire);
+                    fenetre.validate();
+                }
+                else{
+                    ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
+                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+
+                    fenetre.setContentPane(conteneurAttente);
+                    fenetre.validate();
+                }
+
+
             }
         }
     }

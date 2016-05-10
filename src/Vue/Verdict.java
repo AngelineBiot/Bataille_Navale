@@ -30,7 +30,7 @@ public class Verdict extends JFrame {
 
 
    public void coule(Bateaux b){
-       if(b.estCoule()){
+       if(b.getCoule()){
            creerDialog("coule!");
        }
        else if (b.estTouche()) {

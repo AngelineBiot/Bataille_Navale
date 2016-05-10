@@ -117,4 +117,17 @@ public class ConteneurGrille extends JPanel {
             }
         }
     }
+
+    public void afficherBateauxCoulesMaGrille() {
+        for(Bateaux bat : joueur.getFlotte().getFlotte()){
+            if (bat.getCoule()){
+                int i = 0;
+                for(Case c : bat.getPosition()){
+                    gridPanel[c.getCoord1D()].setIcon(ImageBateau.getImageBateau(bat.getTypeBateau(), bat.getEstOrienteVerticalement(), i, true));
+                    i++;
+                }
+            }
+
+        }
+    }
 }
