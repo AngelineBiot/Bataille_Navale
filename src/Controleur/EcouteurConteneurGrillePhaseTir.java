@@ -49,14 +49,13 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
         if (e.getActionCommand().equals("validation")) {
             if (model_tire.getCaseOuEstTire() != null) {
                 boolean dejaTirSurCase = model_tire.getCaseOuEstTire().getToucher();
-
+                jeu.getJoueurConcerne().setNbcoups();
                 model_tire.getCaseOuEstTire().setToucher();
 
 
                 if (model_tire.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
                     model_tire.getCaseOuEstTire().getBat().updateEstCoule();
-                    jeu.getJoueurConcerne().setNbcoups();
 
                     if(model_tire.getCaseOuEstTire().getBat().getCoule()){
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
@@ -71,7 +70,6 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 } else {
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                    jeu.getJoueurNonConcerne().setNbcoups();
                 }
 
                 if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
@@ -82,13 +80,15 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                     JLabel messageVictoire = new JLabel("Bravo "+jeu.getJoueurConcerne().getNomJoueur()+", vous avez gagne !");
                     conteneurVictoire.add(messageVictoire);
 
-                    Tableau_Score_2 tableauScore = new Tableau_Score_2(jeu);
+                    Tableau_Score tableauScore = new Tableau_Score(jeu);
                     conteneurVictoire.add(tableauScore);
 
                     fenetre.setContentPane(conteneurVictoire);
                     fenetre.validate();
                 }
                 else{
+                    jeu.echangeConcerneJoueur1();
+
                     ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
                     new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
 

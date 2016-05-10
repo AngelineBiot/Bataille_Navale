@@ -86,7 +86,6 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("changementDirection")){
             String texteCaseACocher = ((JRadioButton) e.getSource()).getText();
-            System.out.println(texteCaseACocher);
             boolean bon = (texteCaseACocher.equals("Placer le bateau horizontalement") && model_place.isDirectionVerticale()) ||
                     (texteCaseACocher.equals("Placer le bateau verticalement") && !model_place.isDirectionVerticale());
             if(bon){
@@ -118,7 +117,6 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                     effaceCase(longueur, xEff, yEff);
                     int i;
 
-                    System.out.println(x+" "+y+" "+!model_place.isDirectionVerticale()+" "+longueur);
                     if(verifAucuneCaseDejaPrise(x, y, !model_place.isDirectionVerticale(), longueur)){
                         String typeBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
                         if(model_place.isDirectionVerticale()){
@@ -182,6 +180,12 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                     panelPlacement.getImageBateau().updateUI();
                 }
                 else{
+
+                    if(!jeu.getConcerneJoueur1()){
+                        jeu.echangeEstPhasePlacement();
+                    }
+
+                    jeu.echangeConcerneJoueur1();
 
                     ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
                     new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);

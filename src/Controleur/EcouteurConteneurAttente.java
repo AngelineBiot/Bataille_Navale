@@ -29,12 +29,6 @@ public class EcouteurConteneurAttente implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(jeu.getEstPhasePlacement()){
 
-            if(!jeu.getConcerneJoueur1()){
-                jeu.echangeEstPhasePlacement();
-            }
-
-            jeu.echangeConcerneJoueur1();
-
             ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
             modelConteneurPlacement.setDimensionCarre(50);
 
@@ -47,8 +41,6 @@ public class EcouteurConteneurAttente implements ActionListener {
 
         }
         else{
-
-            jeu.echangeConcerneJoueur1();
 
             ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
             ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
