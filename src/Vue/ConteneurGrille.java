@@ -66,7 +66,7 @@ public class ConteneurGrille extends JPanel {
             boolean estVertical = bat.getEstOrienteVerticalement();
 
             while(i<bat.getTaille()){
-                ImageIcon image = ImageBateau.getImageBateau(bat.getTypeBateau(), estVertical, i);
+                ImageIcon image = ImageBateau.getImageBateau(bat.getTypeBateau(), estVertical, i, false);
                 gridPanel[coord].setIcon(image);
 
 

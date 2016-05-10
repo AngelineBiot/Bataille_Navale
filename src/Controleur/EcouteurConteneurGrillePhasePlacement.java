@@ -68,12 +68,12 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
             if(model_place.isDirectionVerticale()){
                 for(i=0 ; i<longueur ; i++){
-                    conteneurGrille.getGridPanel()[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau,true,i));
+                    conteneurGrille.getGridPanel()[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau,true,i, false));
                 }
             }
             else{
                 for(i=0 ; i<longueur ; i++){
-                    conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i));
+                    conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i, false));
                 }
             }
 
@@ -123,12 +123,12 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                         String typeBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[model_place.getIndiceBateauEnCours()].getTypeBateau();
                         if(model_place.isDirectionVerticale()){
                             for(i=0 ; i<longueur ; i++){
-                                conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i));
+                                conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i, false));
                             }
                         }
                         else{
                             for(i=0 ; i<longueur ; i++){
-                                conteneurGrille.getGridPanel()[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau,true,i));
+                                conteneurGrille.getGridPanel()[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau,true,i, false));
                             }
 
                         }
