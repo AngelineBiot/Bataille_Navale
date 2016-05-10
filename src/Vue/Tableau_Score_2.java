@@ -18,8 +18,8 @@ public class Tableau_Score_2 extends JPanel{
 
         //Les données du tableau
         Object[][] data = {
-                {jeu.getJoueur1().getNomJoueur(),String.valueOf(Joueur.getNbCoups()),String.valueOf(Flotte.getFlotteCoulee()),String.valueOf(Flotte.getNbTouches()),"efficacite"},
-                {jeu.getJoueur2().getNomJoueur(),String.valueOf(Joueur.getNbCoups()),String.valueOf(Flotte.getFlotteCoulee()),String.valueOf(Flotte.getNbTouches()),"efficacite"},
+                {jeu.getJoueur1().getNomJoueur(),String.valueOf(jeu.getJoueur1().getNbCoups()),String.valueOf(jeu.getJoueur1().getFlotte().getNbBateauxCoule()),String.valueOf(jeu.getJoueur1().getFlotte().getNbTouches()),"efficacite"},
+                {jeu.getJoueur2().getNomJoueur(),String.valueOf(jeu.getJoueur2().getNbCoups()),String.valueOf(jeu.getJoueur2().getFlotte().getNbBateauxCoule()),String.valueOf(jeu.getJoueur2().getFlotte().getNbTouches()),"efficacite"},
         };
 
         //Les titres des colonnes

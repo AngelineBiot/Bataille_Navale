@@ -26,7 +26,7 @@ public class Joueur {
         return flotte;
     }
 
-    public static int getNbCoups(){
+    public int getNbCoups(){
         int nbcoups=0;
         return nbcoups;
     }

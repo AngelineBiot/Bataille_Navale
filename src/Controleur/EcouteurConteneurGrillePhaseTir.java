@@ -51,11 +51,12 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 model_tire.getCaseOuEstTire().setToucher();
 
                 if (model_tire.getCaseOuEstTire().getBat() != null) {
+                    jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
                     JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Touché! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Raté! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 }
 
                 ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);

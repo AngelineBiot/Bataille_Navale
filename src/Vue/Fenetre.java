@@ -82,15 +82,17 @@ public class Fenetre extends JFrame{
         setJMenuBar(menuBar);
     }
 
-    public void creerScores(){
+    public void creerScores() {
         //Les données du tableau
         Object[][] data = {
-                {jeu.getJoueur1(), Joueur.getNbCoups(), Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
-                {jeu.getJoueur2(),Joueur.getNbCoups(), Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
+                {jeu.getJoueur1(), jeu.getJoueur1().getNbCoups(), jeu.getJoueur1().getFlotte().getNbBateauxCoule(),
+                                    jeu.getJoueur1().getFlotte().getNbTouches(), "efficacite"},
+                {jeu.getJoueur2(), jeu.getJoueur2().getNbCoups(), jeu.getJoueur2().getFlotte().getNbBateauxCoule(),
+                                    jeu.getJoueur2().getFlotte().getNbTouches(), "efficacite"},
         };
 
         //Les titres des colonnes
-        String  title[] = {"Nom", "Nombre de tours", "Bateaux ennemis coulés","Bateaux ennemis touchés","Efficacité"};
+        String  title[] = {"Nom", "Nombre de tours", "Bateaux ennemis coulés", "Bateaux ennemis touchés", "Efficacité"};
         JTable tableau = new JTable(data, title);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !

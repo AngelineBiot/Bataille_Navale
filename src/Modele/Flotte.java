@@ -28,25 +28,28 @@ public class Flotte {
         return new Flotte(flotte);
     }
 
-    public void setNbBateauxCoule(Flotte f){
+    public void incrementeNbBateauxCoule(){
+        nbBateauxCoule++;
+    }
 
+    public int getNbBateauxCoule(){
+        return nbBateauxCoule;
+    }
+
+    public int getNbTouches(){
+        return nbTouches;
+    }
+
+    public void incrementeNbBateauxTouche(){
+        nbTouches++;
     }
 
     public boolean flotteCoulee(){
         return nbBateauxCoule == nbBateaux;
     }
 
-    public static int getFlotteCoulee(){
-        int nbBateauxCoule=0;
-        return nbBateauxCoule;
-    }
-
     public Bateaux[] getFlotte(){
         return flotte;
     }
 
-    public static int getNbTouches(){
-        int nbTouches=0;
-        return nbTouches;
-    }
 }
