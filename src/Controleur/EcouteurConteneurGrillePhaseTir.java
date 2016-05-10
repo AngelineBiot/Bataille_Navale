@@ -43,7 +43,6 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
         model_tire.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[model_tire.getCoord1D()]);
         panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
         panelTire.getConteneurGrille().getGridPanel()[model_tire.getCoord1D()].setOpaque(true);
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -53,10 +52,10 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                 if (model_tire.getCaseOuEstTire().getBat() != null) {
                     JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Toucher! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jop.showMessageDialog(null, "Touché! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Rater! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+                    jop.showMessageDialog(null, "Raté! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 }
 
                 ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);

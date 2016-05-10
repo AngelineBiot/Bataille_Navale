@@ -85,7 +85,7 @@ public class ConteneurGrille extends JPanel {
     public void afficherCaseTouche(){
 
         for(Case currentCase : joueur.getGrille().getGrille()){
-
+            System.out.println("n'importe quoi");
             if (currentCase.getToucher()){
                 if (currentCase.getBat()!=null){
                     System.out.println(1);
