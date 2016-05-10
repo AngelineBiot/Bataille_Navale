@@ -76,7 +76,7 @@ public class EcouteurMenu implements ActionListener{
             fenetre.setContentPane(conteneurGlobal);
             fenetre.validate();
 
-            EcouteurConteneurInscription ecouteur = new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);
+            new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);
         }
         //quitter partie
         if (e.getSource()==fenetre.getQuitterPartie())

@@ -17,11 +17,13 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
     private ModelConteneurTir model_tire;
     private ConteneurTir panelTire;
     private Jeu jeu;
+    private Fenetre fenetre;
 
 
 
-    public EcouteurConteneurGrillePhaseTir(ConteneurTir panTir, ModelConteneurTir model, Jeu j) {
+    public EcouteurConteneurGrillePhaseTir(ConteneurTir panTir, ModelConteneurTir model, Jeu j, Fenetre fen) {
         jeu = j;
+        fenetre = fen;
         model_tire=model;
         panelTire=panTir;
         model_tire.setDimensionCarre(50);
@@ -56,6 +58,12 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(null, "Rater! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 }
+
+                ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
+                new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+
+                fenetre.setContentPane(conteneurAttente);
+                fenetre.validate();
             }
         }
     }
