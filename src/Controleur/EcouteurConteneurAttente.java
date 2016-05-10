@@ -66,6 +66,7 @@ public class EcouteurConteneurAttente implements ActionListener {
 
 
             conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
+            conteneurGrilleJoueur.afficherCaseToucheMaGrille();
             conteneurGrilleAutreJoueur.afficherCaseTouche();
             conteneurGrilleAutreJoueur.updateUI();
 

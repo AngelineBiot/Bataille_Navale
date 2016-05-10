@@ -85,7 +85,6 @@ public class ConteneurGrille extends JPanel {
     public void afficherCaseTouche(){
 
         for(Case currentCase : joueur.getGrille().getGrille()){
-            System.out.println("n'importe quoi");
             if (currentCase.getToucher()){
                 if (currentCase.getBat()!=null){
                     System.out.println(1);
@@ -101,4 +100,21 @@ public class ConteneurGrille extends JPanel {
         }
     }
 
+    public void afficherCaseToucheMaGrille() {
+        for(Case currentCase : joueur.getGrille().getGrille()){
+            if (currentCase.getToucher()){
+                if (currentCase.getBat()!=null){
+                    System.out.println(1);
+                    gridPanel[currentCase.getCoord1D()].setIcon(ImageBateau.getImageBateau(currentCase.getBat().getTypeBateau(),
+                                                                currentCase.getBat().getEstOrienteVerticalement(),
+                                                                currentCase.getBat().getIndiceCaseBateau(currentCase), true));
+                }else {
+                    System.out.println(2);
+                    setBackgroundCase(currentCase.getCoord1D(),Color.BLUE);
+                }
+                gridPanel[currentCase.getCoord1D()].setOpaque(true);
+                gridPanel[currentCase.getCoord1D()].updateUI();
+            }
+        }
+    }
 }
