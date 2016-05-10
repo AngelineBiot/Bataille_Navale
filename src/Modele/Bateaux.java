@@ -1,8 +1,6 @@
 package Modele;
 
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -10,7 +8,6 @@ import java.util.Scanner;
  */
 public class Bateaux{
 
-    static final Scanner input = new Scanner(System.in);
 
     private int taille;
     protected Case[] position;
@@ -20,7 +17,7 @@ public class Bateaux{
 
     public Bateaux(){}
 
-    Bateaux(String typeDeBateau){
+    public Bateaux(String typeDeBateau){
         typeBateau = typeDeBateau;
         if (typeDeBateau.equals("porte-avion")){
             this.taille=5;
@@ -92,5 +89,18 @@ public class Bateaux{
 
     public String getTypeBateau(){
         return typeBateau;
+    }
+
+    public int getIndiceCaseBateau(Case c){
+        int i;
+        int retour = 0;
+
+        for(i=0 ; i<position.length ; i++){
+            if(c == position[i]){
+                retour = i;
+            }
+        }
+
+        return retour;
     }
 }
