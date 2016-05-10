@@ -21,7 +21,7 @@ public class Main_Grille_test {
         Jeu jeu = new Jeu(j1, j2);
 
 
-        Fenetre fenetre = new Fenetre("Bataille navale");
+        Fenetre fenetre = new Fenetre("Bataille navale",jeu);
 
         ConteneurInscription conteneurInscription = new ConteneurInscription();
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());

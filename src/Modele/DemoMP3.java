@@ -4,14 +4,13 @@ package Modele;
  * Created by ANTOINE on 08/05/2016.
  */
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 
-import javax.swing.*;
+import javazoom.jlme.util.Player;
+import javazoom.jl.decoder.JavaLayerException;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 
 /**
@@ -25,8 +24,7 @@ import java.net.URL;
 
 import javax.swing.JFrame;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+
 
 public class DemoMP3 {
 
@@ -42,16 +40,16 @@ public class DemoMP3 {
                 new Thread() {
 
                     public void run() {
-                        URL url = DemoMP3.class.getResource("2952.mp3");
-                        // exemple avec autre dossier : URL url = DemoMP3.class.getResource("/musix/othermusic.mp3");
-                        try (InputStream audioIn = url.openStream()) {
-                            Player clip = new Player(audioIn);
-                            clip.play();
-                        } catch (IOException | JavaLayerException e1) {
-                            e1.printStackTrace();
+                        //URL url = DemoMP3.class.getResource("ressource/sons/Slipknot.mp3");
+                        try {
+                            FileInputStream fis = new FileInputStream("ressource/sons/Slipknot.mp3");
+                            //on laisse Slipknot pour compiler en attendant le bon mp3 (2952.mp3)
+                            Player fil = new Player(fis);
+                            fil.play();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    };
-
+                    }
                 }.start();
             }
         });

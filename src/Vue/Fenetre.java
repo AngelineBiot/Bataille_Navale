@@ -2,6 +2,9 @@ package Vue;
 
 
 import Controleur.EcouteurMenu;
+import Modele.Flotte;
+import Modele.Jeu;
+import Modele.Joueur;
 
 
 import javax.swing.*;
@@ -27,11 +30,16 @@ public class Fenetre extends JFrame{
     protected JMenuItem		itemAide;
     protected JMenuItem		itemApropos;
 
-    public Fenetre(String nomFenetre){
+    protected Tableau_Score_2 tableauScore;
+
+    protected Jeu jeu;
+
+    public Fenetre(String nomFenetre,Jeu jeu){
         setTitle(nomFenetre);
+        this.jeu = jeu;
+        creerScores();
 
-
-        Image im = Toolkit.getDefaultToolkit().getImage("TorpilleurHorizontal.png");
+        Image im = Toolkit.getDefaultToolkit().getImage("ressource/images/TorpilleurHorizontal.png");
         setIconImage(im);
 
         setSize(900,700);
@@ -72,6 +80,25 @@ public class Fenetre extends JFrame{
         menuBar.add(partie);
         menuBar.add(aide);
         setJMenuBar(menuBar);
+    }
+
+    public void creerScores(){
+        //Les données du tableau
+        Object[][] data = {
+                {jeu.getJoueur1(), Joueur.getNbCoups(), Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
+                {jeu.getJoueur2(),Joueur.getNbCoups(), Flotte.getFlotteCoulee(),Flotte.getNbTouches(),"efficacite"},
+        };
+
+        //Les titres des colonnes
+        String  title[] = {"Nom", "Nombre de tours", "Bateaux ennemis coulés","Bateaux ennemis touchés","Efficacité"};
+        JTable tableau = new JTable(data, title);
+        //Nous ajoutons notre tableau à notre contentPane dans un scroll
+        //Sinon les titres des colonnes ne s'afficheront pas !
+        //this.getContentPane().add(new JScrollPane(tableau));
+
+        JPanel pano = new JPanel();
+        pano.add(tableau);
+        setContentPane(pano);
     }
 
     public void setControlMenu(EcouteurMenu control){
