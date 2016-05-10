@@ -90,7 +90,7 @@ public class Fenetre extends JFrame{
         };
 
         //Les titres des colonnes
-        String  title[] = {"Nom", "Nombre de tours", "Bateaux ennemis coulés", "Bateaux ennemis touchés", "Efficacité"};
+        String  title[] = {"Nom", "Nombre de tirs", "Bateaux ennemis coulés", "Bateaux ennemis touchés", "Efficacité"};
         JTable tableau = new JTable(data, title);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !

@@ -30,8 +30,19 @@ public class EcouteurMenu implements ActionListener{
 
         Object source = e.getSource();
 
-        String msgAide = "Vous tirez sur les bateaux et on vous tire dessus !";
-        String msgApropos = "Jeu créé par nous";
+        String msgAide = "Cliquez sur une case pour la sélectionner\n" +
+                            "Puis sur 'Valider le tir' pour tirer\n" +
+                            "Si vous touchez un bateau, la case devient rouge, sinon elle devient bleue\n" +
+                            "Si vous touchez toutes les cases sur lesquelles se trouve un bateau : vous l'avez coulé !\n" +
+                            "Coulez toute la flotte de votre adversaire pour gagner !";
+        String msgApropos = "Jeu créé par :\n\n" +
+                                "BIOT Angeline\n" +
+                                "GUERRE Michael\n" +
+                                "LIAO Zuzhi\n" +
+                                "PARTY Florian\n" +
+                                "PY Antoine\n" +
+                                "SURLEAU Etienne\n" +
+                                "\n Etudiants en S2 DUT Informatique - IUT-BM (2016)";
 
         if (source.equals(fenetre.getItemAide()))
         {
