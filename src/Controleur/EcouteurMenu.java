@@ -60,7 +60,6 @@ public class EcouteurMenu implements ActionListener{
         else if (source.equals(fenetre.getSauvegarderPartie())){
             if(jeu.getJoueur1().getNomJoueur() != null && jeu.getJoueur2().getNomJoueur() != null){
                 Jeu.Sauvegarde(jeu);
-                System.out.println("Sauvegarde");
             }
             else{
                 JOptionPane jopApropos = new JOptionPane();
@@ -71,7 +70,6 @@ public class EcouteurMenu implements ActionListener{
 
         }
         else if (source.equals(fenetre.getReprendrePartie())){
-            System.out.println("reprendre partie");
             try{
                 this.jeu=Jeu.resumeGame();
                 fenetre.setJeu(this.jeu);
@@ -142,7 +140,7 @@ public class EcouteurMenu implements ActionListener{
 
         }
         // nouvelle partie
-        if (e.getSource() ==fenetre.getNouvellePartie())
+        else if (e.getSource() ==fenetre.getNouvellePartie())
         {
 
             Grille grillej1 = new Grille();
@@ -154,7 +152,7 @@ public class EcouteurMenu implements ActionListener{
             Joueur j1 = new Joueur(flottej1, grillej1);
             Joueur j2 = new Joueur(flottej2, grillej2);
 
-            Jeu jeu = new Jeu(j1, j2);
+            jeu = new Jeu(j1, j2);
 
             ConteneurInscription conteneurInscription = new ConteneurInscription();
             int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
@@ -171,11 +169,12 @@ public class EcouteurMenu implements ActionListener{
             new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);
         }
         //quitter partie
-        if (e.getSource()==fenetre.getQuitterPartie())
+        else if (e.getSource()==fenetre.getQuitterPartie())
         {
             int result = JOptionPane.showConfirmDialog(null,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
             if  (result==JOptionPane.YES_OPTION)
-                System.exit(0);
+                fenetre.dispose();
+                //System.exit(0);
         }
     }
 }
