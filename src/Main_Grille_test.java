@@ -1,4 +1,6 @@
 import Controleur.EcouteurConteneurInscription;
+import Controleur.EcouteurFermeture;
+import Controleur.EcouteurMenu;
 import Modele.*;
 import Vue.*;
 
@@ -36,6 +38,8 @@ public class Main_Grille_test {
         fenetre.validate();
 
         new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);
+        new EcouteurFermeture(fenetre);
+        new EcouteurMenu(fenetre,jeu);
 
         }
 

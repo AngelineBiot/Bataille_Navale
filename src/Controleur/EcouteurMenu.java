@@ -58,14 +58,15 @@ public class EcouteurMenu implements ActionListener{
 
         }
         else if (source.equals(fenetre.getSauvegarderPartie())){
-            if(jeu.getJoueur1().getNomJoueur() != null && jeu.getJoueur2().getNomJoueur() != null){
+            try{
                 Jeu.Sauvegarde(jeu);
             }
-            else{
+            catch(SauvegardeException e2){
+                e2.printStackTrace();
                 JOptionPane jopApropos = new JOptionPane();
-                jopApropos.showMessageDialog(fenetre,"La partie n'a pas encore commencé !","Impossible de sauvegarder la partie",JOptionPane.INFORMATION_MESSAGE);
+                jopApropos.showMessageDialog(fenetre,"Impossible de sauvegarder la partie !","Erreur",JOptionPane.INFORMATION_MESSAGE);
 
-                jopApropos.createDialog(fenetre,"Impossible de sauvegarder la partie");
+                jopApropos.createDialog(fenetre,"Erreur");
             }
 
         }
@@ -171,10 +172,26 @@ public class EcouteurMenu implements ActionListener{
         //quitter partie
         else if (e.getSource()==fenetre.getQuitterPartie())
         {
-            int result = JOptionPane.showConfirmDialog(null,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
-            if  (result==JOptionPane.YES_OPTION)
+            int resultQuitter = JOptionPane.showConfirmDialog(fenetre,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
+            if  (resultQuitter==JOptionPane.YES_OPTION){
+                int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,"Voulez-vous sauvegarder la partie en cours ?","Confirm",JOptionPane.YES_NO_OPTION);
+                if  (resultSauvegarde==JOptionPane.YES_OPTION){
+                    try {
+                        Jeu.Sauvegarde(fenetre.getJeu());
+
+                    }
+                    catch(SauvegardeException e1){
+                        JOptionPane jopApropos = new JOptionPane();
+                        jopApropos.showMessageDialog(fenetre,"Impossible de sauvegarder la partie !","Erreur",JOptionPane.INFORMATION_MESSAGE);
+
+                        jopApropos.createDialog(fenetre,"Erreur");
+                    }
+
+                }
+
+
                 fenetre.dispose();
-                //System.exit(0);
+            }
         }
     }
 }
