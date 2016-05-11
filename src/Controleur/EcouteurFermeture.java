@@ -22,7 +22,6 @@ public class EcouteurFermeture extends WindowAdapter {
 
     public void windowClosing(WindowEvent e){
         int resultQuitter = JOptionPane.showConfirmDialog(fenetre,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
-        fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         if  (resultQuitter==JOptionPane.YES_OPTION){
             int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,"Voulez-vous sauvegarder la partie en cours ?","Confirm",JOptionPane.YES_NO_OPTION);
             if  (resultSauvegarde==JOptionPane.YES_OPTION){
