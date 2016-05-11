@@ -69,6 +69,7 @@ public class EcouteurMenu implements ActionListener{
         else if (source.equals(fenetre.getReprendrePartie())){
             System.out.println("reprendre partie");
             this.jeu=jeu.resumeGame();
+            fenetre.setJeu(this.jeu);// changer pour reset le panel
         }
         // nouvelle partie
         if (e.getSource() ==fenetre.getNouvellePartie())

@@ -30,6 +30,10 @@ public class Fenetre extends JFrame{
 
     protected Tableau_Score tableauScore;
 
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
     protected Jeu jeu;
 
     public Fenetre(String nomFenetre,Jeu jeu){
