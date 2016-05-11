@@ -15,6 +15,7 @@ public class Joueur implements Serializable{
         flotte = fl;
         grille = gr;
         nbcoups = 0;
+        nomJoueur = null;
     }
 
     public void setNomJoueur(String nom){

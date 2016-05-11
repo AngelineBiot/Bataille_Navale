@@ -10,6 +10,9 @@ public class Flotte implements Serializable{
 
     private Bateaux[] flotte;
     private int nbBateaux;
+
+
+    private int nbBateauxPlaces;
     private int nbBateauxCoule;
     private int nbTouches;
 
@@ -17,6 +20,7 @@ public class Flotte implements Serializable{
         this.flotte = flotte;
         nbBateaux = flotte.length;
         nbBateauxCoule = 0;
+        nbBateauxPlaces = 0;
     }
 
     public static Flotte creerFlotte6bateaux(){
@@ -52,6 +56,14 @@ public class Flotte implements Serializable{
 
     public Bateaux[] getFlotte(){
         return flotte;
+    }
+
+    public int getNbBateauxPlaces() {
+        return nbBateauxPlaces;
+    }
+
+    public void incrementeNbBateauxPlaces() {
+        this.nbBateauxPlaces+=1;
     }
 
 }

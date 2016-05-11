@@ -1,12 +1,7 @@
 package Controleur;
 
-import Modele.Flotte;
-import Modele.Grille;
-import Modele.Jeu;
-import Modele.Joueur;
-import Vue.ConteneurInscription;
-import Vue.Fenetre;
-import Vue.ImageBateau;
+import Modele.*;
+import Vue.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -63,13 +58,88 @@ public class EcouteurMenu implements ActionListener{
 
         }
         else if (source.equals(fenetre.getSauvegarderPartie())){
-            jeu.Sauvegarde();
-            System.out.println("Sauvegarde");
+            if(jeu.getJoueur1().getNomJoueur() != null && jeu.getJoueur2().getNomJoueur() != null){
+                Jeu.Sauvegarde(jeu);
+                System.out.println("Sauvegarde");
+            }
+            else{
+                JOptionPane jopApropos = new JOptionPane();
+                jopApropos.showMessageDialog(fenetre,"La partie n'a pas encore commencé !","Impossible de sauvegarder la partie",JOptionPane.INFORMATION_MESSAGE);
+
+                jopApropos.createDialog(fenetre,"Impossible de sauvegarder la partie");
+            }
+
         }
         else if (source.equals(fenetre.getReprendrePartie())){
             System.out.println("reprendre partie");
-            this.jeu=jeu.resumeGame();
-            fenetre.setJeu(this.jeu);// changer pour reset le panel
+            try{
+                this.jeu=Jeu.resumeGame();
+                fenetre.setJeu(this.jeu);
+
+                if(jeu.getEstPhasePlacement()){
+
+                    ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
+                    modelConteneurPlacement.setDimensionCarre(50);
+
+                    ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
+                    conteneurGrille.repaintBateauxDejaPlaces();
+                    ConteneurPlacement conteneur = new ConteneurPlacement(modelConteneurPlacement, jeu.getJoueurConcerne().getFlotte(), conteneurGrille);
+                    new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
+
+                    fenetre.setContentPane(conteneur);
+                    fenetre.validate();
+
+                }
+                else{
+                    ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
+                    ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
+
+                    ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
+                    Tableau_Score score = new Tableau_Score(jeu);
+
+                    ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score);
+
+
+                    new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
+
+                    fenetre.setContentPane(conteneurTir);
+                    fenetre.validate();
+
+
+                    conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
+                    conteneurGrilleJoueur.afficherCaseToucheMaGrille();
+                    conteneurGrilleAutreJoueur.afficherCaseTouche();
+                    conteneurGrilleAutreJoueur.afficherBateauxCoulesMaGrille();
+                    conteneurGrilleAutreJoueur.updateUI();
+                }
+            }
+            catch(SauvegardeException e1){
+                JOptionPane jopApropos = new JOptionPane();
+                jopApropos.showMessageDialog(fenetre,"Aucune sauvegarde n'a été trouvée","Impossible de reprendre la partie",JOptionPane.INFORMATION_MESSAGE);
+
+                jopApropos.createDialog(fenetre,"Impossible de reprendre la partie");
+            }
+            // changer pour reset le panel
+
+            /*
+
+            ConteneurInscription conteneurInscription = new ConteneurInscription();
+            int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
+            int hauteurBox = (700-hauteurConteneur)/2;
+
+            JPanel conteneurGlobal = new JPanel();
+            conteneurGlobal.setLayout(new BoxLayout(conteneurGlobal, BoxLayout.Y_AXIS));
+            conteneurGlobal.add(Box.createVerticalStrut(hauteurBox));
+            conteneurGlobal.add(conteneurInscription);
+
+            fenetre.setContentPane(conteneurGlobal);
+            fenetre.validate();
+
+            new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);*/
+
+
+
+
         }
         // nouvelle partie
         if (e.getSource() ==fenetre.getNouvellePartie())
