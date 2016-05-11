@@ -54,7 +54,7 @@ public class AnimationTouche extends JFrame implements Runnable {
     @Override
     public void run() {
         try {
-            t.sleep(2000);
+            t.sleep(1700);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
