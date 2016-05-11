@@ -24,7 +24,6 @@ public class Jeu implements Serializable{
 
     public void Sauvegarde(){
         ObjectOutputStream oos;
-        ObjectInputStream ois;
         try {
             oos=new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("ressource/Sauvegarde/Jeu.txt"))));
             oos.writeObject(this);
@@ -32,12 +31,29 @@ public class Jeu implements Serializable{
         }
         catch (FileNotFoundException fnfe){
             fnfe.printStackTrace();
-            System.out.println("fnfe");
         }
         catch (IOException ioe){
             ioe.printStackTrace();
-            System.out.println("ioe"+ ioe.getMessage());
         }
+    }
+    public Jeu resumeGame(){
+        ObjectInputStream ois;
+        Jeu jeu=new Jeu(joueur1,joueur2);
+        try {
+            ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("ressource/Sauvegarde/Jeu.txt")));
+            jeu=(Jeu)ois.readObject();
+            ois.close();
+        }
+        catch (FileNotFoundException fnf){
+            fnf.printStackTrace();
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return jeu;
     }
 
     public Joueur getJoueurConcerne(){

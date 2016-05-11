@@ -66,6 +66,10 @@ public class EcouteurMenu implements ActionListener{
             jeu.Sauvegarde();
             System.out.println("Sauvegarde");
         }
+        else if (source.equals(fenetre.getReprendrePartie())){
+            System.out.println("reprendre partie");
+            this.jeu=jeu.resumeGame();
+        }
         // nouvelle partie
         if (e.getSource() ==fenetre.getNouvellePartie())
         {

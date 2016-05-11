@@ -107,6 +107,7 @@ public class Fenetre extends JFrame{
         itemApropos.addActionListener(control);
         nouvellePartie.addActionListener(control);
         sauvegarderPartie.addActionListener(control);
+        reprendrePartie.addActionListener(control);
     }
 
 
