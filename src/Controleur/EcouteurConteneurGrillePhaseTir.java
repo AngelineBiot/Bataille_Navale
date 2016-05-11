@@ -59,23 +59,17 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                     if(model_tire.getCaseOuEstTire().getBat().getCoule()){
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
-//                        JOptionPane jop = new JOptionPane();
-//                        jop.showMessageDialog(null, "Coulé ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                        AnimationCoule ac = new AnimationCoule();
-                        ac.setVisible(true);
+                        JOptionPane jop = new JOptionPane();
+                        jop.showMessageDialog(null, "Coulé ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{
-                        //JOptionPane jop = new JOptionPane();
-                        //jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                        AnimationTouche at = new AnimationTouche();
-                        at.setVisible(true);
+                        JOptionPane jop = new JOptionPane();
+                        jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                     }
 
                 } else {
-//                    JOptionPane jop = new JOptionPane();
-//                    jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                    AnimationRate at = new AnimationRate();
-                    at.setVisible(true);
+                    JOptionPane jop = new JOptionPane();
+                    jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
                 }
 
                 if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
