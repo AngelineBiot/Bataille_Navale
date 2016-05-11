@@ -5,7 +5,9 @@ package Modele;
  */
 
 
-import javazoom.jlme.util.Player;
+//import javazoom.jlme.util.Player;
+
+import javazoom.jl.player.Player;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

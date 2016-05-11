@@ -1,4 +1,10 @@
 package Modele;
+
+/**
+ * Created by ANTOINE on 11/05/2016.
+ */
+import javax.swing.*;
+import java.awt.*;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,25 +15,26 @@ import javax.swing.ImageIcon;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class DemoAnimation extends JFrame {
+public class AnimationTouche extends JFrame implements Runnable {
+    Thread t;
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
 
-    public DemoAnimation() {
+    public AnimationTouche() {
         try {
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            t=new Thread(this);
+            t.start();
             contentPane = (JPanel) getContentPane();
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
-            setTitle("Raté");
+            setTitle("Touché");
             // add the header label
             headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
-            headerLabel.setText("Raté");
+            headerLabel.setText("Touché");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon(this.getClass().getResource(
-                    "eau.gif"));
+            ImageIcon ii = new ImageIcon("ressource/images/touche.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
@@ -41,7 +48,16 @@ public class DemoAnimation extends JFrame {
 
     public static void main(String[] args) {
 
-        new DemoAnimation();
+        new AnimationTouche();
     }
 
+    @Override
+    public void run() {
+        try {
+            t.sleep(2000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        this.setVisible(false);
+    }
 }
