@@ -22,8 +22,12 @@ public class Jeu implements Serializable{
     }
 
 
-    public static void Sauvegarde(Jeu jeu){
+    public static void Sauvegarde(Jeu jeu) throws SauvegardeException{
         ObjectOutputStream oos;
+        if(jeu.getJoueur1().getNomJoueur() == null && jeu.getJoueur2().getNomJoueur() == null){
+            throw new SauvegardeException();
+        }
+
         try {
             oos=new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("ressource/Sauvegarde/Jeu"))));
             //oos.reset();
@@ -31,7 +35,7 @@ public class Jeu implements Serializable{
             oos.close();
         }
         catch (IOException ioe){
-            ioe.printStackTrace();
+            throw new SauvegardeException();
         }
     }
     public static Jeu resumeGame() throws SauvegardeException{

@@ -1,6 +1,7 @@
 package Vue;
 
 
+import Controleur.EcouteurFermeture;
 import Controleur.EcouteurMenu;
 import Modele.Jeu;
 
@@ -30,9 +31,7 @@ public class Fenetre extends JFrame{
 
     protected Tableau_Score tableauScore;
 
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
-    }
+
 
     protected Jeu jeu;
 
@@ -45,11 +44,12 @@ public class Fenetre extends JFrame{
         setIconImage(im);
 
         setSize(900,700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setLocationRelativeTo(null);
         setResizable(false);
         creerMenu();
-        new EcouteurMenu(this,jeu);
+
 
         /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
         setContentPane(conteneur);*/
@@ -144,5 +144,13 @@ public class Fenetre extends JFrame{
 
     public JMenuItem getNouvellePartie() {
         return nouvellePartie;
+    }
+
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    public Jeu getJeu() {
+        return jeu;
     }
 }
