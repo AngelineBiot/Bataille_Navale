@@ -112,6 +112,7 @@ public class Fenetre extends JFrame{
         nouvellePartie.addActionListener(control);
         sauvegarderPartie.addActionListener(control);
         reprendrePartie.addActionListener(control);
+        quitterPartie.addActionListener(control);
     }
 
 
