@@ -56,6 +56,21 @@ public class ConteneurGrille extends JPanel {
 
     }
 
+    public void repaintBateauxDejaPlaces(){
+        for(Bateaux bat : joueur.getFlotte().getFlotte()){
+            Case[] tabCaseBateaux = bat.getPosition();
+            if(bat.getPosition() != null){
+                int i;
+                for(i=0 ; i< tabCaseBateaux.length ;i++){
+                    int coord = tabCaseBateaux[i].getCoord1D();
+                    ImageIcon image = ImageBateau.getImageBateau(bat.getTypeBateau(), bat.getEstOrienteVerticalement(), i, false);
+                    gridPanel[coord].setIcon(image);
+                }
+            }
+        }
+    }
+
+
     public void afficherBateauxDeSaFlotte(){
 
 

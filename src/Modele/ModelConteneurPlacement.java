@@ -11,7 +11,6 @@ public class ModelConteneurPlacement {
     private int dimensionCarre;
 
     private boolean directionVerticale;
-    private int indiceBateauEnCours;
     private Case caseOuEstBateauEnCoursPlacement;
 
     public ModelConteneurPlacement(){
@@ -66,13 +65,13 @@ public class ModelConteneurPlacement {
         this.caseOuEstBateauEnCoursPlacement = caseOuEstBateauEnCoursPlacement;
     }
 
-    public int getIndiceBateauEnCours() {
+    /*public int getIndiceBateauEnCours() {
         return indiceBateauEnCours;
     }
 
     public void setIndiceBateauEnCours(int indiceBateauEnCours) {
         this.indiceBateauEnCours = indiceBateauEnCours;
-    }
+    }*/
 
 
 

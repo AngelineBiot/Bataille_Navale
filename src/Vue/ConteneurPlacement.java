@@ -45,11 +45,11 @@ public class ConteneurPlacement extends JPanel {
 
 
 
-        infoPlacement = new JLabel("Veuillez placer votre "+flotte.getFlotte()[0].getTypeBateau());
+        infoPlacement = new JLabel("Veuillez placer votre "+flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau());
         infoPlacement.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         imageBateau = new JLabel();
-        imageBateau.setIcon(ImageBateau.getImageBateau(flotte.getFlotte()[0].getTypeBateau(),false));
+        imageBateau.setIcon(ImageBateau.getImageBateau(flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau(),false));
         imageBateau.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 
