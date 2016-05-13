@@ -25,7 +25,7 @@ public class ConteneurAttente extends JPanel {
     }
 
     public void creerWidgetJoueur(String nomJoueur) {
-        Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
         //!!!!!!!
         //Ca : que pour les tests : ENLEVER CA A LA FIN

@@ -1,10 +1,8 @@
-package Modele;
+package Vue;
 
 /**
  * Created by ANTOINE on 11/05/2016.
  */
-import javax.swing.*;
-import java.awt.*;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,26 +13,26 @@ import javax.swing.ImageIcon;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class AnimationTouche extends JFrame implements Runnable {
+public class AnimationCoule extends JFrame  implements Runnable{
     Thread t;
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
 
-    public AnimationTouche() {
+    public AnimationCoule() {
         try {
             t=new Thread(this);
             t.start();
             contentPane = (JPanel) getContentPane();
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
-            setTitle("Touché");
+            setTitle("Coulé");
             // add the header label
             headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
-            headerLabel.setText("Touché");
+            headerLabel.setText("Coulé");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon("ressources/images/touche.gif");
+            ImageIcon ii = new ImageIcon("ressources/images/couler.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
@@ -48,16 +46,17 @@ public class AnimationTouche extends JFrame implements Runnable {
 
     public static void main(String[] args) {
 
-        new AnimationTouche();
+        new AnimationCoule();
     }
 
     @Override
     public void run() {
         try {
-            t.sleep(1700);
+            t.sleep(2700);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
         this.setVisible(false);
+
     }
 }

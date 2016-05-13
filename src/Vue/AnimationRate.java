@@ -1,11 +1,9 @@
-package Modele;
+package Vue;
 
 /**
  * Created by ANTOINE on 11/05/2016.
  */
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

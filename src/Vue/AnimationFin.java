@@ -1,4 +1,4 @@
-package Modele;
+package Vue;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,4 @@
-package Modele;
-
-/**
- * Created by ANTOINE on 11/05/2016.
- */
-import javax.swing.*;
-import java.awt.*;
+package Vue;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,26 +9,24 @@ import javax.swing.ImageIcon;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class AnimationCoule extends JFrame  implements Runnable{
-    Thread t;
+public class DemoAnimation extends JFrame {
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
 
-    public AnimationCoule() {
+    public DemoAnimation() {
         try {
-            t=new Thread(this);
-            t.start();
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
             contentPane = (JPanel) getContentPane();
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
-            setTitle("Coulé");
+            setTitle("Raté");
             // add the header label
             headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
-            headerLabel.setText("Coulé");
+            headerLabel.setText("Raté");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon("ressources/images/couler.gif");
+            ImageIcon ii = new ImageIcon("ressources/images/eau.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
@@ -48,17 +40,7 @@ public class AnimationCoule extends JFrame  implements Runnable{
 
     public static void main(String[] args) {
 
-        new AnimationCoule();
+        new DemoAnimation();
     }
 
-    @Override
-    public void run() {
-        try {
-            t.sleep(2700);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        this.setVisible(false);
-
-    }
 }
