@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -24,8 +25,14 @@ public class ConteneurAttente extends JPanel {
     }
 
     public void creerWidgetJoueur(String nomJoueur) {
+        Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente");
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente", locale);
 
 
         JLabel lab = new JLabel(nomJoueur+" "+ texteInternational.getString("tour"),SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
