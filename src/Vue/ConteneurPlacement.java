@@ -2,6 +2,8 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurGrillePhasePlacement;
 import Modele.*;
@@ -35,6 +37,16 @@ public class ConteneurPlacement extends JPanel {
     }
 
     private void addWidgets(){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurPlacement", locale);
+
+
+
         add(conteneurGrille);
 
 
@@ -45,7 +57,7 @@ public class ConteneurPlacement extends JPanel {
 
 
 
-        infoPlacement = new JLabel("Veuillez placer votre "+flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau());
+        infoPlacement = new JLabel(texteInternational.getString("place")+flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational());
         infoPlacement.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         imageBateau = new JLabel();
@@ -53,8 +65,8 @@ public class ConteneurPlacement extends JPanel {
         imageBateau.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 
-        placerBateauVertical = new JRadioButton("Placer le bateau verticalement");
-        placerBateauHorizontal = new JRadioButton("Placer le bateau horizontalement");;
+        placerBateauVertical = new JRadioButton(texteInternational.getString("vertical"));
+        placerBateauHorizontal = new JRadioButton(texteInternational.getString("horizontal"));
 
         ButtonGroup groupeBoutonChoixDirection = new ButtonGroup();
         groupeBoutonChoixDirection.add(placerBateauVertical);
@@ -62,9 +74,6 @@ public class ConteneurPlacement extends JPanel {
         placerBateauVertical.setSelected(true);
 
         placerBateauVertical.setActionCommand("changementDirection");
-
-
-
         placerBateauHorizontal.setActionCommand("changementDirection");
 
 
@@ -77,7 +86,7 @@ public class ConteneurPlacement extends JPanel {
 
 
 
-        boutonValidation = new JButton("Valider le placement du bateau");
+        boutonValidation = new JButton(texteInternational.getString("valider"));
         boutonValidation.setActionCommand("validation");
 
         boutonValidation.setAlignmentX(JComponent.CENTER_ALIGNMENT);

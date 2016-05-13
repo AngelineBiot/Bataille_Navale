@@ -5,6 +5,8 @@ import Vue.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Florian on 18/04/2016.
@@ -87,10 +89,19 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
 
     public void actionPerformed(ActionEvent e){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurPlacement", locale);
+
+
         if(e.getActionCommand().equals("changementDirection")){
             String texteCaseACocher = ((JRadioButton) e.getSource()).getText();
-            boolean bon = (texteCaseACocher.equals("Placer le bateau horizontalement") && model_place.isDirectionVerticale()) ||
-                    (texteCaseACocher.equals("Placer le bateau verticalement") && !model_place.isDirectionVerticale());
+            boolean bon = (texteCaseACocher.equals(texteInternational.getString("horizontal")) && model_place.isDirectionVerticale()) ||
+                    (texteCaseACocher.equals(texteInternational.getString("vertical")) && !model_place.isDirectionVerticale());
             if(bon){
                 if(model_place.getCaseOuEstBateauEnCoursPlacement() != null){
                     model_place.setCoordX(model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneX());
@@ -177,8 +188,8 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                 flotte.incrementeNbBateauxPlaces();
 
                 if(flotte.getNbBateauxPlaces()<jeu.getJoueurConcerne().getFlotte().getFlotte().length){
-                    String typeNouvBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
-                    panelPlacement.getInfoPlacement().setText("Veuillez placer votre "+typeNouvBateau);
+                    String typeNouvBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational();
+                    panelPlacement.getInfoPlacement().setText(texteInternational.getString("place")+typeNouvBateau);
                     panelPlacement.getImageBateau().setIcon(ImageBateau.getImageBateau(typeNouvBateau,false));
                     panelPlacement.getImageBateau().updateUI();
                 }

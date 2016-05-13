@@ -2,6 +2,8 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurInscription;
 
@@ -16,29 +18,39 @@ public class ConteneurInscription extends JPanel{
 
 
     public ConteneurInscription(){
-        initAttributs();
-        addwidgets();
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription", locale);
+
+
+        initAttributs(texteInternational.getString("valider"));
+        addwidgets(texteInternational.getString("pseudo1"), texteInternational.getString("pseudo2"));
 
     }
 
-    public void initAttributs(){
+    public void initAttributs(String texteValider){
         labelJoueur1 = new JTextField();
         labelJoueur2 = new JTextField();
-        valider = new JButton("Valider");
+        valider = new JButton(texteValider);
 
         labelJoueur1.setColumns(15);
         labelJoueur2.setColumns(15);
     }
 
-    public void addwidgets(){
+    public void addwidgets(String textePseudo1, String textePseudo2){
         JPanel placementGrille = new JPanel();
         GridLayout g = new GridLayout(2,2);
         g.setVgap(10);
         placementGrille.setLayout(g);
 
-        placementGrille.add(new JLabel("Pseudo du joueur 1 : "));
+        placementGrille.add(new JLabel(textePseudo1));
         placementGrille.add(labelJoueur1);
-        placementGrille.add(new JLabel("Pseudo du joueur 2 : "));
+        placementGrille.add(new JLabel(textePseudo2));
         placementGrille.add(labelJoueur2);
 
         JPanel placementGeneral = new JPanel();

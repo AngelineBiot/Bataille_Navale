@@ -2,6 +2,8 @@ package Modele;
 
 
 import java.io.Serializable;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -15,6 +17,7 @@ public class Bateaux implements Serializable{
     private boolean coule;
     private boolean estOrienteVerticalement;
     private String typeBateau;
+    private String typeBateauInternational;
 
     public Bateaux(){}
 
@@ -32,6 +35,16 @@ public class Bateaux implements Serializable{
         if (typeDeBateau.equals("torpilleur")){
             this.taille=2;
         }
+
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Bateaux", locale);
+        typeBateauInternational = texteInternational.getString(typeDeBateau);
     }
 
     public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
@@ -107,5 +120,9 @@ public class Bateaux implements Serializable{
         }
 
         return retour;
+    }
+
+    public String getTypeBateauInternational() {
+        return typeBateauInternational;
     }
 }
