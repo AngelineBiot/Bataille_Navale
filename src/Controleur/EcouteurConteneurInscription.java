@@ -6,6 +6,8 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 29/04/16.
@@ -27,15 +29,26 @@ public class EcouteurConteneurInscription implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurInscription", locale);
+
+
         String pseudoJoueur1 = conteneurInscription.getlabelJoueur1().getText();
         String pseudoJoueur2 = conteneurInscription.getlabelJoueur2().getText();
 
         if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
             JOptionPane jopErreurInscriptionVide = new JOptionPane();
-            JOptionPane.showMessageDialog(null, "Veuillez entrer un pseudo pour chaque joueur", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, texteInternational.getString("pseudoVide"),
+                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
         } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
             JOptionPane jopErreurInscriptionIdentique = new JOptionPane();
-            JOptionPane.showMessageDialog(null, "Les deux joueurs doivent avoir des pseudos disctincts", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, texteInternational.getString("memePseudos"),
+                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
         } else {
             jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
             jeu.getJoueur2().setNomJoueur(pseudoJoueur2);

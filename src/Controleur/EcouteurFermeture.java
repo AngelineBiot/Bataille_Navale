@@ -8,6 +8,8 @@ import Vue.Fenetre;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 11/05/16.
@@ -21,9 +23,20 @@ public class EcouteurFermeture extends WindowAdapter {
     }
 
     public void windowClosing(WindowEvent e){
-        int resultQuitter = JOptionPane.showConfirmDialog(fenetre,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu", locale);
+
+
+        int resultQuitter = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
+                texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
         if  (resultQuitter==JOptionPane.YES_OPTION){
-            int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,"Voulez-vous sauvegarder la partie en cours ?","Confirm",JOptionPane.YES_NO_OPTION);
+            int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeSauvegarde"),
+                    texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
             if  (resultSauvegarde==JOptionPane.YES_OPTION){
                 try {
                     Jeu.Sauvegarde(fenetre.getJeu());
@@ -31,9 +44,10 @@ public class EcouteurFermeture extends WindowAdapter {
                 }
                 catch(SauvegardeException e1){
                     JOptionPane jopApropos = new JOptionPane();
-                    jopApropos.showMessageDialog(fenetre,"Impossible de sauvegarder la partie !","Erreur",JOptionPane.INFORMATION_MESSAGE);
+                    jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                            texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
 
-                    jopApropos.createDialog(fenetre,"Erreur");
+                    jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
                 }
 
             }

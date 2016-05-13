@@ -6,6 +6,8 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by angel on 03/05/2016.
@@ -23,36 +25,41 @@ public class EcouteurMenu implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu", locale);
+
+
 
         Object source = e.getSource();
 
-        String msgAide = "Cliquez sur une case pour la sélectionner\n" +
-                            "Puis sur 'Valider le tir' pour tirer\n" +
-                            "Si vous touchez un bateau, la case devient rouge, sinon elle devient bleue\n" +
-                            "Si vous touchez toutes les cases sur lesquelles se trouve un bateau : vous l'avez coulé !\n" +
-                            "Coulez toute la flotte de votre adversaire pour gagner !";
-        String msgApropos = "Jeu créé par :\n\n" +
+        String msgApropos = texteInternational.getString("jeuCree") +
                                 "BIOT Angeline\n" +
                                 "GUERRE Michael\n" +
                                 "LIAO Zuzhi\n" +
                                 "PARTY Florian\n" +
                                 "PY Antoine\n" +
                                 "SURLEAU Etienne\n" +
-                                "\n Etudiants en S2 DUT Informatique - IUT-BM (2016)";
+                                texteInternational.getString("etudiants");
 
         if (source.equals(fenetre.getItemAide()))
         {
             JOptionPane jopAide = new JOptionPane();
-            jopAide.showMessageDialog(null,msgAide,"Aide",JOptionPane.INFORMATION_MESSAGE);
+            jopAide.showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"),JOptionPane.INFORMATION_MESSAGE);
 
-            jopAide.createDialog(null,"Aide");
+            jopAide.createDialog(null,texteInternational.getString("aide"));
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {
             JOptionPane jopApropos = new JOptionPane();
-            jopApropos.showMessageDialog(null,msgApropos,"A propos",JOptionPane.INFORMATION_MESSAGE);
+            jopApropos.showMessageDialog(null,msgApropos,texteInternational.getString("aPropos"),JOptionPane.INFORMATION_MESSAGE);
 
-            jopApropos.createDialog(null,"A propos");
+            jopApropos.createDialog(null,texteInternational.getString("aPropos"));
 
 
         }
@@ -61,11 +68,11 @@ public class EcouteurMenu implements ActionListener{
                 Jeu.Sauvegarde(jeu);
             }
             catch(SauvegardeException e2){
-                e2.printStackTrace();
                 JOptionPane jopApropos = new JOptionPane();
-                jopApropos.showMessageDialog(fenetre,"Impossible de sauvegarder la partie !","Erreur",JOptionPane.INFORMATION_MESSAGE);
+                jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                                            texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
 
-                jopApropos.createDialog(fenetre,"Erreur");
+                jopApropos.createDialog(fenetre, texteInternational.getString("erreur"));
             }
 
         }
@@ -113,9 +120,10 @@ public class EcouteurMenu implements ActionListener{
             }
             catch(SauvegardeException e1){
                 JOptionPane jopApropos = new JOptionPane();
-                jopApropos.showMessageDialog(fenetre,"Aucune sauvegarde n'a été trouvée","Impossible de reprendre la partie",JOptionPane.INFORMATION_MESSAGE);
+                jopApropos.showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
+                                            texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
 
-                jopApropos.createDialog(fenetre,"Impossible de reprendre la partie");
+                jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
             }
             // changer pour reset le panel
 
@@ -171,9 +179,11 @@ public class EcouteurMenu implements ActionListener{
         //quitter partie
         else if (e.getSource()==fenetre.getQuitterPartie())
         {
-            int resultQuitter = JOptionPane.showConfirmDialog(fenetre,"Vous voulez quitter?","Confirm",JOptionPane.YES_NO_OPTION);
+            int resultQuitter = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
+                                            texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
             if  (resultQuitter==JOptionPane.YES_OPTION){
-                int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,"Voulez-vous sauvegarder la partie en cours ?","Confirm",JOptionPane.YES_NO_OPTION);
+                int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeSauvegarde"),
+                                                                    texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
                 if  (resultSauvegarde==JOptionPane.YES_OPTION){
                     try {
                         Jeu.Sauvegarde(fenetre.getJeu());
@@ -181,9 +191,10 @@ public class EcouteurMenu implements ActionListener{
                     }
                     catch(SauvegardeException e1){
                         JOptionPane jopApropos = new JOptionPane();
-                        jopApropos.showMessageDialog(fenetre,"Impossible de sauvegarder la partie !","Erreur",JOptionPane.INFORMATION_MESSAGE);
+                        jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                                                texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
 
-                        jopApropos.createDialog(fenetre,"Erreur");
+                        jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
                     }
 
                 }

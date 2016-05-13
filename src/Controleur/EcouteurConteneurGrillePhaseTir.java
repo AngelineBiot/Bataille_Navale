@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Michael on 24/04/2016.
@@ -79,12 +81,23 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 }
 
                 if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
+                    Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+                    //!!!!!!!
+                    //Ca : que pour les tests : ENLEVER CA A LA FIN
+                    //!!!!!!!
+
+                    ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurGrillePhaseTir", locale);
+
+
 
                     JPanel conteneurVictoire = new JPanel();
                     conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
                     AnimationFin af = new AnimationFin();
                     af.setVisible(true);
-                    JLabel messageVictoire = new JLabel("Bravo "+jeu.getJoueurConcerne().getNomJoueur()+", vous avez gagne !");
+                    JLabel messageVictoire = new JLabel(texteInternational.getString("bravo")+
+                                                        jeu.getJoueurConcerne().getNomJoueur()+
+                                                        texteInternational.getString("gagne"));
                     conteneurVictoire.add(messageVictoire);
 
                     TableauScores tableauScore = new TableauScores(jeu);

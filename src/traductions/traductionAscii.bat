@@ -1,3 +1,4 @@
+@echo off
 dir /B "*.properties" >sauv.txt
 
 for /f %%i IN (sauv.txt) DO (

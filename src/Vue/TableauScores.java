@@ -21,7 +21,7 @@ public class TableauScores extends JPanel{
         //Ca : que pour les tests : ENLEVER CA A LA FIN
         //!!!!!!!
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurTir", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores", locale);
 
 
 
@@ -56,11 +56,11 @@ public class TableauScores extends JPanel{
         };
 
         //Les titres des colonnes
-        String  title[] = {"Nom",
-                            "Nombre de tours",
-                            "Nombre de bateaux ennemis coulés",
-                            "nombre de touchés",
-                            "efficacité"};
+        String  title[] = {texteInternational.getString("nom"),
+                            texteInternational.getString("nombreTours"),
+                            texteInternational.getString("nombreCoules"),
+                            texteInternational.getString("nombreTouches"),
+                            texteInternational.getString("efficacite")};
         JTable tableau = new JTable(data, title);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !

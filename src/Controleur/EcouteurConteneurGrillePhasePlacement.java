@@ -188,8 +188,9 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                 flotte.incrementeNbBateauxPlaces();
 
                 if(flotte.getNbBateauxPlaces()<jeu.getJoueurConcerne().getFlotte().getFlotte().length){
-                    String typeNouvBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational();
-                    panelPlacement.getInfoPlacement().setText(texteInternational.getString("place")+typeNouvBateau);
+                    String typeNouvBateau = jeu.getJoueurConcerne().getFlotte().getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
+                    String typeNouvBateauInternational = jeu.getJoueurConcerne().getFlotte().getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational();
+                    panelPlacement.getInfoPlacement().setText(texteInternational.getString("place")+typeNouvBateauInternational);
                     panelPlacement.getImageBateau().setIcon(ImageBateau.getImageBateau(typeNouvBateau,false));
                     panelPlacement.getImageBateau().updateUI();
                 }

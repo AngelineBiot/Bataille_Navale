@@ -7,6 +7,8 @@ import Modele.Jeu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -37,7 +39,6 @@ public class Fenetre extends JFrame{
     public Fenetre(String nomFenetre,Jeu jeu){
         setTitle(nomFenetre);
         this.jeu = jeu;
-        creerScores();
 
         Image im = Toolkit.getDefaultToolkit().getImage("ressources/images/TorpilleurHorizontal.png");
         setIconImage(im);
@@ -58,18 +59,27 @@ public class Fenetre extends JFrame{
     }
 
     public void creerMenu(){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre", locale);
+
+
 
         menuBar = new JMenuBar();
 
-        partie  = new JMenu("Partie");
+        partie  = new JMenu(texteInternational.getString("partie"));
         aide    = new JMenu("?");
 
-        nouvellePartie      = new JMenuItem("Nouvelle Partie");
-        sauvegarderPartie   = new JMenuItem("Sauvegarder la partie");
-        quitterPartie       = new JMenuItem("Quitter la partie");
-        reprendrePartie     = new JMenuItem("Reprendre une partie");
-        itemAide            = new JMenuItem("Aide");
-        itemApropos         = new JMenuItem("A propos");
+        nouvellePartie      = new JMenuItem(texteInternational.getString("nouvellePartie"));
+        sauvegarderPartie   = new JMenuItem(texteInternational.getString("sauvegarderPartie"));
+        quitterPartie       = new JMenuItem(texteInternational.getString("quitterPartie"));
+        reprendrePartie     = new JMenuItem(texteInternational.getString("reprendrePartie"));
+        itemAide            = new JMenuItem(texteInternational.getString("aide"));
+        itemApropos         = new JMenuItem(texteInternational.getString("aPropos"));
 
         aide.add(itemAide);
         aide.add(itemApropos);
@@ -84,26 +94,7 @@ public class Fenetre extends JFrame{
         setJMenuBar(menuBar);
     }
 
-    public void creerScores() {
-        //Les données du tableau
-        Object[][] data = {
-                {jeu.getJoueur1(), jeu.getJoueur1().getNbCoups(), jeu.getJoueur1().getFlotte().getNbBateauxCoule(),
-                                    jeu.getJoueur1().getFlotte().getNbTouches(), "efficacite"},
-                {jeu.getJoueur2(), jeu.getJoueur2().getNbCoups(), jeu.getJoueur2().getFlotte().getNbBateauxCoule(),
-                                    jeu.getJoueur2().getFlotte().getNbTouches(), "efficacite"},
-        };
 
-        //Les titres des colonnes
-        String  title[] = {"Nom", "Nombre de tirs", "Bateaux ennemis coulés", "Bateaux ennemis touchés", "Efficacité"};
-        JTable tableau = new JTable(data, title);
-        //Nous ajoutons notre tableau à notre contentPane dans un scroll
-        //Sinon les titres des colonnes ne s'afficheront pas !
-        //this.getContentPane().add(new JScrollPane(tableau));
-
-        JPanel pano = new JPanel();
-        pano.add(tableau);
-        setContentPane(pano);
-    }
 
     public void setControlMenu(EcouteurMenu control){
 

@@ -5,11 +5,24 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Main_Grille_test {
     public static void main(String[] args) {
 
         ImageBateau.initTableauImagesBateau();
+
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre", locale);
+
+
+
 
         Grille grillej1 = new Grille();
         Grille grillej2 = new Grille();
@@ -23,7 +36,7 @@ public class Main_Grille_test {
         Jeu jeu = new Jeu(j1, j2);
 
 
-        Fenetre fenetre = new Fenetre("Bataille navale",jeu);
+        Fenetre fenetre = new Fenetre(texteInternational.getString("titre"),jeu);
 
         ConteneurInscription conteneurInscription = new ConteneurInscription();
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
