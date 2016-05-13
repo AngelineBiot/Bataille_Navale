@@ -2,6 +2,8 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by ANTOINE on 13/05/2016.
@@ -13,6 +15,16 @@ public class AnimationFin extends JFrame implements Runnable{
     JLabel headerLabel = new JLabel();
 
     public AnimationFin() {
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Animation", locale);
+        String fin = texteInternational.getString("fin");
+
         try {
             t=new Thread(this);
             t.start();
@@ -21,10 +33,10 @@ public class AnimationFin extends JFrame implements Runnable{
             contentPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
-            setTitle("FIN");
+            setTitle(fin);
             // add the header label
             headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
-            headerLabel.setText("FIN");
+            headerLabel.setText(fin);
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
             ImageIcon ii = new ImageIcon("ressources/images/fin.gif");
