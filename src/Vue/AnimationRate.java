@@ -5,11 +5,8 @@ package Vue;
  */
 
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 
 /**
  * Created by ANTOINE on 09/05/2016.
@@ -26,6 +23,9 @@ public class AnimationRate extends JFrame implements Runnable{
             t=new Thread(this);
             t.start();
             contentPane = (JPanel) getContentPane();
+            contentPane.setBackground(Color.LIGHT_GRAY);
+
+            contentPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
             setTitle("Raté");
@@ -39,6 +39,8 @@ public class AnimationRate extends JFrame implements Runnable{
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
             this.setLocationRelativeTo(null);
+            this.setAlwaysOnTop(true);
+            this.setUndecorated(true);
             this.setVisible(true);
         } catch (Exception exception) {
             exception.printStackTrace();

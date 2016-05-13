@@ -17,6 +17,8 @@ public class AnimationFin extends JFrame implements Runnable{
             t=new Thread(this);
             t.start();
             contentPane = (JPanel) getContentPane();
+            contentPane.setBackground(Color.LIGHT_GRAY);
+            contentPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             contentPane.setLayout(new BorderLayout());
             setSize(new Dimension(400, 300));
             setTitle("FIN");
@@ -30,6 +32,8 @@ public class AnimationFin extends JFrame implements Runnable{
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
             this.setLocationRelativeTo(null);
+            this.setAlwaysOnTop(true);
+            this.setUndecorated(true);
             this.setVisible(true);
         } catch (Exception exception) {
             exception.printStackTrace();
