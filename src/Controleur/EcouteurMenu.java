@@ -6,7 +6,6 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 /**
  * Created by angel on 03/05/2016.
@@ -94,7 +93,7 @@ public class EcouteurMenu implements ActionListener{
                     ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
 
                     ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
-                    Tableau_Score score = new Tableau_Score(jeu);
+                    TableauScores score = new TableauScores(jeu);
 
                     ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score);
 

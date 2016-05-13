@@ -7,12 +7,24 @@ import Modele.Jeu;
 import Modele.Joueur;
 
 import javax.swing.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class Tableau_Score extends JPanel{
-    public Tableau_Score(Jeu jeu){
+public class TableauScores extends JPanel{
+    public TableauScores(Jeu jeu){
         creerWidget(jeu);
     }
     public void creerWidget(Jeu jeu){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurTir", locale);
+
+
+
         this.setSize(300, 120);
         double efficaciteJoueur1;
         double efficaciteJoueur2;
@@ -71,7 +83,7 @@ public class Tableau_Score extends JPanel{
 
 
                 Jeu jeu = new Jeu(j1, j2);
-                Tableau_Score f = new Tableau_Score(jeu);
+                TableauScores f = new TableauScores(jeu);
                 JFrame test = new JFrame();
                 test.setContentPane(f);
                 test.setVisible(true);

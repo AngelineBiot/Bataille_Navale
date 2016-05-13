@@ -1,7 +1,6 @@
 package Vue;
 
 
-import Controleur.EcouteurFermeture;
 import Controleur.EcouteurMenu;
 import Modele.Jeu;
 
@@ -29,7 +28,7 @@ public class Fenetre extends JFrame{
     protected JMenuItem		itemAide;
     protected JMenuItem		itemApropos;
 
-    protected Tableau_Score tableauScore;
+    protected TableauScores tableauScore;
 
 
 

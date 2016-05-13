@@ -46,7 +46,7 @@ public class EcouteurConteneurAttente implements ActionListener {
             ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
 
             ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
-            Tableau_Score score = new Tableau_Score(jeu);
+            TableauScores score = new TableauScores(jeu);
 
             ConteneurTir conteneurTir = new ConteneurTir(modelConteneurTir, conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score);
 

@@ -4,6 +4,8 @@ import Controleur.EcouteurConteneurGrillePhaseTir;
 import Modele.ModelConteneurTir;
 
 import javax.swing.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Michael on 24/04/2016.
@@ -15,12 +17,12 @@ public class ConteneurTir extends JTabbedPane {
     private JButton boutonValidation;
     private ConteneurGrille conteneurGrilleJoueur;
     private ConteneurGrille conteneurGrilleAutreJoueur;
-    private Tableau_Score score;
+    private TableauScores score;
 
 
     private ModelConteneurTir modelConteneurTir;    //Servira peut etre plus tard
 
-    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, Tableau_Score sc){
+    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc){
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
         modelConteneurTir = modele;
@@ -29,14 +31,23 @@ public class ConteneurTir extends JTabbedPane {
 
     }
     private void addWidgets(){
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        //!!!!!!!
+        //Ca : que pour les tests : ENLEVER CA A LA FIN
+        //!!!!!!!
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurTir", locale);
+
+
         JPanel choixTir = new JPanel();
         choixTir.setLayout(new BoxLayout(choixTir, BoxLayout.Y_AXIS));
 
-        infoTire = new JLabel("Veuillez choisir où vous tirez");
+        infoTire = new JLabel(texteInternational.getString("choixTir"));
         infoTire.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         choixTir.add(infoTire);
 
-        boutonValidation = new JButton("Valider le tir");
+        boutonValidation = new JButton(texteInternational.getString("validerTir"));
         boutonValidation.setActionCommand("validation");
         boutonValidation.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         choixTir.add(Box.createVerticalStrut(20));
@@ -54,12 +65,12 @@ public class ConteneurTir extends JTabbedPane {
         conteneurGrilleTir.add(conteneurChoixTir);
 
 
-        addTab("À l'attaque !", conteneurGrilleTir);
+        addTab(texteInternational.getString("ongletTir"), conteneurGrilleTir);
 
 
         conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
-        addTab("Voir ma grille", conteneurGrilleJoueur);
-        addTab("Voir le tableau des scores", score);
+        addTab(texteInternational.getString("ongletMaGrille"), conteneurGrilleJoueur);
+        addTab(texteInternational.getString("ongletScores"), score);
 
 
     }
