@@ -2,6 +2,11 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurAttente;
 import Modele.*;
@@ -19,11 +24,14 @@ public class ConteneurAttente extends JPanel {
     }
 
     public void creerWidgetJoueur(String nomJoueur) {
-        //Message
-        JLabel lab = new JLabel(nomJoueur+" à toi de jouer",SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente");
+
+
+        JLabel lab = new JLabel(nomJoueur+" "+ texteInternational.getString("tour"),SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
 
         // Affichage du bouton prêt
-        pret = new JButton("Prêt ?");;
+        pret = new JButton(texteInternational.getString("pret"));
         this.setLayout(new BorderLayout());
         add(lab, BorderLayout.CENTER);
         add(pret, BorderLayout.SOUTH);
