@@ -36,7 +36,7 @@ public class AnimationRate extends JFrame implements Runnable{
             headerLabel.setText("Raté");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon("ressource/images/rate.gif");
+            ImageIcon ii = new ImageIcon("ressources/images/rate.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it

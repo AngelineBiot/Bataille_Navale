@@ -40,7 +40,7 @@ public class Fenetre extends JFrame{
         this.jeu = jeu;
         creerScores();
 
-        Image im = Toolkit.getDefaultToolkit().getImage("ressource/images/TorpilleurHorizontal.png");
+        Image im = Toolkit.getDefaultToolkit().getImage("ressources/images/TorpilleurHorizontal.png");
         setIconImage(im);
 
         setSize(900,700);

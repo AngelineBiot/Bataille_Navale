@@ -29,7 +29,7 @@ public class Jeu implements Serializable{
         }
 
         try {
-            oos=new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("ressource/Sauvegarde/Jeu"))));
+            oos=new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("ressources/sauvegarde/Jeu"))));
             //oos.reset();
             oos.writeObject(jeu);
             oos.close();
@@ -42,7 +42,7 @@ public class Jeu implements Serializable{
         ObjectInputStream ois;
         Jeu jeu;
         try {
-            ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("ressource/Sauvegarde/Jeu")));
+            ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("ressources/sauvegarde/Jeu")));
             jeu=(Jeu)ois.readObject();
             ois.close();
 

@@ -34,7 +34,7 @@ public class AnimationCoule extends JFrame  implements Runnable{
             headerLabel.setText("Coulé");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon("ressource/images/couler.gif");
+            ImageIcon ii = new ImageIcon("ressources/images/couler.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it

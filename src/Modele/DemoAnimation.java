@@ -26,8 +26,7 @@ public class DemoAnimation extends JFrame {
             headerLabel.setText("Raté");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon(this.getClass().getResource(
-                    "eau.gif"));
+            ImageIcon ii = new ImageIcon("ressources/images/eau.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it

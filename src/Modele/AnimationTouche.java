@@ -34,7 +34,7 @@ public class AnimationTouche extends JFrame implements Runnable {
             headerLabel.setText("Touché");
             contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
             // add the image label
-            ImageIcon ii = new ImageIcon("ressource/images/touche.gif");
+            ImageIcon ii = new ImageIcon("ressources/images/touche.gif");
             imageLabel.setIcon(ii);
             contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
             // show it
