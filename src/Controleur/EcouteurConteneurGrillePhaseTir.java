@@ -82,7 +82,8 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                     JPanel conteneurVictoire = new JPanel();
                     conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
-
+                    AnimationFin af = new AnimationFin();
+                    af.setVisible(true);
                     JLabel messageVictoire = new JLabel("Bravo "+jeu.getJoueurConcerne().getNomJoueur()+", vous avez gagne !");
                     conteneurVictoire.add(messageVictoire);
 
