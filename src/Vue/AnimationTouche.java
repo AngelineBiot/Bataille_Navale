@@ -19,14 +19,8 @@ public class AnimationTouche extends JFrame implements Runnable {
     JLabel headerLabel = new JLabel();
 
     public AnimationTouche() {
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
-
-
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Animation", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Animation");
         String touche = texteInternational.getString("touche");
 
         try {

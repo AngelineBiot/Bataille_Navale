@@ -37,13 +37,9 @@ public class ConteneurPlacement extends JPanel {
     }
 
     private void addWidgets(){
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurPlacement", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurPlacement");
 
 
 

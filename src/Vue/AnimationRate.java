@@ -21,14 +21,8 @@ public class AnimationRate extends JFrame implements Runnable{
 
 
     public AnimationRate() {
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
-
-
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Animation", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Animation");
         String rate = texteInternational.getString("rate");
 
         try {

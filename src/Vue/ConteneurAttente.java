@@ -25,14 +25,10 @@ public class ConteneurAttente extends JPanel {
     }
 
     public void creerWidgetJoueur(String nomJoueur) {
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
-
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
 
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente", locale);
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente");
 
 
         JLabel lab = new JLabel(nomJoueur+" "+ texteInternational.getString("tour"),SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte

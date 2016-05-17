@@ -13,13 +13,12 @@ public class Main_Grille_test {
 
         ImageBateau.initTableauImagesBateau();
 
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+        Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
+        Locale.setDefault(locale);
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre", locale);
+
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
 
 
 

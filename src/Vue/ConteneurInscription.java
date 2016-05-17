@@ -18,14 +18,8 @@ public class ConteneurInscription extends JPanel{
 
 
     public ConteneurInscription(){
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
-
-
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
 
 
         initAttributs(texteInternational.getString("valider"));

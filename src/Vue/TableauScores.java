@@ -15,13 +15,9 @@ public class TableauScores extends JPanel{
         creerWidget(jeu);
     }
     public void creerWidget(Jeu jeu){
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores");
 
 
 

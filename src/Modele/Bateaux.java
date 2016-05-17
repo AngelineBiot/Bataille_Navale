@@ -36,14 +36,9 @@ public class Bateaux implements Serializable{
             this.taille=2;
         }
 
-        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
-
-        //!!!!!!!
-        //Ca : que pour les tests : ENLEVER CA A LA FIN
-        //!!!!!!!
 
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Bateaux", locale);
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Bateaux");
         typeBateauInternational = texteInternational.getString(typeDeBateau);
     }
 
