@@ -13,9 +13,10 @@ public class Main_Grille_test {
 
         ImageBateau.initTableauImagesBateau();
 
+        System.out.println(Locale.getDefault());
         Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
 
-        Locale.setDefault(locale);
+        //Locale.setDefault(locale);
 
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
