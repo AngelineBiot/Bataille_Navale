@@ -8,24 +8,24 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Michael on 17/04/2016.
+ * Created by Michael on  17/04/2016.
+ *
  */
 public class ConteneurGrille extends JPanel {
+
+    private static int dimensionCarre = 50;
+
     private JPanel afficheButton;
     private JLabel[] gridPanel;
     private Joueur joueur;
 
-    private static int dimensionCarre=50;
-
-    public ConteneurGrille(Joueur j){
+    public ConteneurGrille(Joueur j) {
         joueur = j;
         initAttribut();
         addWidget();
     }
 
-
-
-    public void initAttribut(){
+    private void initAttribut() {
         afficheButton = new JPanel(new GridLayout(10,10));
         gridPanel = new JLabel[100];
         for (int i=0;i<gridPanel.length;i++){
@@ -36,8 +36,8 @@ public class ConteneurGrille extends JPanel {
     }
 
     private void addWidget() {
-        for (int i=0;i<gridPanel.length;i++){
-            afficheButton.add(gridPanel[i]);
+        for (JLabel aGridPanel : gridPanel) {
+            afficheButton.add(aGridPanel);
 
         }
         this.add(afficheButton);
@@ -47,7 +47,7 @@ public class ConteneurGrille extends JPanel {
         return gridPanel;
     }
 
-    public void setBackgroundCase(int coord,Color couleur){
+    private void setBackgroundCase(int coord, Color couleur){
         gridPanel[coord].setBackground(couleur);
     }
 

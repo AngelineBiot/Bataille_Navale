@@ -4,33 +4,32 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static javax.swing.JOptionPane.*;
+
 /**
  * Created by angel on 03/05/2016.
  * Updated by angel ON 03/05/2016.
  */
-public class EcouteurMenu implements ActionListener{
+public class EcouteurMenu implements ActionListener {
 
     private Fenetre fenetre;
     private Jeu jeu;
 
-    public EcouteurMenu(Fenetre fenetre,Jeu jeu){
+    public EcouteurMenu(Fenetre fenetre,Jeu jeu) {
         this.fenetre = fenetre;
         this.jeu=jeu;
         fenetre.setControlMenu(this);
     }
 
-    public void actionPerformed(ActionEvent e){
-
-
+    public void actionPerformed(ActionEvent e) {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu");
-
-
 
         Object source = e.getSource();
 
@@ -43,17 +42,19 @@ public class EcouteurMenu implements ActionListener{
                                 "SURLEAU Etienne\n" +
                                 texteInternational.getString("etudiants");
 
+        ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
+
         if (source.equals(fenetre.getItemAide()))
         {
             JOptionPane jopAide = new JOptionPane();
-            jopAide.showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"),JOptionPane.INFORMATION_MESSAGE);
+            showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"), INFORMATION_MESSAGE);
 
             jopAide.createDialog(null,texteInternational.getString("aide"));
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {
             JOptionPane jopApropos = new JOptionPane();
-            jopApropos.showMessageDialog(null,msgApropos,texteInternational.getString("aPropos"),JOptionPane.INFORMATION_MESSAGE);
+            showMessageDialog(null,msgApropos,texteInternational.getString("aPropos"), INFORMATION_MESSAGE, icon);
 
             jopApropos.createDialog(null,texteInternational.getString("aPropos"));
 
@@ -65,8 +66,8 @@ public class EcouteurMenu implements ActionListener{
             }
             catch(SauvegardeException e2){
                 JOptionPane jopApropos = new JOptionPane();
-                jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
-                                            texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
+                showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                                            texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
                 jopApropos.createDialog(fenetre, texteInternational.getString("erreur"));
             }
@@ -116,8 +117,8 @@ public class EcouteurMenu implements ActionListener{
             }
             catch(SauvegardeException e1){
                 JOptionPane jopApropos = new JOptionPane();
-                jopApropos.showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
-                                            texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
+                showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
+                                            texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
                 jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
             }
@@ -175,20 +176,20 @@ public class EcouteurMenu implements ActionListener{
         //quitter partie
         else if (e.getSource()==fenetre.getQuitterPartie())
         {
-            int resultQuitter = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
-                                            texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
-            if  (resultQuitter==JOptionPane.YES_OPTION){
-                int resultSauvegarde = JOptionPane.showConfirmDialog(fenetre,texteInternational.getString("demandeSauvegarde"),
-                                                                    texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
-                if  (resultSauvegarde==JOptionPane.YES_OPTION){
+            int resultQuitter = showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
+                                            texteInternational.getString("quitter"), YES_NO_OPTION);
+            if  (resultQuitter== YES_OPTION){
+                int resultSauvegarde = showConfirmDialog(fenetre,texteInternational.getString("demandeSauvegarde"),
+                                                                    texteInternational.getString("quitter"), YES_NO_OPTION);
+                if  (resultSauvegarde== YES_OPTION){
                     try {
                         Jeu.Sauvegarde(fenetre.getJeu());
 
                     }
                     catch(SauvegardeException e1){
                         JOptionPane jopApropos = new JOptionPane();
-                        jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
-                                                texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
+                        showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                                                texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
                         jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
                     }
