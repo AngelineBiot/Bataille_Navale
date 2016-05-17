@@ -4,10 +4,8 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static javax.swing.JOptionPane.*;

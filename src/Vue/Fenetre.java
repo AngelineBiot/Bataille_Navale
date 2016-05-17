@@ -7,36 +7,27 @@ import Modele.Jeu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 /**
  * Created by Florian on 14/04/2016.
+ /* Updates by Angie on 17/05/2016.
  */
 public class Fenetre extends JFrame{
 
-    private JMenuBar 		menuBar;
-    private JMenu 			partie;
-    private JMenu			aide;
+    private JMenuItem		nouvellePartie;
+    private JMenuItem		sauvegarderPartie;
+    private JMenuItem		quitterPartie;
+    private JMenuItem		reprendrePartie;
 
-    protected JMenuItem		nouvellePartie;
-    protected JMenuItem		sauvegarderPartie;
-    protected JMenuItem		quitterPartie;
-    protected JMenuItem		reprendrePartie;
-
-
-
-    protected JMenuItem		itemAide;
-    protected JMenuItem		itemApropos;
-
-    protected TableauScores tableauScore;
-
-
+    private JMenuItem		itemAide;
+    private JMenuItem		itemApropos;
 
     protected Jeu jeu;
 
-    public Fenetre(String nomFenetre,Jeu jeu){
+    public Fenetre(String nomFenetre,Jeu jeu) {
+
         setTitle(nomFenetre);
         this.jeu = jeu;
 
@@ -58,17 +49,14 @@ public class Fenetre extends JFrame{
         setVisible(true);
     }
 
-    public void creerMenu(){
-
+    private void creerMenu() {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
 
+        JMenuBar menuBar = new JMenuBar();
 
-
-        menuBar = new JMenuBar();
-
-        partie  = new JMenu(texteInternational.getString("partie"));
-        aide    = new JMenu("?");
+        JMenu partie = new JMenu(texteInternational.getString("partie"));
+        JMenu aide = new JMenu("?");
 
         nouvellePartie      = new JMenuItem(texteInternational.getString("nouvellePartie"));
         sauvegarderPartie   = new JMenuItem(texteInternational.getString("sauvegarderPartie"));
@@ -91,8 +79,7 @@ public class Fenetre extends JFrame{
     }
 
 
-
-    public void setControlMenu(EcouteurMenu control){
+    public void setControlMenu(EcouteurMenu control) {
 
         itemAide.addActionListener(control);
         itemApropos.addActionListener(control);
