@@ -25,6 +25,7 @@ public class ConteneurPlacement extends JPanel {
     private ModelConteneurPlacement modelConteneurPlacement;
 
 
+
     public ConteneurPlacement(ModelConteneurPlacement modele, Flotte f, ConteneurGrille contGr){
 
         conteneurGrille = contGr;
@@ -64,6 +65,8 @@ public class ConteneurPlacement extends JPanel {
         placerBateauVertical = new JRadioButton(texteInternational.getString("vertical"));
         placerBateauHorizontal = new JRadioButton(texteInternational.getString("horizontal"));
 
+
+
         ButtonGroup groupeBoutonChoixDirection = new ButtonGroup();
         groupeBoutonChoixDirection.add(placerBateauVertical);
         groupeBoutonChoixDirection.add(placerBateauHorizontal);
@@ -84,8 +87,13 @@ public class ConteneurPlacement extends JPanel {
 
         boutonValidation = new JButton(texteInternational.getString("valider"));
         boutonValidation.setActionCommand("validation");
-
         boutonValidation.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+
+
+        placerBateauVertical.setFocusable(false);        //Ils ne doivent pas prendre le focus a la grille lors du placement
+        placerBateauHorizontal.setFocusable(false);      //Sinon, impossible de choisir la direction du bateau au clavier
+        boutonValidation.setFocusable(false);
+
 
         control.add(infoPlacement);
         control.add(Box.createRigidArea(new Dimension(0,30)));
@@ -109,11 +117,21 @@ public class ConteneurPlacement extends JPanel {
     public JLabel getImageBateau(){
         return imageBateau;
     }
+
     public void setControl(EcouteurConteneurGrillePhasePlacement ecouteur){
         placerBateauVertical.addActionListener(ecouteur);
         placerBateauHorizontal.addActionListener(ecouteur);
         boutonValidation.addActionListener(ecouteur);
+        addKeyListener(ecouteur);
+    }
 
+    public void echangeCheckboxPositionnement(){
+        if(placerBateauVertical.isSelected()){
+            placerBateauHorizontal.setSelected(true);
+        }
+        else{
+            placerBateauVertical.setSelected(true);
+        }
     }
 
     public ConteneurGrille getConteneurGrille(){

@@ -39,6 +39,9 @@ public class EcouteurConteneurAttente implements ActionListener {
             fenetre.setContentPane(conteneur);
             fenetre.validate();
 
+            conteneur.setFocusable(true);
+            conteneur.requestFocus();
+
         }
         else{
 
