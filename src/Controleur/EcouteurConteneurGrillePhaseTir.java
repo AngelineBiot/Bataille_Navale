@@ -61,55 +61,30 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                     if(model_tire.getCaseOuEstTire().getBat().getCoule()){
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
-//                        JOptionPane jop = new JOptionPane();
-//                        jop.showMessageDialog(null, "Coulé ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+//
                         AnimationCoule ac = new AnimationCoule();
-                        ac.setVisible(true);
+                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                        Timer timer=new Timer(2400, ecouteurFinAnimation);
+                        ecouteurFinAnimation.setTimer(timer);
+                        timer.start();
+
                     }
                     else{
-                        //JOptionPane jop = new JOptionPane();
-                        //jop.showMessageDialog(null, "Touché ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
-                        AnimationTouche at = new AnimationTouche();
-                        at.setVisible(true);
+
+                        AnimationTouche ac = new AnimationTouche();
+                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                        Timer timer=new Timer(1600, ecouteurFinAnimation);
+                        ecouteurFinAnimation.setTimer(timer);
+                        timer.start();
                     }
 
                 } else {
-//                    JOptionPane jop = new JOptionPane();
-//                    jop.showMessageDialog(null, "Raté ! ", "Attaque", JOptionPane.INFORMATION_MESSAGE);
+
                     AnimationRate at = new AnimationRate();
-                    at.setVisible(true);
-                }
-
-                if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
-
-
-                    ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurGrillePhaseTir");
-
-
-
-                    JPanel conteneurVictoire = new JPanel();
-                    conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
-                    AnimationFin af = new AnimationFin();
-                    af.setVisible(true);
-                    JLabel messageVictoire = new JLabel(texteInternational.getString("bravo")+
-                                                        jeu.getJoueurConcerne().getNomJoueur()+
-                                                        texteInternational.getString("gagne"));
-                    conteneurVictoire.add(messageVictoire);
-
-                    TableauScores tableauScore = new TableauScores(jeu);
-                    conteneurVictoire.add(tableauScore);
-
-                    fenetre.setContentPane(conteneurVictoire);
-                    fenetre.validate();
-                }
-                else{
-                    jeu.echangeConcerneJoueur1();
-
-                    ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
-
-                    fenetre.setContentPane(conteneurAttente);
-                    fenetre.validate();
+                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu);
+                    Timer timer=new Timer(2500, ecouteurFinAnimation);
+                    ecouteurFinAnimation.setTimer(timer);
+                    timer.start();
                 }
 
 

@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class AnimationRate extends JFrame implements Runnable{
-    Thread t;
+public class AnimationRate extends JFrame{
+
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
@@ -26,8 +26,7 @@ public class AnimationRate extends JFrame implements Runnable{
         String rate = texteInternational.getString("rate");
 
         try {
-            t=new Thread(this);
-            t.start();
+
             contentPane = (JPanel) getContentPane();
             contentPane.setBackground(Color.LIGHT_GRAY);
 
@@ -54,19 +53,5 @@ public class AnimationRate extends JFrame implements Runnable{
     }
 
 
-    public static void main(String[] args) {
 
-        new AnimationRate();
-    }
-
-    @Override
-    public void run() {
-        try {
-            t.sleep(7000);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        this.setVisible(false);
-
-    }
 }

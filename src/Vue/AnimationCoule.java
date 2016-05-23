@@ -12,8 +12,7 @@ import java.util.ResourceBundle;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class AnimationCoule extends JFrame  implements Runnable{
-    Thread t;
+public class AnimationCoule extends JFrame{
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
@@ -27,8 +26,7 @@ public class AnimationCoule extends JFrame  implements Runnable{
 
 
         try {
-            t=new Thread(this);
-            t.start();
+
             contentPane = (JPanel) getContentPane();
             contentPane.setBackground(Color.LIGHT_GRAY);
 
@@ -52,22 +50,5 @@ public class AnimationCoule extends JFrame  implements Runnable{
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        new AnimationCoule();
-    }
-
-    @Override
-    public void run() {
-        try {
-            t.sleep(2700);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        this.setVisible(false);
-
     }
 }

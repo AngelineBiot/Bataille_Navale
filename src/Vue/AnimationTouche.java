@@ -12,8 +12,7 @@ import java.util.ResourceBundle;
 /**
  * Created by ANTOINE on 09/05/2016.
  */
-public class AnimationTouche extends JFrame implements Runnable {
-    Thread t;
+public class AnimationTouche extends JFrame {
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
@@ -24,8 +23,6 @@ public class AnimationTouche extends JFrame implements Runnable {
         String touche = texteInternational.getString("touche");
 
         try {
-            t=new Thread(this);
-            t.start();
             contentPane = (JPanel) getContentPane();
             contentPane.setBackground(Color.LIGHT_GRAY);
             contentPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -51,18 +48,5 @@ public class AnimationTouche extends JFrame implements Runnable {
     }
 
 
-    public static void main(String[] args) {
 
-        new AnimationTouche();
-    }
-
-    @Override
-    public void run() {
-        try {
-            t.sleep(1700);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        this.setVisible(false);
-    }
 }
