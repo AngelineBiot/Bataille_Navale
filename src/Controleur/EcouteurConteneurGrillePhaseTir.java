@@ -50,6 +50,8 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("validation")) {
             if (model_tire.getCaseOuEstTire() != null) {
+                panelTire.desactiveValidation();
+
                 boolean dejaTirSurCase = model_tire.getCaseOuEstTire().getToucher();
                 jeu.getJoueurConcerne().setNbcoups();
                 model_tire.getCaseOuEstTire().setToucher();

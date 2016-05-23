@@ -81,5 +81,9 @@ public class ConteneurTir extends JTabbedPane {
         return conteneurGrilleAutreJoueur;
     }
 
+    public void desactiveValidation(){
+        boutonValidation.setEnabled(false);
+    }
+
 
 }
