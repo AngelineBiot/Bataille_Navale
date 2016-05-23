@@ -31,17 +31,21 @@ public class AnimationCoule extends JFrame{
             contentPane.setBackground(Color.LIGHT_GRAY);
 
             contentPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            contentPane.setLayout(new BorderLayout());
+            contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
             setSize(new Dimension(400, 300));
             setTitle(coule);
             // add the header label
             headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
             headerLabel.setText(coule);
-            contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
+            headerLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            contentPane.add(headerLabel);
+
+            contentPane.add(Box.createRigidArea(new Dimension(0, 30)));
             // add the image label
             ImageIcon ii = new ImageIcon("ressources/images/couler.gif");
             imageLabel.setIcon(ii);
-            contentPane.add(imageLabel, java.awt.BorderLayout.CENTER);
+            imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            contentPane.add(imageLabel);
             // show it
             this.setLocationRelativeTo(null);
             this.setUndecorated(true);

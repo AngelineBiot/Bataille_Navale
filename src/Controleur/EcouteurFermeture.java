@@ -49,7 +49,7 @@ public class EcouteurFermeture extends WindowAdapter {
             }
 
 
-            fenetre.dispose();
+            System.exit(0);
         }
 
     }

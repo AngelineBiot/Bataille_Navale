@@ -59,7 +59,11 @@ public class TableauScores extends JPanel {
                             texteInternational.getString("nombreCoules"),
                             texteInternational.getString("nombreTouches"),
                             texteInternational.getString("efficacite")};
-        JTable tableau = new JTable(data, title);
+        JTable tableau = new JTable(data, title){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
         JScrollPane pano = new JScrollPane(tableau);
