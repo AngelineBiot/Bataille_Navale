@@ -8,8 +8,8 @@ import java.util.ResourceBundle;
 /**
  * Created by ANTOINE on 13/05/2016.
  */
-public class AnimationFin extends JFrame implements Runnable{
-    Thread t;
+public class AnimationFin extends JFrame{
+
     JPanel contentPane;
     JLabel imageLabel = new JLabel();
     JLabel headerLabel = new JLabel();
@@ -22,9 +22,6 @@ public class AnimationFin extends JFrame implements Runnable{
         String fin = texteInternational.getString("fin");
 
         try {
-            t=new Thread(this);
-            t.start();
-
 
             contentPane = (JPanel) getContentPane();
             contentPane.setBackground(Color.LIGHT_GRAY);
@@ -45,7 +42,6 @@ public class AnimationFin extends JFrame implements Runnable{
             imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
 
-
             contentPane.add(imageLabel);
             // show it
             this.setLocationRelativeTo(null);
@@ -55,22 +51,5 @@ public class AnimationFin extends JFrame implements Runnable{
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        new AnimationFin();
-    }
-
-    @Override
-    public void run() {
-        try {
-            t.sleep(4700);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        this.setVisible(false);
-
     }
 }

@@ -20,10 +20,20 @@ public class EcouteurFinAnimation implements ActionListener{
 
     private JFrame fenetreAnimation;
     private Timer timer;
+    private boolean partieFinie;
+
     public EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
+        partieFinie = false;
+    }
+
+    public EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j, boolean fini){
+        fenetreAnimation=fenSec;
+        fenetre = fen;
+        jeu=j;
+        partieFinie = fini;
     }
 
     public void setTimer(Timer t){
@@ -31,9 +41,11 @@ public class EcouteurFinAnimation implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
+        timer.stop();
+        fenetreAnimation.dispose();
 
+        if(partieFinie){
 
-        if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
 
 
             ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurGrillePhaseTir");
@@ -42,8 +54,7 @@ public class EcouteurFinAnimation implements ActionListener{
 
             JPanel conteneurVictoire = new JPanel();
             conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
-            AnimationFin af = new AnimationFin();
-            af.setVisible(true);
+
             JLabel messageVictoire = new JLabel(texteInternational.getString("bravo")+
                     jeu.getJoueurConcerne().getNomJoueur()+
                     texteInternational.getString("gagne"));
@@ -65,7 +76,6 @@ public class EcouteurFinAnimation implements ActionListener{
             fenetre.validate();
         }
 
-        timer.stop();
-        fenetreAnimation.dispose();
+
     }
 }

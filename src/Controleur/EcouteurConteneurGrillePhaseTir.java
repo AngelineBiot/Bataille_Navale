@@ -61,14 +61,29 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
                     model_tire.getCaseOuEstTire().getBat().updateEstCoule();
 
+
                     if(model_tire.getCaseOuEstTire().getBat().getCoule()){
+
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
+
+                        if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
+
+                            AnimationFin ac = new AnimationFin();
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, true);
+                            Timer timer=new Timer(4700, ecouteurFinAnimation);
+                            ecouteurFinAnimation.setTimer(timer);
+                            timer.start();
+
+                        }
+                        else{
+                            AnimationCoule ac = new AnimationCoule();
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                            Timer timer=new Timer(2250, ecouteurFinAnimation);
+                            ecouteurFinAnimation.setTimer(timer);
+                            timer.start();
+                        }
 //
-                        AnimationCoule ac = new AnimationCoule();
-                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
-                        Timer timer=new Timer(2250, ecouteurFinAnimation);
-                        ecouteurFinAnimation.setTimer(timer);
-                        timer.start();
+
 
                     }
                     else{
