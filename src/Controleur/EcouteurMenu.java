@@ -71,12 +71,12 @@ public class EcouteurMenu implements ActionListener {
             }
 
         }
-        else if (source.equals(fenetre.getReprendrePartie())){
+        else if (source.equals(fenetre.getReprendrePartie())) {
             try{
                 this.jeu=Jeu.resumeGame();
                 fenetre.setJeu(this.jeu);
 
-                if(jeu.getEstPhasePlacement()){
+                if(jeu.getEstPhasePlacement()) {
 
                     ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
                     modelConteneurPlacement.setDimensionCarre(50);
@@ -113,7 +113,7 @@ public class EcouteurMenu implements ActionListener {
                     conteneurGrilleAutreJoueur.updateUI();
                 }
             }
-            catch(SauvegardeException e1){
+            catch(SauvegardeException e1) {
                 JOptionPane jopApropos = new JOptionPane();
                 showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
                                             texteInternational.getString("erreur"), INFORMATION_MESSAGE);
@@ -143,7 +143,7 @@ public class EcouteurMenu implements ActionListener {
 
         }
         // nouvelle partie
-        else if (e.getSource() ==fenetre.getNouvellePartie())
+        else if (e.getSource() == fenetre.getNouvellePartie())
         {
 
             Grille grillej1 = new Grille();

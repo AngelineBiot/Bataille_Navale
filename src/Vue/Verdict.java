@@ -1,14 +1,12 @@
 package Vue;
 
 import Modele.Bateaux;
-import Modele.Case;
 
 import javax.swing.*;
 
 public class Verdict extends JFrame {
-  private JOptionPane jop;
 
-  public Verdict() {
+    private Verdict() {
  
     creerWidget();
  
@@ -17,14 +15,14 @@ public class Verdict extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Gestion de la fermeture
   }
  
-  public void creerWidget() {
+  private void creerWidget() {
     JPanel pano = new JPanel();   // Création d'un JPanel qui va contenir
     setContentPane(pano);  }
 
 
-   public void creerDialog(String s) {
-       	jop = new JOptionPane();
-        jop.showMessageDialog(null, s, "Information", JOptionPane.INFORMATION_MESSAGE);
+   private void creerDialog(String s) {
+       JOptionPane jop = new JOptionPane();
+        JOptionPane.showMessageDialog(null, s, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
 
@@ -43,13 +41,9 @@ public class Verdict extends JFrame {
 
    public static void main(String[] args) {
  
-    javax.swing.SwingUtilities.invokeLater( new Runnable() {
- 
-      public void run() {
-        Verdict f = new Verdict();
-      
-      }
- 
+    javax.swing.SwingUtilities.invokeLater(() -> {
+      Verdict f = new Verdict();
+
     });
   }
 

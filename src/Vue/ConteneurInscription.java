@@ -2,13 +2,13 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurInscription;
 
 /**
  * Created by Florian on 14/04/2016.
+ *
  */
 public class ConteneurInscription extends JPanel{
     private JTextField labelJoueur1;
@@ -27,7 +27,7 @@ public class ConteneurInscription extends JPanel{
 
     }
 
-    public void initAttributs(String texteValider){
+    private void initAttributs(String texteValider){
         labelJoueur1 = new JTextField();
         labelJoueur2 = new JTextField();
         valider = new JButton(texteValider);
@@ -36,7 +36,7 @@ public class ConteneurInscription extends JPanel{
         labelJoueur2.setColumns(15);
     }
 
-    public void addwidgets(String textePseudo1, String textePseudo2){
+    private void addwidgets(String textePseudo1, String textePseudo2){
         JPanel placementGrille = new JPanel();
         GridLayout g = new GridLayout(2,2);
         g.setVgap(10);

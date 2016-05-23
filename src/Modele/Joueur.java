@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by fparty2 on 28/04/16.
+ *
  */
 public class Joueur implements Serializable{
     private String nomJoueur;

@@ -2,11 +2,6 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurAttente;
@@ -14,6 +9,7 @@ import Modele.*;
 
 /**
  * Created by ANTOINE on 17/04/2016.
+ *
  */
 public class ConteneurAttente extends JPanel {
     private JButton pret;
@@ -24,9 +20,7 @@ public class ConteneurAttente extends JPanel {
 
     }
 
-    public void creerWidgetJoueur(String nomJoueur) {
-
-
+    private void creerWidgetJoueur(String nomJoueur) {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente");
 

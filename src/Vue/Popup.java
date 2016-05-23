@@ -1,7 +1,6 @@
 package Vue;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by angel on 17/05/2016.
@@ -9,14 +8,11 @@ import java.awt.*;
  */
 public class Popup extends JFrame{
 
-    private Icon icon = null;
-
     public Popup(String nomFenetre) {
 
         setTitle(nomFenetre);
 
-        ImageIcon im = new ImageIcon("ressources/images/help.png");
-        this.icon = im;
+        Icon icon = new ImageIcon("ressources/images/help.png");
 
         initContenu();
 

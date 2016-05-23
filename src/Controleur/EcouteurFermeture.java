@@ -8,11 +8,11 @@ import Vue.Fenetre;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 11/05/16.
+ *
  */
 public class EcouteurFermeture extends WindowAdapter {
     private Fenetre fenetre;
@@ -40,7 +40,7 @@ public class EcouteurFermeture extends WindowAdapter {
                 }
                 catch(SauvegardeException e1){
                     JOptionPane jopApropos = new JOptionPane();
-                    jopApropos.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
+                    JOptionPane.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
                             texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
 
                     jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));

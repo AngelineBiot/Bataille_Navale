@@ -2,18 +2,18 @@ package Modele;
 
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 /**
  * Created by angel on 16/04/2016.
+ *
  */
 public class Bateaux implements Serializable{
 
 
     private int taille;
-    protected Case[] position;
+    private Case[] position;
     private boolean coule;
     private boolean estOrienteVerticalement;
     private String typeBateau;
@@ -21,7 +21,7 @@ public class Bateaux implements Serializable{
 
     public Bateaux(){}
 
-    public Bateaux(String typeDeBateau){
+    Bateaux(String typeDeBateau){
         typeBateau = typeDeBateau;
         if (typeDeBateau.equals("porte-avion")){
             this.taille=5;
@@ -96,8 +96,7 @@ public class Bateaux implements Serializable{
     }
 
     public int getCoordonneesPremiereCase(){
-        int coord = position[0].getCoord1D();
-        return coord;
+        return position[0].getCoord1D();
     }
 
     public String getTypeBateau(){

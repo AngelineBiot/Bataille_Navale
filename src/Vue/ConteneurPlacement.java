@@ -2,7 +2,6 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurGrillePhasePlacement;
@@ -10,6 +9,7 @@ import Modele.*;
 
 /**
  * Created by Florian on 18/04/2016.
+ *
  */
 public class ConteneurPlacement extends JPanel {
 
@@ -22,14 +22,10 @@ public class ConteneurPlacement extends JPanel {
     private JRadioButton placerBateauHorizontal;
     private ConteneurGrille conteneurGrille;
 
-    private ModelConteneurPlacement modelConteneurPlacement;
-
-
 
     public ConteneurPlacement(ModelConteneurPlacement modele, Flotte f, ConteneurGrille contGr){
 
         conteneurGrille = contGr;
-        modelConteneurPlacement = modele;
         flotte = f;
 
         setLayout(new FlowLayout());

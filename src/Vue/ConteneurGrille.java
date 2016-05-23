@@ -5,15 +5,12 @@ import Modele.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Michael on  17/04/2016.
  *
  */
 public class ConteneurGrille extends JPanel {
-
-    private static int dimensionCarre = 50;
 
     private JPanel afficheButton;
     private JLabel[] gridPanel;
@@ -30,6 +27,7 @@ public class ConteneurGrille extends JPanel {
         gridPanel = new JLabel[100];
         for (int i=0;i<gridPanel.length;i++){
             gridPanel[i]=new JLabel();
+            int dimensionCarre = 50;
             gridPanel[i].setPreferredSize(new Dimension(dimensionCarre, dimensionCarre));
             gridPanel[i].setBorder(BorderFactory.createLineBorder(Color.black));
         }

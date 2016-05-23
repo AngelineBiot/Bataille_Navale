@@ -4,7 +4,8 @@ package Modele;
 import java.io.Serializable;
 
 /**
- * Created by angel on 17/04/2016.
+ * Created by angeline on 17/04/2016.
+ *
  */
 public class Flotte implements Serializable{
 
@@ -16,7 +17,7 @@ public class Flotte implements Serializable{
     private int nbBateauxCoule;
     private int nbTouches;
 
-    public Flotte(Bateaux[] flotte) {
+    private Flotte(Bateaux[] flotte) {
         this.flotte = flotte;
         nbBateaux = flotte.length;
         nbBateauxCoule = 0;

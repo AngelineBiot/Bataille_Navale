@@ -8,39 +8,40 @@ import java.io.IOException;
 
 /**
  * Created by Florian on 20/04/2016.
+ *
  */
-public class ImageBateau{
+public class ImageBateau {
     private static BufferedImage[] tableauImagesBateauVertical;
     private static BufferedImage[] tableauImagesBateauHorizontal;
 
 
-    public static ImageIcon getImageBateau(String typeBateau, boolean imageVerticale){
+    public static ImageIcon getImageBateau(String typeBateau, boolean imageVerticale) {
         int indexBateau = recupereIndexBateau(typeBateau);
         ImageIcon resultat;
 
-        if(imageVerticale){
+        if(imageVerticale) {
             resultat = new ImageIcon(tableauImagesBateauVertical[indexBateau]);
         }
-        else{
+        else {
             resultat = new ImageIcon(tableauImagesBateauHorizontal[indexBateau]);
         }
 
         return resultat;
     }
 
-    public static ImageIcon getImageBateau(String typeBateau, boolean imageVerticale, int partieVoulue, boolean coule){
+    public static ImageIcon getImageBateau(String typeBateau, boolean imageVerticale, int partieVoulue, boolean coule) {
         int indexBateau = recupereIndexBateau(typeBateau);
-        if(coule){
+        if(coule) {
             indexBateau += 4;
         }
 
         BufferedImage imagePartieBateauIntermediaire;
         ImageIcon resultat;
 
-        if(imageVerticale){
+        if(imageVerticale) {
             imagePartieBateauIntermediaire = tableauImagesBateauVertical[indexBateau].getSubimage(0, 50*partieVoulue, 50, 50);
         }
-        else{
+        else {
             imagePartieBateauIntermediaire = tableauImagesBateauHorizontal[indexBateau].getSubimage(50*partieVoulue, 0, 50, 50);
         }
 
@@ -51,20 +52,22 @@ public class ImageBateau{
 
 
 
-    private static int recupereIndexBateau(String typeBateau){
+    private static int recupereIndexBateau(String typeBateau) {
         int resultat =0;
 
-        if(typeBateau.equals("torpilleur")){
-            resultat = 3;
-        }
-        else if(typeBateau.equals("sous-marin")){
-            resultat = 2;
-        }
-        else if(typeBateau.equals("croiseur")){
-            resultat = 1;
-        }
-        else if(typeBateau.equals("porte-avion")){
-            resultat = 0;
+        switch (typeBateau) {
+            case "torpilleur":
+                resultat = 3;
+                break;
+            case "sous-marin":
+                resultat = 2;
+                break;
+            case "croiseur":
+                resultat = 1;
+                break;
+            case "porte-avion":
+                resultat = 0;
+                break;
         }
 
         return resultat;

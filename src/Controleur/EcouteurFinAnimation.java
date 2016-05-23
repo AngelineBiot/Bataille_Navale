@@ -1,7 +1,6 @@
 package Controleur;
 
 import Modele.Jeu;
-import Vue.AnimationFin;
 import Vue.ConteneurAttente;
 import Vue.Fenetre;
 import Vue.TableauScores;
@@ -13,8 +12,9 @@ import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 23/05/16.
+ *
  */
-public class EcouteurFinAnimation implements ActionListener{
+class EcouteurFinAnimation implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
 
@@ -22,29 +22,29 @@ public class EcouteurFinAnimation implements ActionListener{
     private Timer timer;
     private boolean partieFinie;
 
-    public EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j){
+    EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j) {
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
         partieFinie = false;
     }
 
-    public EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j, boolean fini){
+    EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j, boolean fini) {
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
         partieFinie = fini;
     }
 
-    public void setTimer(Timer t){
+    void setTimer(Timer t){
         timer = t;
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         timer.stop();
         fenetreAnimation.dispose();
 
-        if(partieFinie){
+        if(partieFinie) {
 
 
 

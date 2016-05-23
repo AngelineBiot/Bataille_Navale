@@ -2,8 +2,8 @@ package Modele;
 
 /**
  * Created by ANTOINE on 08/05/2016.
+ *
  */
-
 
 //import javazoom.jlme.util.Player;
 
@@ -14,12 +14,9 @@ import java.awt.event.WindowEvent;
 import java.io.*;
 
 
-/**
- * Created by ANTOINE on 05/05/2016.
- */
-
 import javax.swing.JFrame;
 
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 
 public class DemoMP3 {
@@ -51,7 +48,7 @@ public class DemoMP3 {
         });
 
         frame.setSize(300, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true); // affichage donc ouverture

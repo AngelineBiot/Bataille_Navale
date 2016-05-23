@@ -6,11 +6,11 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 29/04/16.
+ *
  */
 public class EcouteurConteneurInscription implements ActionListener {
 

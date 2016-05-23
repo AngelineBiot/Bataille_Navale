@@ -4,15 +4,14 @@ import Controleur.EcouteurConteneurGrillePhaseTir;
 import Modele.ModelConteneurTir;
 
 import javax.swing.*;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * Created by Michael on 24/04/2016.
+ *
  */
 public class ConteneurTir extends JTabbedPane {
 
-    private JLabel infoTire;
     private JLabel imageBateau;
     private JButton boutonValidation;
     private ConteneurGrille conteneurGrilleJoueur;
@@ -20,26 +19,21 @@ public class ConteneurTir extends JTabbedPane {
     private TableauScores score;
 
 
-    private ModelConteneurTir modelConteneurTir;    //Servira peut etre plus tard
-
-    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc){
+    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc) {
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
-        modelConteneurTir = modele;
         score=sc;
         addWidgets();
 
     }
-    private void addWidgets(){
-
+    private void addWidgets() {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurTir");
-
 
         JPanel choixTir = new JPanel();
         choixTir.setLayout(new BoxLayout(choixTir, BoxLayout.Y_AXIS));
 
-        infoTire = new JLabel(texteInternational.getString("choixTir"));
+        JLabel infoTire = new JLabel(texteInternational.getString("choixTir"));
         infoTire.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         choixTir.add(infoTire);
 

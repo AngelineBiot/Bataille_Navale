@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 /**
  * Created by michael on 31/03/2016.
+ *
  */
-public class Case implements Serializable{
-    public int coordoneX;
-    public int coordoneY;
+public class Case implements Serializable {
+
+    private int coordoneX;
+    private int coordoneY;
     private Bateaux bat;
-    boolean toucher;
+    private boolean toucher;
 
     Case(int x,int y){
         this.toucher = false;

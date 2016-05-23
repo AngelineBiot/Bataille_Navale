@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by fparty2 on 29/04/16.
+ *
  */
 public class EcouteurConteneurAttente implements ActionListener {
     private ConteneurAttente conteneurAttente;
@@ -15,7 +16,7 @@ public class EcouteurConteneurAttente implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
 
-    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j){
+    EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j){
 
         conteneurAttente =conteneur;
         fenetre = fen;
