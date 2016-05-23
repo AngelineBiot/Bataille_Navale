@@ -24,19 +24,19 @@ public class TableauScores extends JPanel {
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores");
 
         this.setSize(300, 120);
-        double efficaciteJoueur1;
-        double efficaciteJoueur2;
+        float efficaciteJoueur1;
+        float efficaciteJoueur2;
 
         if (jeu.getJoueur1().getNbCoups() == 0) {
             efficaciteJoueur1 = 0;
         } else {    //On le calcule a partir du nombre de bateaux touches dans la flotte de l'autre joueur
-            efficaciteJoueur1 = ((float)(jeu.getJoueur2().getFlotte().getNbTouches())/jeu.getJoueur1().getNbCoups())*100;
+            efficaciteJoueur1 = arrondi(((float)(jeu.getJoueur2().getFlotte().getNbTouches())/jeu.getJoueur1().getNbCoups())*100);
         }
 
         if (jeu.getJoueur2().getNbCoups() == 0) {
             efficaciteJoueur2 = 0;
         } else {
-            efficaciteJoueur2 = ((float)(jeu.getJoueur1().getFlotte().getNbTouches())/jeu.getJoueur2().getNbCoups())*100;
+            efficaciteJoueur2 = arrondi(((float)(jeu.getJoueur1().getFlotte().getNbTouches())/jeu.getJoueur2().getNbCoups())*100);
         }
 
         //Les données du tableau
@@ -69,6 +69,11 @@ public class TableauScores extends JPanel {
         JScrollPane pano = new JScrollPane(tableau);
         this.add(pano);
     }
+
+    private float arrondi(float nombre){
+        return ((float)Math.floor(nombre*100))/100;
+    }
+
     public static void main(String[] args) {
 
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
