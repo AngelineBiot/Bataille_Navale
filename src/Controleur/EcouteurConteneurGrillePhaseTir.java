@@ -64,7 +64,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 //
                         AnimationCoule ac = new AnimationCoule();
                         EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
-                        Timer timer=new Timer(2350, ecouteurFinAnimation);
+                        Timer timer=new Timer(2250, ecouteurFinAnimation);
                         ecouteurFinAnimation.setTimer(timer);
                         timer.start();
 
@@ -73,7 +73,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                         AnimationTouche ac = new AnimationTouche();
                         EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
-                        Timer timer=new Timer(1600, ecouteurFinAnimation);
+                        Timer timer=new Timer(1530, ecouteurFinAnimation);
                         ecouteurFinAnimation.setTimer(timer);
                         timer.start();
                     }
