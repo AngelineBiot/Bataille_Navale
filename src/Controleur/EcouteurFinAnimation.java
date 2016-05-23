@@ -31,8 +31,7 @@ public class EcouteurFinAnimation implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
-        timer.stop();
-        fenetreAnimation.dispose();
+
 
         if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
 
@@ -65,5 +64,8 @@ public class EcouteurFinAnimation implements ActionListener{
             fenetre.setContentPane(conteneurAttente);
             fenetre.validate();
         }
+
+        timer.stop();
+        fenetreAnimation.dispose();
     }
 }
