@@ -67,6 +67,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
 
                         if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
+                            jeu.setPartieFinie();
 
                             AnimationFin ac = new AnimationFin();
                             EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, true);

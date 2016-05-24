@@ -83,6 +83,7 @@ public class EcouteurMenu implements ActionListener {
 
                     ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
                     conteneurGrille.repaintBateauxDejaPlaces();
+                    conteneurGrille.setModelPlacement(modelConteneurPlacement);
                     ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
                     new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
 

@@ -12,6 +12,7 @@ public class Jeu implements Serializable{
     private Joueur joueur2;
     private boolean estPhasePlacement;
     private boolean concerneJoueur1;
+    private boolean partieFinie;
 
 
     public Jeu(Joueur j1, Joueur j2){
@@ -20,12 +21,13 @@ public class Jeu implements Serializable{
 
         estPhasePlacement = true;
         concerneJoueur1 = true;
+        partieFinie = false;
     }
 
 
     public static void Sauvegarde(Jeu jeu) throws SauvegardeException{
         ObjectOutputStream oos;
-        if(jeu.getJoueur1().getNomJoueur() == null && jeu.getJoueur2().getNomJoueur() == null){
+        if(jeu.getJoueur1().getNomJoueur() == null || jeu.getJoueur2().getNomJoueur() == null || jeu.isPartieFinie()){
             throw new SauvegardeException();
         }
 
@@ -100,5 +102,13 @@ public class Jeu implements Serializable{
 
     public void echangeConcerneJoueur1() {
         this.concerneJoueur1 = !concerneJoueur1;
+    }
+
+    public void setPartieFinie(){
+        partieFinie = true;
+    }
+
+    public boolean isPartieFinie(){
+        return partieFinie;
     }
 }
