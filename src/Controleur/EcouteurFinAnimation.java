@@ -44,25 +44,9 @@ class EcouteurFinAnimation implements ActionListener {
         fenetreAnimation.dispose();
 
         if(partieFinie) {
-
-
-
-            ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurGrillePhaseTir");
-
-
-
-            JPanel conteneurVictoire = new JPanel();
-            conteneurVictoire.setLayout(new BoxLayout(conteneurVictoire, BoxLayout.Y_AXIS));
-
-            JLabel messageVictoire = new JLabel(texteInternational.getString("bravo")+
-                    jeu.getJoueurConcerne().getNomJoueur()+
-                    texteInternational.getString("gagne"));
-            conteneurVictoire.add(messageVictoire);
-
-            TableauScores tableauScore = new TableauScores(jeu);
-            conteneurVictoire.add(tableauScore);
-
+            ConteneurVictoire conteneurVictoire = new ConteneurVictoire(jeu);
             fenetre.setContentPane(conteneurVictoire);
+
             fenetre.validate();
         }
         else{
