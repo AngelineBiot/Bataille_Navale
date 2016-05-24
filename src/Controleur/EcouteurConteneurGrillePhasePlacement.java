@@ -144,49 +144,19 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
             model_place.setCoordY(model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneY());
             int longueur = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTaille();
 
-            boolean xBon = model_place.getCoordX()>=0
-                    && ((!model_place.isDirectionVerticale()
-                    && model_place.getCoordX()<10)
-                    || (model_place.getCoordX()<=10-longueur));
-            boolean yBon = model_place.getCoordY()>=0
-                    && ((model_place.isDirectionVerticale()
-                    && model_place.getCoordY()<10)
-                    || (model_place.getCoordY()<=10-longueur));
+
+            /*tab de longueur 4 : {nouvX, nouvY, ancienX, ancienY}*/
+            int[] tabCoordonnees = model_place.calculeCoordonnees(longueur);
 
 
-            int x= model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneX();
-            int y = model_place.getCaseOuEstBateauEnCoursPlacement().getCoordoneY();
 
-            int xEff = x;
-            int yEff = y;
-
-            if (!(xBon && yBon)) {
-                if(model_place.isDirectionVerticale()) {
-                    x=10-longueur;
-                }
-                else {
-                    y=10-longueur;
-                }
-            }
-
-            panelPlacement.effaceCase(longueur, xEff, yEff);
-            int i;
+            panelPlacement.effaceCase(longueur, tabCoordonnees[2], tabCoordonnees[3]);
 
             if(model_place.verifAucuneCaseDejaPrise(grille, longueur)) {
                 String typeBateau = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
-                if(model_place.isDirectionVerticale()) {
-                    for(i = 0 ; i < longueur ; i++) {
-                        conteneurGrille.getGridPanel()[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau, false, i, false));
-                    }
-                }
-                else {
-                    for(i = 0 ; i < longueur ; i++) {
-                        conteneurGrille.getGridPanel()[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau, true, i, false));
-                    }
+                conteneurGrille.changementDirectionBateau(tabCoordonnees[0], tabCoordonnees[1], typeBateau, longueur);
 
-                }
-
-                model_place.setCaseOuEstBateauEnCoursPlacement(grille.getGrille()[x+y*10]);
+                model_place.setCaseOuEstBateauEnCoursPlacement(grille.getGrille()[tabCoordonnees[0]+tabCoordonnees[1]*10]);
             }
             else {
                 model_place.setCaseOuEstBateauEnCoursPlacement(null);

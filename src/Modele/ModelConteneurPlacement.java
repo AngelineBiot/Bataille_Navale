@@ -74,6 +74,20 @@ public class ModelConteneurPlacement {
         return xBon && yBon;
     }
 
+    public boolean changementDirectionPossible(int longueur){
+        boolean xBon = coordX>=0
+                && ((!directionVerticale
+                && coordX<10)
+                || (coordX<=10-longueur));
+
+        boolean yBon = coordY>=0
+                && ((directionVerticale
+                && coordY<10)
+                || (coordY<=10-longueur));
+
+        return xBon && yBon;
+    }
+
     public boolean verifAucuneCaseDejaPrise(Grille grille, int longueur) {
         boolean resultat = true;
         int i;
@@ -99,6 +113,30 @@ public class ModelConteneurPlacement {
 
         return resultat;
     }
+
+    public int[] calculeCoordonnees(int longueur){
+        int[] tabRes = new int[4];
+
+        tabRes[0]= caseOuEstBateauEnCoursPlacement.getCoordoneX();
+        tabRes[1] = caseOuEstBateauEnCoursPlacement.getCoordoneY();
+
+        tabRes[2] = tabRes[0];
+        tabRes[3] = tabRes[1];
+
+
+        if (!(changementDirectionPossible(longueur))) {
+            if(directionVerticale) {
+                tabRes[0]=10-longueur;
+            }
+            else {
+                tabRes[1]=10-longueur;
+            }
+        }
+
+        return tabRes;
+    }
+
+
 
 
 
