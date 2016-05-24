@@ -1,7 +1,6 @@
 package Vue;
 
 import Controleur.EcouteurConteneurGrillePhaseTir;
-import Modele.ModelConteneurTir;
 
 import javax.swing.*;
 import java.util.ResourceBundle;
@@ -12,14 +11,13 @@ import java.util.ResourceBundle;
  */
 public class ConteneurTir extends JTabbedPane {
 
-    private JLabel imageBateau;
     private JButton boutonValidation;
     private ConteneurGrille conteneurGrilleJoueur;
     private ConteneurGrille conteneurGrilleAutreJoueur;
     private TableauScores score;
 
 
-    public ConteneurTir(ModelConteneurTir modele, ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc) {
+    public ConteneurTir(ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc) {
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
         score=sc;

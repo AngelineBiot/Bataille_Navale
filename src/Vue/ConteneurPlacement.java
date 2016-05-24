@@ -23,7 +23,7 @@ public class ConteneurPlacement extends JPanel {
     private ConteneurGrille conteneurGrille;
 
 
-    public ConteneurPlacement(ModelConteneurPlacement modele, Flotte f, ConteneurGrille contGr){
+    public ConteneurPlacement(Flotte f, ConteneurGrille contGr){
 
         conteneurGrille = contGr;
         flotte = f;

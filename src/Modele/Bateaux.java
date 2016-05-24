@@ -60,15 +60,7 @@ public class Bateaux implements Serializable{
         }
         coule = (i == this.taille);
     }
-    public boolean estTouche(){
-        boolean estTouche = false;
-        for(Case coordonnees : position){
-            if(coordonnees.getToucher()){
-                estTouche = true;
-            }
-        }
-        return estTouche;
-    }
+
 
     public void setPosition(Case[] tabCases, boolean estVertical){
         position = tabCases;
