@@ -38,11 +38,9 @@ public class EcouteurConteneurInscription implements ActionListener {
         String pseudoJoueur2 = conteneurInscription.getlabelJoueur2().getText();
 
         if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
-            JOptionPane jopErreurInscriptionVide = new JOptionPane();
             JOptionPane.showMessageDialog(null, texteInternational.getString("pseudoVide"),
                                         texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
         } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
-            JOptionPane jopErreurInscriptionIdentique = new JOptionPane();
             JOptionPane.showMessageDialog(null, texteInternational.getString("memePseudos"),
                                         texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
         } else {

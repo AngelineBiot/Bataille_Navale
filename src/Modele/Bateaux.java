@@ -42,20 +42,7 @@ public class Bateaux implements Serializable{
         typeBateauInternational = texteInternational.getString(typeDeBateau);
     }
 
-    public void setBateaux(String typeDeBateau){  //Porte-avion, Croiseur, Sous-marin, Torpilleur
-        if (typeDeBateau.equals("porte-avion")){
-            this.taille=5;
-        }
-        if (typeDeBateau.equals("croiseur")){
-            this.taille=4;
-        }
-        if (typeDeBateau.equals("sous-marin")){
-            this.taille=3;
-        }
-        if (typeDeBateau.equals("torpilleur")){
-            this.taille=2;
-        }
-    }
+
     public int getTaille() {
         return taille;
     }
@@ -64,9 +51,6 @@ public class Bateaux implements Serializable{
     }
     public boolean getEstOrienteVerticalement(){
         return this.estOrienteVerticalement;
-    }
-    public void setEstOrienteVerticalement(boolean orientation){
-        this.estOrienteVerticalement=orientation;
     }
 
     public void updateEstCoule(){

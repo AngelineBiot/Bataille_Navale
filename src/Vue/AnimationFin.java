@@ -3,6 +3,7 @@ package Vue;
 
 /**
  * Created by ANTOINE on 13/05/2016.
+ *
  */
 public class AnimationFin extends Animation{
 

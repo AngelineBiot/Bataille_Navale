@@ -82,7 +82,6 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                             ecouteurFinAnimation.setTimer(timer);
                             timer.start();
                         }
-//
 
 
                     }

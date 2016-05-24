@@ -31,7 +31,6 @@ public class Jeu implements Serializable{
 
         try {
             oos=new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("ressources/sauvegarde/Jeu"))));
-            //oos.reset();
             oos.writeObject(jeu);
             oos.close();
         }

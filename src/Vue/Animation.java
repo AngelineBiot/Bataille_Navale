@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by belfort on 24/05/2016.
+ *
  */
 public class Animation extends JFrame {
     protected String message;

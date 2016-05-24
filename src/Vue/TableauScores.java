@@ -1,18 +1,14 @@
 package Vue;
+import Modele.Jeu;
+import javax.swing.*;
+import java.util.ResourceBundle;
+
+
 
 /**
  * Created by ANTOINE on 02/05/2016.
  *
  */
-import Modele.Flotte;
-import Modele.Grille;
-import Modele.Jeu;
-import Modele.Joueur;
-
-import javax.swing.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 public class TableauScores extends JPanel {
 
     public TableauScores(Jeu jeu){
@@ -74,28 +70,4 @@ public class TableauScores extends JPanel {
         return ((float)Math.floor(nombre*100))/100;
     }
 
-    public static void main(String[] args) {
-
-        javax.swing.SwingUtilities.invokeLater( new Runnable() {
-
-            public void run() {
-                Grille grillej1 = new Grille();
-                Grille grillej2 = new Grille();
-
-                Flotte flottej1 = Flotte.creerFlotte6bateaux();
-                Flotte flottej2 = Flotte.creerFlotte6bateaux();
-
-                Joueur j1 = new Joueur(flottej1, grillej1);
-                Joueur j2 = new Joueur(flottej2, grillej2);
-
-
-                Jeu jeu = new Jeu(j1, j2);
-                TableauScores f = new TableauScores(jeu);
-                JFrame test = new JFrame();
-                test.setContentPane(f);
-                test.setVisible(true);
-            }
-
-        });
-    }
 }

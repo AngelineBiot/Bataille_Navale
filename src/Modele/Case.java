@@ -18,12 +18,7 @@ public class Case implements Serializable {
         this.coordoneX=x;
         this.coordoneY=y;
     }
-    Case(int x, int y, Bateaux b ){
-        this.coordoneX=x;
-        this.coordoneY=y;
-        this.toucher = false;
-        this.bat=b;
-    }
+
 
     public int getCoordoneX() {
         return coordoneX;
@@ -40,7 +35,6 @@ public class Case implements Serializable {
     public Bateaux getBat() {
         return bat;
     }
-    public int[] getCoord(){return new int[]{coordoneX,coordoneY};}
     public void setBat(Bateaux b){
         this.bat=b;
     }

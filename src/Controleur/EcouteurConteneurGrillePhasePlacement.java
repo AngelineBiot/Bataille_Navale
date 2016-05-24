@@ -34,7 +34,6 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
         panelPlacement=panPlace;
         model.setDirectionVerticale(true);
-        //model.setIndiceBateauEnCours(jeu.getJoueurConcerne().getFlotte().getNbBateauxPlaces());
         model.setCaseOuEstBateauEnCoursPlacement(null);
 
         panelPlacement.setControl(this);

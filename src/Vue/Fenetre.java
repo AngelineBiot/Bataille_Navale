@@ -36,15 +36,11 @@ public class Fenetre extends JFrame{
 
         setSize(900,700);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setLocationRelativeTo(null);
         setResizable(false);
         creerMenu();
 
-
-        /*Vue.ConteneurInscription conteneur =new Vue.ConteneurInscription(this);
-        setContentPane(conteneur);*/
 
         setVisible(true);
     }

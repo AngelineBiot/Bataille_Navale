@@ -66,13 +66,6 @@ public class ModelConteneurPlacement {
         this.caseOuEstBateauEnCoursPlacement = caseOuEstBateauEnCoursPlacement;
     }
 
-    /*public int getIndiceBateauEnCours() {
-        return indiceBateauEnCours;
-    }
-
-    public void setIndiceBateauEnCours(int indiceBateauEnCours) {
-        this.indiceBateauEnCours = indiceBateauEnCours;
-    }*/
 
 
 

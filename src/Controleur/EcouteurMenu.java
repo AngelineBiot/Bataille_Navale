@@ -120,25 +120,6 @@ public class EcouteurMenu implements ActionListener {
 
                 jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
             }
-            // changer pour reset le panel
-
-            /*
-
-            ConteneurInscription conteneurInscription = new ConteneurInscription();
-            int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
-            int hauteurBox = (700-hauteurConteneur)/2;
-
-            JPanel conteneurGlobal = new JPanel();
-            conteneurGlobal.setLayout(new BoxLayout(conteneurGlobal, BoxLayout.Y_AXIS));
-            conteneurGlobal.add(Box.createVerticalStrut(hauteurBox));
-            conteneurGlobal.add(conteneurInscription);
-
-            fenetre.setContentPane(conteneurGlobal);
-            fenetre.validate();
-
-            new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);*/
-
-
 
 
         }
