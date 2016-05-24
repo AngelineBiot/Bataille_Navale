@@ -1,9 +1,7 @@
 package Controleur;
 
 import Modele.Jeu;
-import Vue.ConteneurAttente;
-import Vue.Fenetre;
-import Vue.TableauScores;
+import Vue.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,18 +16,18 @@ class EcouteurFinAnimation implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
 
-    private JFrame fenetreAnimation;
+    private Animation fenetreAnimation;
     private Timer timer;
     private boolean partieFinie;
 
-    EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j) {
+    EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
         partieFinie = false;
     }
 
-    EcouteurFinAnimation(JFrame fenSec, Fenetre fen, Jeu j, boolean fini) {
+    EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, boolean fini){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
@@ -42,6 +40,7 @@ class EcouteurFinAnimation implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         timer.stop();
+        fenetreAnimation.coupeSon();
         fenetreAnimation.dispose();
 
         if(partieFinie) {
