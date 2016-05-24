@@ -62,11 +62,6 @@ public class Bateaux implements Serializable{
     }
 
 
-    public void setPosition(Case[] tabCases, boolean estVertical){
-        position = tabCases;
-        estOrienteVerticalement = estVertical;
-    }
-
     public Case[] getPosition(){
         return position;
     }
@@ -94,5 +89,30 @@ public class Bateaux implements Serializable{
 
     public String getTypeBateauInternational() {
         return typeBateauInternational;
+    }
+
+    public void initPosition(ModelConteneurPlacement modele, Grille grille){
+        position = new Case[taille];
+        int i;
+
+        int x = modele.getCaseOuEstBateauEnCoursPlacement().getCoordoneX();
+        int y = modele.getCaseOuEstBateauEnCoursPlacement().getCoordoneY();
+
+
+
+        if(modele.isDirectionVerticale()){
+            for(i=0 ; i<taille ; i++){
+                position[i] = grille.getGrille()[x+(i+y)*10];
+                position[i].setBat(this);
+            }
+        }
+        else{
+            for(i=0 ; i<taille ; i++){
+                position[i] = grille.getGrille()[x+i+y*10];
+                position[i].setBat(this);
+            }
+        }
+
+        estOrienteVerticalement=modele.isDirectionVerticale();
     }
 }

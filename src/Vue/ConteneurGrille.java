@@ -16,6 +16,8 @@ public class ConteneurGrille extends JPanel {
     private JLabel[] gridPanel;
     private Joueur joueur;
 
+    private ModelConteneurPlacement modelConteneurPlacement;
+
     public ConteneurGrille(Joueur j) {
         joueur = j;
         initAttribut();
@@ -52,6 +54,23 @@ public class ConteneurGrille extends JPanel {
     public void setControl(MouseAdapter ecouteur){
         afficheButton.addMouseListener(ecouteur);
 
+    }
+
+    public void ajoutBateau(String typeBateau, int longueur){
+        int x = modelConteneurPlacement.getCaseOuEstBateauEnCoursPlacement().getCoordoneX();
+        int y =modelConteneurPlacement.getCaseOuEstBateauEnCoursPlacement().getCoordoneY();
+        int i;
+
+        if(modelConteneurPlacement.isDirectionVerticale()){
+            for(i=0 ; i<longueur ; i++){
+                gridPanel[x+ 10*(y+i)].setIcon(ImageBateau.getImageBateau(typeBateau,true,i, false));
+            }
+        }
+        else{
+            for(i=0 ; i<longueur ; i++){
+                gridPanel[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau,false,i, false));
+            }
+        }
     }
 
     public void repaintBateauxDejaPlaces(){
@@ -138,5 +157,9 @@ public class ConteneurGrille extends JPanel {
             }
 
         }
+    }
+
+    public void setModelPlacement(ModelConteneurPlacement modele){
+        modelConteneurPlacement = modele;
     }
 }

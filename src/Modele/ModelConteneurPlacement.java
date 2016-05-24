@@ -68,5 +68,39 @@ public class ModelConteneurPlacement {
 
 
 
+    public boolean bateauEstPlacable(int longueur){
+        boolean xBon = coordX>=0 && ((isDirectionVerticale() && coordX<10) || (coordX<=10-longueur));
+        boolean yBon = coordY>=0 && ((!isDirectionVerticale() && coordY<10) || (coordY<=10-longueur));
+        return xBon && yBon;
+    }
+
+    public boolean verifAucuneCaseDejaPrise(Grille grille, int longueur) {
+        boolean resultat = true;
+        int i;
+
+        Case[] grilleModele = grille.getGrille();
+
+        if(directionVerticale) {
+            for(i=0 ; i<longueur ; i++) {
+                if(grilleModele[coordX+ 10*(coordY+i)].getBat() != null) {
+                    resultat = false;
+                }
+            }
+        }
+        else {
+            for(i=0 ; i<longueur ; i++) {
+                if(grilleModele[coordY*10 +coordX+i].getBat() != null) {
+                    resultat = false;
+                }
+
+            }
+        }
+
+
+        return resultat;
+    }
+
+
+
 
 }

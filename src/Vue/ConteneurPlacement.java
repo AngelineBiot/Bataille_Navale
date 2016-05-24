@@ -22,11 +22,14 @@ public class ConteneurPlacement extends JPanel {
     private JRadioButton placerBateauHorizontal;
     private ConteneurGrille conteneurGrille;
 
+    private ModelConteneurPlacement modele;
 
-    public ConteneurPlacement(Flotte f, ConteneurGrille contGr){
+
+    public ConteneurPlacement(Flotte f, ConteneurGrille contGr, ModelConteneurPlacement m){
 
         conteneurGrille = contGr;
         flotte = f;
+        modele=m;
 
         setLayout(new FlowLayout());
         addWidgets();
@@ -106,14 +109,6 @@ public class ConteneurPlacement extends JPanel {
     }
 
 
-    public JLabel getInfoPlacement(){
-        return infoPlacement;
-    }
-
-    public JLabel getImageBateau(){
-        return imageBateau;
-    }
-
     public void setControl(EcouteurConteneurGrillePhasePlacement ecouteur){
         placerBateauVertical.addActionListener(ecouteur);
         placerBateauHorizontal.addActionListener(ecouteur);
@@ -132,6 +127,31 @@ public class ConteneurPlacement extends JPanel {
 
     public ConteneurGrille getConteneurGrille(){
         return  conteneurGrille;
+    }
+
+
+    public void effaceCase(int longueur, int xEff, int yEff) {
+        int i;
+
+        if(modele.isDirectionVerticale()) {
+            for(i = 0 ; i < longueur ; i++) {
+                conteneurGrille.getGridPanel()[xEff+ 10*(yEff+i)].setIcon(null);
+            }
+        }
+        else{
+            for(i = 0 ; i < longueur ; i++) {
+                conteneurGrille.getGridPanel()[yEff*10 +xEff+i].setIcon(null);
+            }
+
+        }
+    }
+
+    public void changeBateau(String textePlacement){
+        String typeNouvBateau = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
+        String typeNouvBateauInternational = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational();
+        infoPlacement.setText(textePlacement+typeNouvBateauInternational);
+        imageBateau.setIcon(ImageBateau.getImageBateau(typeNouvBateau,false));
+        imageBateau.updateUI();
     }
 }
 

@@ -34,7 +34,8 @@ public class EcouteurConteneurAttente implements ActionListener {
             modelConteneurPlacement.setDimensionCarre(50);
 
             ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
-            ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille);
+            conteneurGrille.setModelPlacement(modelConteneurPlacement);
+            ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
             new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
 
             fenetre.setContentPane(conteneur);
