@@ -39,11 +39,8 @@ public class EcouteurFermeture extends WindowAdapter {
 
                 }
                 catch(SauvegardeException e1){
-                    JOptionPane jopApropos = new JOptionPane();
                     JOptionPane.showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
                             texteInternational.getString("erreur"),JOptionPane.INFORMATION_MESSAGE);
-
-                    jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
                 }
 
             }

@@ -19,6 +19,7 @@ public class EcouteurMenu implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
 
+
     public EcouteurMenu(Fenetre fenetre,Jeu jeu) {
         this.fenetre = fenetre;
         this.jeu=jeu;
@@ -28,33 +29,28 @@ public class EcouteurMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu");
-
         Object source = e.getSource();
 
-        String msgApropos = texteInternational.getString("jeuCree") +
-                                "BIOT Angeline\n" +
-                                "GUERRE Michael\n" +
-                                "LIAO Zuzhi\n" +
-                                "PARTY Florian\n" +
-                                "PY Antoine\n" +
-                                "SURLEAU Etienne\n" +
-                                texteInternational.getString("etudiants");
-
-        ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
 
         if (source.equals(fenetre.getItemAide()))
         {
-            JOptionPane jopAide = new JOptionPane();
             showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"), INFORMATION_MESSAGE);
 
-            jopAide.createDialog(null,texteInternational.getString("aide"));
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {
-            JOptionPane jopApropos = new JOptionPane();
+            ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
+            String msgApropos = texteInternational.getString("jeuCree") +
+                    "BIOT Angeline\n" +
+                    "GUERRE Michael\n" +
+                    "LIAO Zuzhi\n" +
+                    "PARTY Florian\n" +
+                    "PY Antoine\n" +
+                    "SURLEAU Etienne\n" +
+                    texteInternational.getString("etudiants");
+
             showMessageDialog(null,msgApropos,texteInternational.getString("aPropos"), INFORMATION_MESSAGE, icon);
 
-            jopApropos.createDialog(null,texteInternational.getString("aPropos"));
 
 
         }
@@ -63,11 +59,9 @@ public class EcouteurMenu implements ActionListener {
                 Jeu.Sauvegarde(jeu);
             }
             catch(SauvegardeException e2){
-                JOptionPane jopApropos = new JOptionPane();
                 showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
                                             texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
-                jopApropos.createDialog(fenetre, texteInternational.getString("erreur"));
             }
 
         }
@@ -115,11 +109,9 @@ public class EcouteurMenu implements ActionListener {
                 }
             }
             catch(SauvegardeException e1) {
-                JOptionPane jopApropos = new JOptionPane();
                 showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
                                             texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
-                jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
             }
 
 
@@ -167,11 +159,9 @@ public class EcouteurMenu implements ActionListener {
 
                     }
                     catch(SauvegardeException e1){
-                        JOptionPane jopApropos = new JOptionPane();
                         showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
                                                 texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
-                        jopApropos.createDialog(fenetre,texteInternational.getString("erreur"));
                     }
 
                 }
