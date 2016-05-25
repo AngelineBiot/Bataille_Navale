@@ -1,6 +1,8 @@
 package Vue;
 import Modele.Jeu;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
 import java.util.ResourceBundle;
 
 
@@ -13,6 +15,7 @@ public class TableauScores extends JPanel {
 
     public TableauScores(Jeu jeu){
         creerWidget(jeu);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
     private void creerWidget(Jeu jeu) {
@@ -60,10 +63,29 @@ public class TableauScores extends JPanel {
                 return false;
             }
         };
+        tableau.setPreferredSize(new Dimension(600, 200));
+        tableau.setRowHeight(100);
+        tableau.getTableHeader().setPreferredSize(new Dimension(tableau.getTableHeader().getWidth(), 50));
+        tableau.setShowGrid(true);
+
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i=0 ; i<tableau.getColumnCount() ; i++) {
+            tableau.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
         JScrollPane pano = new JScrollPane(tableau);
-        this.add(pano);
+        pano.setPreferredSize(new Dimension(700, 253));
+
+        JPanel conteneurTableau = new JPanel();
+        conteneurTableau.add(Box.createHorizontalStrut(50));
+        conteneurTableau.add(pano);
+        conteneurTableau.add(Box.createHorizontalStrut(50));
+
+        this.add(Box.createVerticalStrut(50));
+        this.add(conteneurTableau);
     }
 
     private float arrondi(float nombre){

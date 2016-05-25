@@ -6,7 +6,6 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 23/05/16.

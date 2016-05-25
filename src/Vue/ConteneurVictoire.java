@@ -18,6 +18,7 @@ public class ConteneurVictoire extends JPanel{
         JLabel messageVictoire = new JLabel(texteInternational.getString("bravo")+
                 jeu.getJoueurConcerne().getNomJoueur()+
                 texteInternational.getString("gagne"));
+        messageVictoire.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         add(messageVictoire);
 
         TableauScores tableauScore = new TableauScores(jeu);
