@@ -21,6 +21,7 @@ public class TableauScores extends JPanel {
     private void creerWidget(Jeu jeu) {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores");
+        System.out.println(texteInternational.getString("nombreCoules"));
 
         this.setSize(300, 120);
         float efficaciteJoueur1;
@@ -53,16 +54,19 @@ public class TableauScores extends JPanel {
         };
 
         //Les titres des colonnes
-        String  title[] = {texteInternational.getString("nom"),
-                            texteInternational.getString("nombreTours"),
-                            texteInternational.getString("nombreCoules"),
-                            texteInternational.getString("nombreTouches"),
-                            texteInternational.getString("efficacite")};
+        String debut = "<html><body>";
+        String fin = "</html></body>";
+        String  title[] = {debut+texteInternational.getString("nom")+fin,
+                            debut+texteInternational.getString("nombreTours")+fin,
+                            debut+texteInternational.getString("nombreCoules")+fin,
+                            debut+texteInternational.getString("nombreTouches")+fin,
+                            debut+texteInternational.getString("efficacite")+fin};
         JTable tableau = new JTable(data, title){
             public boolean isCellEditable(int row, int col) {
                 return false;
             }
         };
+        //zoneTexteAPropos.setContentType("text/html");
         tableau.setPreferredSize(new Dimension(600, 200));
         tableau.setRowHeight(100);
         tableau.getTableHeader().setPreferredSize(new Dimension(tableau.getTableHeader().getWidth(), 50));
