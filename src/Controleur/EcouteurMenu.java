@@ -4,6 +4,7 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
+import javax.swing.Popup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -11,14 +12,14 @@ import java.util.ResourceBundle;
 import static javax.swing.JOptionPane.*;
 
 /**
- * Created by angel on 03/05/2016.
- * Updated by angel ON 03/05/2016.
+ * Created by angeline on 03/05/2016.
+ *
  */
 public class EcouteurMenu implements ActionListener {
 
     private Fenetre fenetre;
     private Jeu jeu;
-
+    private fenPopUp popup;
 
     public EcouteurMenu(Fenetre fenetre,Jeu jeu) {
         this.fenetre = fenetre;
@@ -34,8 +35,8 @@ public class EcouteurMenu implements ActionListener {
 
         if (source.equals(fenetre.getItemAide()))
         {
-            showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"), INFORMATION_MESSAGE);
-
+            //showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"), INFORMATION_MESSAGE);
+            popup = new fenPopUp("Aide");
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {
@@ -156,17 +157,13 @@ public class EcouteurMenu implements ActionListener {
                 if  (resultSauvegarde== YES_OPTION){
                     try {
                         Jeu.Sauvegarde(fenetre.getJeu());
-
                     }
                     catch(SauvegardeException e1){
                         showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
                                                 texteInternational.getString("erreur"), INFORMATION_MESSAGE);
 
                     }
-
                 }
-
-
                 fenetre.dispose();
             }
         }

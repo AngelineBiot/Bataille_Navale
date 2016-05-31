@@ -9,7 +9,6 @@ import Modele.*;
 
 /**
  * Created by ANTOINE on 17/04/2016.
- *
  */
 public class ConteneurAttente extends JPanel {
     private JButton pret;
@@ -25,7 +24,7 @@ public class ConteneurAttente extends JPanel {
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAttente");
 
 
-        JLabel lab = new JLabel(nomJoueur+" "+ texteInternational.getString("tour"),SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
+        JLabel lab = new JLabel(nomJoueur + " " + texteInternational.getString("tour"), SwingConstants.CENTER); // SwingConstants.center sert à centrer le texte
 
         // Affichage du bouton prêt
         pret = new JButton(texteInternational.getString("pret"));
@@ -35,7 +34,7 @@ public class ConteneurAttente extends JPanel {
 
     }
 
-    public void setEcouteurConteneurAttente(EcouteurConteneurAttente ecouteur){
+    public void setEcouteurConteneurAttente(EcouteurConteneurAttente ecouteur) {
         pret.addActionListener(ecouteur);
     }
 
