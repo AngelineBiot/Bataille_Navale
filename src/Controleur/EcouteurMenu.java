@@ -35,8 +35,8 @@ public class EcouteurMenu implements ActionListener {
 
         if (source.equals(fenetre.getItemAide()))
         {
-            //showMessageDialog(null,texteInternational.getString("messageAide"),texteInternational.getString("aide"), INFORMATION_MESSAGE);
-            popup = new fenPopUp("Aide");
+            //showMessageDialog(null,texteInternational.getString("messageAide"),, INFORMATION_MESSAGE);
+            popup = new fenPopUp(texteInternational.getString("aide"));
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {

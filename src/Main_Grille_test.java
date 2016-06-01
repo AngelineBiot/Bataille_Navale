@@ -15,7 +15,7 @@ public class Main_Grille_test {
 
 
         //Ici : Choix de la langue (a enlever dans version finale)
-        Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+        Locale locale = new Locale("");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
         Locale.setDefault(locale);
 
 
