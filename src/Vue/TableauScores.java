@@ -21,7 +21,6 @@ public class TableauScores extends JPanel {
     private void creerWidget(Jeu jeu) {
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.TableauScores");
-        System.out.println(texteInternational.getString("nombreCoules"));
 
         this.setSize(300, 120);
         float efficaciteJoueur1;
