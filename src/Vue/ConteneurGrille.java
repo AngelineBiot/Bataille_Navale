@@ -165,7 +165,7 @@ public class ConteneurGrille extends JPanel {
 
     public void changementDirectionBateau(int x, int y, String typeBateau, int longueur){
         int i;
-        if(modelConteneurPlacement.isDirectionVerticale()) {
+        if(!modelConteneurPlacement.isDirectionVerticale()) {
             for(i = 0 ; i < longueur ; i++) {
                 gridPanel[y*10 +x+i].setIcon(ImageBateau.getImageBateau(typeBateau, false, i, false));
             }

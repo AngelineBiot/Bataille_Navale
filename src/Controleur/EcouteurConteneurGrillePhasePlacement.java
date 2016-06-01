@@ -151,6 +151,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
 
             panelPlacement.effaceCase(longueur, tabCoordonnees[2], tabCoordonnees[3]);
+            model_place.setDirectionVerticale(!model_place.isDirectionVerticale());
 
             if(model_place.verifAucuneCaseDejaPrise(grille, longueur)) {
                 String typeBateau = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
@@ -164,7 +165,9 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
 
 
         }
-        model_place.setDirectionVerticale(!model_place.isDirectionVerticale());
+        else{
+            model_place.setDirectionVerticale(!model_place.isDirectionVerticale());
+        }
     }
 
     public void keyTyped(KeyEvent e) {
