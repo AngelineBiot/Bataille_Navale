@@ -3,7 +3,7 @@ package Controleur;
 import Modele.Jeu;
 import Vue.*;
 
-import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

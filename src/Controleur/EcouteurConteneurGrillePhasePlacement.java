@@ -3,7 +3,7 @@ package Controleur;
 import Modele.*;
 import Vue.*;
 
-import javax.swing.*;
+import javax.swing.JRadioButton;
 import java.awt.event.*;
 
 import java.util.ResourceBundle;

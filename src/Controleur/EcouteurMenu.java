@@ -4,7 +4,6 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
-import javax.swing.Popup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -19,7 +18,6 @@ public class EcouteurMenu implements ActionListener {
 
     private Fenetre fenetre;
     private Jeu jeu;
-    private fenPopUp popup;
 
     public EcouteurMenu(Fenetre fenetre,Jeu jeu) {
         this.fenetre = fenetre;
@@ -36,7 +34,7 @@ public class EcouteurMenu implements ActionListener {
         if (source.equals(fenetre.getItemAide()))
         {
             //showMessageDialog(null,texteInternational.getString("messageAide"),, INFORMATION_MESSAGE);
-            popup = new fenPopUp(texteInternational.getString("aide"));
+            new fenPopUp(texteInternational.getString("aide"));
         }
         else if(e.getSource()==fenetre.getItemApropos())
         {
