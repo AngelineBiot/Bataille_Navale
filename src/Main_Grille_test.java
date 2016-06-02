@@ -37,8 +37,8 @@ public class Main_Grille_test {
 
 
         Fenetre fenetre = new Fenetre(texteInternational.getString("titre"),jeu);
-
-        ConteneurInscription conteneurInscription = new ConteneurInscription();
+        ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
+        ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
         int hauteurBox = (700-hauteurConteneur)/2;
 
@@ -50,10 +50,11 @@ public class Main_Grille_test {
         fenetre.setContentPane(conteneurGlobal);
         fenetre.validate();
 
-        new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre);
+        new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
         new EcouteurFermeture(fenetre);
         new EcouteurMenu(fenetre,jeu);
+        fenetre.setVisible(true);
 
-        }
+    }
 
 }

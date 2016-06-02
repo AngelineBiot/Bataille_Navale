@@ -5,23 +5,28 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurInscription;
+import Modele.ModelConteneurInscription;
 
 /**
  * Created by Florian on 14/04/2016.
  *
  */
 public class ConteneurInscription extends JPanel{
+    ModelConteneurInscription model;
     private JTextField labelJoueur1;
     private JTextField labelJoueur2;
     private JButton valider;
-    
+    private JComboBox jComboBoxJoueur1;
+    private JComboBox jComboBoxJoueur2;
 
 
-    public ConteneurInscription(){
-
+    public ConteneurInscription(ModelConteneurInscription m){
+        model=m;
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
-
-
+        model.initJoueur();
+        if (model.getJoueur()!=null){
+            model.initListPseudo(model.getJoueur());
+        }
         initAttributs(texteInternational.getString("valider"));
         addwidgets(texteInternational.getString("pseudo1"), texteInternational.getString("pseudo2"));
 
@@ -31,7 +36,19 @@ public class ConteneurInscription extends JPanel{
         labelJoueur1 = new JTextField();
         labelJoueur2 = new JTextField();
         valider = new JButton(texteValider);
-
+        if (model.getListPseudo()!=null){
+            jComboBoxJoueur1 =new JComboBox(model.getListPseudo());
+        }else {
+            jComboBoxJoueur1=new JComboBox();
+        }
+        jComboBoxJoueur1.setEditable(true);
+        if (model.getListPseudo()!=null){
+            jComboBoxJoueur2 =new JComboBox(model.getListPseudo());
+            jComboBoxJoueur2.setEditable(true);
+        }else {
+            jComboBoxJoueur2=new JComboBox();
+        }
+        jComboBoxJoueur2.setEditable(true);
         labelJoueur1.setColumns(15);
         labelJoueur2.setColumns(15);
     }
@@ -43,9 +60,9 @@ public class ConteneurInscription extends JPanel{
         placementGrille.setLayout(g);
 
         placementGrille.add(new JLabel(textePseudo1));
-        placementGrille.add(labelJoueur1);
+        placementGrille.add(jComboBoxJoueur1);
         placementGrille.add(new JLabel(textePseudo2));
-        placementGrille.add(labelJoueur2);
+        placementGrille.add(jComboBoxJoueur2);
 
         JPanel placementGeneral = new JPanel();
         placementGeneral.setLayout(new BoxLayout(placementGeneral, BoxLayout.Y_AXIS));
@@ -63,6 +80,15 @@ public class ConteneurInscription extends JPanel{
 
     public JTextField getlabelJoueur2(){
         return labelJoueur2;
+    }
+
+
+    public JComboBox getjComboBoxJoueur1() {
+        return jComboBoxJoueur1;
+    }
+
+    public JComboBox getjComboBoxJoueur2() {
+        return jComboBoxJoueur2;
     }
 
     public void setEcouteurConteneurInscription(EcouteurConteneurInscription ecouteur){

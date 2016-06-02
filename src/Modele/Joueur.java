@@ -10,6 +10,7 @@ public class Joueur implements Serializable{
     private String nomJoueur;
     private Flotte flotte;
     private Grille grille;
+    private int idJoueur;
     private int nbcoups;
 
     public Joueur(Flotte fl, Grille gr){
@@ -41,6 +42,15 @@ public class Joueur implements Serializable{
 
     public Grille getGrille(){
         return grille;
+    }
+
+
+    public int getIdJoueur() {
+        return idJoueur;
+    }
+
+    public void setIdJoueur(int idJoueur) {
+        this.idJoueur = idJoueur;
     }
 
 

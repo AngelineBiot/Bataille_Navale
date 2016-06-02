@@ -15,11 +15,13 @@ public class ConteneurTir extends JTabbedPane {
     private ConteneurGrille conteneurGrilleJoueur;
     private ConteneurGrille conteneurGrilleAutreJoueur;
     private TableauScores score;
+    private ConteneurAchievement conteneurAchievement;
 
 
-    public ConteneurTir(ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc) {
+    public ConteneurTir(ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc, ConteneurAchievement cA) {
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
+        conteneurAchievement=cA;
         score=sc;
         addWidgets();
 
@@ -59,7 +61,7 @@ public class ConteneurTir extends JTabbedPane {
         conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
         addTab(texteInternational.getString("ongletMaGrille"), conteneurGrilleJoueur);
         addTab(texteInternational.getString("ongletScores"), score);
-
+        addTab("Succes",conteneurAchievement);
 
     }
     public void setControlTire(EcouteurConteneurGrillePhaseTir ecouteur){

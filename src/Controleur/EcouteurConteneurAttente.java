@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by fparty2 on 29/04/16.
- *
  */
 public class EcouteurConteneurAttente implements ActionListener {
     private ConteneurAttente conteneurAttente;
@@ -52,8 +51,8 @@ public class EcouteurConteneurAttente implements ActionListener {
 
             ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
             TableauScores score = new TableauScores(jeu);
-
-            ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score);
+            ConteneurAchievement conteneurAchievement=new ConteneurAchievement(jeu);
+            ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur,score,conteneurAchievement);
 
 
             new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
