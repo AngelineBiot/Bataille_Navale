@@ -98,7 +98,6 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                     (texteCaseACocher.equals(texteInternational.getString("vertical")) && !model_place.isDirectionVerticale());
             if(bon){
                 changeDirection();
-
             }
 
         }

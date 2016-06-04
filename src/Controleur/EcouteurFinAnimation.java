@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  * Created by fparty2 on 23/05/16.
  *
  */
-class EcouteurFinAnimation implements ActionListener {
+public class EcouteurFinAnimation implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
 
@@ -19,21 +19,21 @@ class EcouteurFinAnimation implements ActionListener {
     private Timer timer;
     private boolean partieFinie;
 
-    EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j){
+    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
         partieFinie = false;
     }
 
-    EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, boolean fini){
+    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, boolean fini){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
         partieFinie = fini;
     }
 
-    void setTimer(Timer t){
+    public void setTimer(Timer t){
         timer = t;
     }
 

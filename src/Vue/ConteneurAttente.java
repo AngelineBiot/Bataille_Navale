@@ -38,4 +38,9 @@ public class ConteneurAttente extends JPanel {
         pret.addActionListener(ecouteur);
     }
 
+
+
+    public void desactivePret(){
+        pret.setEnabled(false);
+    }
 }

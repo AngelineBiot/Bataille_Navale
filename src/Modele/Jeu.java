@@ -37,6 +37,7 @@ public class Jeu implements Serializable{
             oos.close();
         }
         catch (IOException ioe){
+            ioe.printStackTrace();
             throw new SauvegardeException();
         }
     }

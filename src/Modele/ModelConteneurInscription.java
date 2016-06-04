@@ -95,10 +95,12 @@ public class ModelConteneurInscription {
     }
 
     public void initListPseudo(Object[][] j){
-        listPseudo=new String[j.length];
-            for (int i=0;i<j.length;i++){
-                listPseudo[i]=(String)j[i][1];
+        listPseudo=new String[j.length-1];
+        for (int i=0;i<j.length-1;i++){
+            if (!j[i+1][1].equals("GLaDAS")) {
+                listPseudo[i] = (String) j[i+1][1];
             }
+        }
     }
 
     public String[] getListPseudo() {

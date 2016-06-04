@@ -17,8 +17,12 @@ public class ModelAchievement {
             Connection connexion = DriverManager.getConnection(url,user,pass);
 
             Statement instruction = connexion.createStatement();
+            String order="";
+            if (idJ2>idJ1){
+                order="ORDER BY idJoueur DESC";
+            }
 
-            ResultSet resultat = instruction.executeQuery("SELECT * FROM joueur WHERE idJoueur="+idJ1+" OR idJoueur="+idJ2);
+            ResultSet resultat = instruction.executeQuery("SELECT * FROM joueur WHERE idJoueur="+idJ1+" OR idJoueur="+idJ2+order);
             ResultSetMetaData rsmd= resultat.getMetaData();
             int columncount = rsmd.getColumnCount();
             int rowcount = 0;

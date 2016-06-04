@@ -12,6 +12,15 @@ public class Joueur implements Serializable{
     private Grille grille;
     private int idJoueur;
     private int nbcoups;
+    private Computer computer;
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
 
     public Joueur(Flotte fl, Grille gr){
         flotte = fl;

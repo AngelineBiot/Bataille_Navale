@@ -59,9 +59,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                 if (model_tire.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
                     if (jeu.getJoueurConcerne().getNbCoups()==1){
-                        System.out.println("test 1");
                         if (model_tire.execQuery("SELECT * FROM joueurAchievement WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur()+" AND idAchievement=2").length==0) {
-                            System.out.println("test 2");
                             model_tire.execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",2)");
                         }
                     }
@@ -94,7 +92,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                                     }
                                 }
                                 if ((int)experienceJoueur[i][0]==jeu.getJoueurNonConcerne().getIdJoueur()){
-                                    expJNonConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*100+(float)experienceJoueur[i][1]);
+                                    expJNonConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*50+(float)experienceJoueur[i][1]);
                                     model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJNonConcerne+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
                                     if (expJNonConcerne>1000){
                                         expJNonConcerne=expJNonConcerne%1000;

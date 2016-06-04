@@ -42,8 +42,13 @@ public class ConteneurInscription extends JPanel{
             jComboBoxJoueur1=new JComboBox();
         }
         jComboBoxJoueur1.setEditable(true);
+        String[] listPseudo2=new String[model.getListPseudo().length+1];
+        for (int i=0;i<model.getListPseudo().length;i++){
+            listPseudo2[i]=model.getListPseudo()[i];
+        }
+        listPseudo2[listPseudo2.length-1]="GLaDAS";
         if (model.getListPseudo()!=null){
-            jComboBoxJoueur2 =new JComboBox(model.getListPseudo());
+            jComboBoxJoueur2 =new JComboBox(listPseudo2);
             jComboBoxJoueur2.setEditable(true);
         }else {
             jComboBoxJoueur2=new JComboBox();
@@ -73,15 +78,6 @@ public class ConteneurInscription extends JPanel{
 
         add(placementGeneral);
     }
-
-    public JTextField getlabelJoueur1(){
-        return labelJoueur1;
-    }
-
-    public JTextField getlabelJoueur2(){
-        return labelJoueur2;
-    }
-
 
     public JComboBox getjComboBoxJoueur1() {
         return jComboBoxJoueur1;
