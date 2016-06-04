@@ -61,7 +61,7 @@ public class ConteneurTir extends JTabbedPane {
         conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
         addTab(texteInternational.getString("ongletMaGrille"), conteneurGrilleJoueur);
         addTab(texteInternational.getString("ongletScores"), score);
-        addTab("Succes",conteneurAchievement);
+        addTab(texteInternational.getString("ongletSucces"),conteneurAchievement);
 
     }
     public void setControlTire(EcouteurConteneurGrillePhaseTir ecouteur){

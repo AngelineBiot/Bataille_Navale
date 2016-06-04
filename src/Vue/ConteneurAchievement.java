@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 /**
  * Created by michael on 21/05/2016.
@@ -27,6 +28,9 @@ public class ConteneurAchievement extends JPanel{
     }
 
     private void InitAttributs() {
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAchievement");
+
+
         model.initJoueur(jeu.getJoueur1().getIdJoueur(),jeu.getJoueur2().getIdJoueur());
         model.initAchievement();
         model.initJoueurAchievement();
@@ -42,7 +46,12 @@ public class ConteneurAchievement extends JPanel{
                 exp=(float)model.getJoueur()[i][3];
             }
         }
-        jLabelniveau=new JLabel(jeu.getJoueurConcerne().getNomJoueur()+" votre niveau est : "+String.valueOf(niveau)+" avec "+String.valueOf(exp)+" point d'éxperience");
+
+        String texteNiveau = texteInternational.getString("niveau");
+        String texteAvec = texteInternational.getString("avec");
+        String texteExperience = texteInternational.getString("experience");
+
+        jLabelniveau=new JLabel(jeu.getJoueurConcerne().getNomJoueur()+", "+texteNiveau+" "+String.valueOf(niveau)+" "+texteAvec+" "+String.valueOf(exp)+" "+texteExperience);
         jProgressBarExp.setValue((int)(exp));
         jProgressBarExp.setStringPainted(true);
         jProgressBarExp.setBorderPainted(true);
@@ -51,23 +60,25 @@ public class ConteneurAchievement extends JPanel{
         Object[][] data=new Object[model.getAchievement().length][3];
         String[]  title =new String[]{"Succes",jeu.getJoueur1().getNomJoueur(),jeu.getJoueur2().getNomJoueur()};
         for (int i=0; i<data.length;i++){
-            data[i][0]=model.getAchievement()[i][1];
+            String nomSucces = supprEspace((String)model.getAchievement()[i][1]);
+            data[i][0]=texteInternational.getString(nomSucces);
+
             boolean gotAch=false;
             for (int j=0;j<model.getJoueurAchievement().length;j++){
                 if (((int)model.getAchievement()[i][0])==(int)(model.getJoueurAchievement()[j][1]) && ((int)model.getJoueur()[0][0])==((int)model.getJoueurAchievement()[j][0] ) || gotAch){
-                    data[i][1]="Dévérrouillé";
+                    data[i][1]=texteInternational.getString("valide");
                     gotAch=true;
                 }else {
-                    data[i][1]="Vérouillé";
+                    data[i][1]=texteInternational.getString("non_valide");
                 }
             }
             gotAch=false;
             for (int j=0;j<model.getJoueurAchievement().length;j++){
                 if (((int)model.getAchievement()[i][0])==((int)model.getJoueurAchievement()[j][1]) && ((int)model.getJoueur()[1][0])==((int)model.getJoueurAchievement()[j][0] ) || gotAch){
-                    data[i][2]="Dévérrouillé";
+                    data[i][2]=texteInternational.getString("valide");
                     gotAch=true;
                 }else {
-                    data[i][2]="Vérouillé";
+                    data[i][2]=texteInternational.getString("non_valide");
                 }
             }
         }
@@ -104,6 +115,17 @@ public class ConteneurAchievement extends JPanel{
         jPanelGlobal.add(conteneurTableau);
         this.add(Box.createVerticalStrut(50));
         this.add(jPanelGlobal);
+    }
+
+    private String supprEspace(String succes){
+        String[] partiesSucces = succes.split(" ");
+        String retour = "";
+
+        for(String partie:partiesSucces){
+            retour += partie;
+        }
+
+        return retour;
     }
 
 }
