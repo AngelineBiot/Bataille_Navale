@@ -6,6 +6,7 @@ import Vue.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static javax.swing.JOptionPane.*;
@@ -134,6 +135,7 @@ public class EcouteurMenu implements ActionListener {
         else{
             String langue = fenetre.getLangueSelectionne((JRadioButtonMenuItem)source);
             jeu.setLangue(langue);
+            JOptionPane.setDefaultLocale(Locale.getDefault());
 
             fenetre.dispose();
             fenetre = new Fenetre(jeu);
