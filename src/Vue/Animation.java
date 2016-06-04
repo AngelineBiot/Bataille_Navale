@@ -15,6 +15,7 @@ public class Animation extends JFrame {
     protected String message;
     protected String image;
     protected String son;
+    protected Player fil;
 
     protected ThreadSon threadSon;
 
@@ -78,7 +79,7 @@ public class Animation extends JFrame {
         public void run(){
             try {
                 FileInputStream fis = new FileInputStream(son);
-                Player fil = new Player(fis);
+                fil = new Player(fis);
                 fil.play();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,6 +88,7 @@ public class Animation extends JFrame {
     }
 
     public void coupeSon(){
+        fil.close();
         threadSon.stop();
     }
 

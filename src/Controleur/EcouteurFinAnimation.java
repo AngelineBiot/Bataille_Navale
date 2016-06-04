@@ -38,8 +38,8 @@ public class EcouteurFinAnimation implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        timer.stop();
         fenetreAnimation.coupeSon();
+        timer.stop();
         fenetreAnimation.dispose();
 
         if(partieFinie) {
