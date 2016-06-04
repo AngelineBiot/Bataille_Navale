@@ -6,7 +6,7 @@ package Vue;
 public class AnimationRate extends Animation{
 
     public AnimationRate() {
-        super("rate", "ressources/images/rate.gif", "ressources/sons/eau.mp3");
+        super("rate", "ressources/images/rate.gif", "ressources/sons/Rate.mp3");
     }
 
 }

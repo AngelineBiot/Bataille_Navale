@@ -104,7 +104,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                             AnimationFin ac = new AnimationFin();
                             EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, true);
-                            Timer timer=new Timer(4700, ecouteurFinAnimation);
+                            Timer timer=new Timer(4400, ecouteurFinAnimation);
                             ecouteurFinAnimation.setTimer(timer);
                             timer.start();
 

@@ -10,6 +10,6 @@ public class AnimationFin extends Animation{
 
 
     public AnimationFin() {
-        super("fin", "ressources/images/fin.gif", "ressources/sons/eau.mp3");
+        super("fin", "ressources/images/fin.gif", "ressources/sons/Victory_Theme.mp3");
     }
 }
