@@ -19,7 +19,7 @@ public class ModelAchievement {
             Statement instruction = connexion.createStatement();
             String order="";
             if (idJ2>idJ1){
-                order="ORDER BY idJoueur DESC";
+                order=" ORDER BY idJoueur DESC";
             }
 
             ResultSet resultat = instruction.executeQuery("SELECT * FROM joueur WHERE idJoueur="+idJ1+" OR idJoueur="+idJ2+order);
