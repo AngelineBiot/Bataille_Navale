@@ -78,7 +78,10 @@ public class ConteneurAchievement extends JPanel{
             }
         };
 
+
+        jTableAchievement.setPreferredSize(new Dimension(600,300));
         jTableAchievement.setRowHeight(100);
+
         jTableAchievement.getTableHeader().setPreferredSize(new Dimension(jTableAchievement.getTableHeader().getWidth(), 50));
         jTableAchievement.setShowGrid(true);
 
@@ -87,7 +90,9 @@ public class ConteneurAchievement extends JPanel{
         for (int i=0 ; i<jTableAchievement.getColumnCount() ; i++) {
             jTableAchievement.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
         }
+
         jScrollPaneTableau=new JScrollPane(jTableAchievement);
+        jScrollPaneTableau.setPreferredSize(new Dimension(600, 353));
 
         jPanelniveau.add(jLabelniveau);
         JPanel conteneurTableau = new JPanel();
