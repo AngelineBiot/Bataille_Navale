@@ -76,7 +76,7 @@ public class EcouteurConteneurInscription implements ActionListener {
                 }
             }else {
                 jeu.getJoueur2().setIdJoueur(-1);
-                String[] buttons = {"EASY","MEDIUM"};
+                String[] buttons = {"EASY","MEDIUM","CANCEL"};
                 int result = JOptionPane.showOptionDialog(fenetre, "Niveau de difficulté de l'IA","Confirmation",JOptionPane.INFORMATION_MESSAGE,0,null,buttons,buttons[1]);
                 System.out.println(result);
                 jeu.getJoueur2().setComputer(new Computer(result));
