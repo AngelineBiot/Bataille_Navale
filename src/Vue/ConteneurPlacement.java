@@ -103,7 +103,7 @@ public class ConteneurPlacement extends JPanel {
         control.add(boutonValidation);
 
 
-
+        control.setPreferredSize(new Dimension(250, 250));
         add(control);
 
     }
