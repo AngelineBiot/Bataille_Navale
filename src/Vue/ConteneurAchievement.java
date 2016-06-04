@@ -90,7 +90,7 @@ public class ConteneurAchievement extends JPanel{
         };
 
 
-        jTableAchievement.setPreferredSize(new Dimension(600,300));
+        jTableAchievement.setPreferredSize(new Dimension(600,200));
         jTableAchievement.setRowHeight(100);
 
         jTableAchievement.getTableHeader().setPreferredSize(new Dimension(jTableAchievement.getTableHeader().getWidth(), 50));
@@ -103,7 +103,7 @@ public class ConteneurAchievement extends JPanel{
         }
 
         jScrollPaneTableau=new JScrollPane(jTableAchievement);
-        jScrollPaneTableau.setPreferredSize(new Dimension(600, 353));
+        jScrollPaneTableau.setPreferredSize(new Dimension(600, 253));
 
         jPanelniveau.add(jLabelniveau);
         JPanel conteneurTableau = new JPanel();
@@ -111,7 +111,9 @@ public class ConteneurAchievement extends JPanel{
         conteneurTableau.add(jScrollPaneTableau);
         conteneurTableau.add(Box.createHorizontalStrut(50));
         jPanelGlobal.add(jPanelniveau);
+        jPanelGlobal.add(Box.createVerticalStrut(10));
         jPanelGlobal.add(jProgressBarExp);
+        jPanelGlobal.add(Box.createVerticalStrut(70));
         jPanelGlobal.add(conteneurTableau);
         this.add(Box.createVerticalStrut(50));
         this.add(jPanelGlobal);
