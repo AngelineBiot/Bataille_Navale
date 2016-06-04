@@ -1,6 +1,7 @@
 package Modele;
 
 import java.io.*;
+import java.util.Locale;
 
 /**
  * Created by fparty2 on 06/05/16.
@@ -10,14 +11,16 @@ public class Jeu implements Serializable{
 
     private Joueur joueur1;
     private Joueur joueur2;
+    private String langue;
     private boolean estPhasePlacement;
     private boolean concerneJoueur1;
     private boolean partieFinie;
 
 
-    public Jeu(Joueur j1, Joueur j2){
+    public Jeu(Joueur j1, Joueur j2, String l){
         joueur1 = j1;
         joueur2 = j2;
+        langue = l;
 
         estPhasePlacement = true;
         concerneJoueur1 = true;
@@ -111,5 +114,24 @@ public class Jeu implements Serializable{
 
     public boolean isPartieFinie(){
         return partieFinie;
+    }
+
+    public String getLangue(){
+        return langue;
+    }
+
+    public void setLangue(String l){
+        langue =l;
+
+        Locale locale = new Locale(langue);
+        Locale.setDefault(locale);
+
+        try{
+            BufferedWriter fichierSauvegardeLangue = new BufferedWriter(new FileWriter("ressources/sauvegarde/choixLangue"));
+            fichierSauvegardeLangue.write(langue);
+            fichierSauvegardeLangue.close();
+        }
+        catch(Exception e){
+        }
     }
 }

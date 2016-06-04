@@ -40,7 +40,7 @@ public class ConteneurPlacement extends JPanel {
 
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurPlacement");
-
+        ResourceBundle texteBateauInternational = ResourceBundle.getBundle("traductions.Bateaux");
 
 
         add(conteneurGrille);
@@ -52,8 +52,8 @@ public class ConteneurPlacement extends JPanel {
 
 
 
-
-        infoPlacement = new JLabel(texteInternational.getString("place")+flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational());
+        String texteBateauxInternational = texteBateauInternational.getString(flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau());
+        infoPlacement = new JLabel(texteInternational.getString("place")+texteBateauxInternational);
         infoPlacement.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         imageBateau = new JLabel();
@@ -147,8 +147,10 @@ public class ConteneurPlacement extends JPanel {
     }
 
     public void changeBateau(String textePlacement){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Bateaux");
+
         String typeNouvBateau = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateau();
-        String typeNouvBateauInternational = flotte.getFlotte()[flotte.getNbBateauxPlaces()].getTypeBateauInternational();
+        String typeNouvBateauInternational = texteInternational.getString(typeNouvBateau);
         infoPlacement.setText(textePlacement+typeNouvBateauInternational);
         imageBateau.setIcon(ImageBateau.getImageBateau(typeNouvBateau,false));
         imageBateau.updateUI();

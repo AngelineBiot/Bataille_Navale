@@ -2,7 +2,6 @@ package Modele;
 
 
 import java.io.Serializable;
-import java.util.ResourceBundle;
 
 
 /**
@@ -17,9 +16,7 @@ public class Bateaux implements Serializable{
     private boolean coule;
     private boolean estOrienteVerticalement;
     private String typeBateau;
-    private String typeBateauInternational;
 
-    public Bateaux(){}
 
     Bateaux(String typeDeBateau){
         typeBateau = typeDeBateau;
@@ -37,9 +34,6 @@ public class Bateaux implements Serializable{
         }
 
 
-
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Bateaux");
-        typeBateauInternational = texteInternational.getString(typeDeBateau);
     }
 
 
@@ -87,9 +81,7 @@ public class Bateaux implements Serializable{
         return retour;
     }
 
-    public String getTypeBateauInternational() {
-        return typeBateauInternational;
-    }
+
 
     public void initPosition(ModelConteneurPlacement modele, Grille grille){
         position = new Case[taille];

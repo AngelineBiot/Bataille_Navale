@@ -5,6 +5,8 @@ import Modele.*;
 import Vue.*;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -12,15 +14,23 @@ public class Main_Grille_test {
     public static void main(String[] args) {
 
         ImageBateau.initTableauImagesBateau();
+        String langue = "en";
+
+        try{
+            BufferedReader fichierSauvegardeLangue = new BufferedReader(new FileReader("ressources/sauvegarde/choixLangue"));
+            String ligne1 = fichierSauvegardeLangue.readLine();
+            if(ligne1 != null && !ligne1.equals("")){
+                langue = ligne1;
+            }
+            fichierSauvegardeLangue.close();
+        }
+        catch(Exception e){
+        }
 
 
-        //Ici : Choix de la langue (a enlever dans version finale)
-        Locale locale = new Locale("fr");     // mettre "" pou anglais, code de deux lettres du pays pour les autres
+
+        Locale locale = new Locale(langue);
         Locale.setDefault(locale);
-
-
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
-
 
 
 
@@ -33,10 +43,12 @@ public class Main_Grille_test {
         Joueur j1 = new Joueur(flottej1, grillej1);
         Joueur j2 = new Joueur(flottej2, grillej2);
 
-        Jeu jeu = new Jeu(j1, j2);
+        Jeu jeu = new Jeu(j1, j2, langue);
 
 
-        Fenetre fenetre = new Fenetre(texteInternational.getString("titre"),jeu);
+
+
+        Fenetre fenetre = new Fenetre(jeu);
         ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
         ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());

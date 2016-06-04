@@ -33,10 +33,10 @@ public class EcouteurMenu implements ActionListener {
 
         if (source.equals(fenetre.getItemAide()))
         {
-            //showMessageDialog(null,texteInternational.getString("messageAide"),, INFORMATION_MESSAGE);
+
             new fenPopUp(texteInternational.getString("aide"));
         }
-        else if(e.getSource()==fenetre.getItemApropos())
+        else if(source==fenetre.getItemApropos())
         {
             ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
             String msgApropos = texteInternational.getString("jeuCree") +
@@ -68,51 +68,7 @@ public class EcouteurMenu implements ActionListener {
             try{
                 this.jeu=Jeu.resumeGame();
                 fenetre.setJeu(this.jeu);
-                if (jeu.getJoueurConcerne().getIdJoueur()!=-1) {
-                    if (jeu.getEstPhasePlacement()) {
-
-                        ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
-                        modelConteneurPlacement.setDimensionCarre(50);
-
-                        ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
-                        conteneurGrille.repaintBateauxDejaPlaces();
-                        conteneurGrille.setModelPlacement(modelConteneurPlacement);
-                        ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
-                        new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
-
-                        fenetre.setContentPane(conteneur);
-                        fenetre.validate();
-
-                    } else {
-                        ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
-                        ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
-
-                        ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
-                        TableauScores score = new TableauScores(jeu);
-                        ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu);
-
-                        ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement);
-
-
-                        new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
-
-                        fenetre.setContentPane(conteneurTir);
-                        fenetre.validate();
-
-
-                        conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
-                        conteneurGrilleJoueur.afficherCaseToucheMaGrille();
-                        conteneurGrilleAutreJoueur.afficherCaseTouche();
-                        conteneurGrilleAutreJoueur.afficherBateauxCoulesMaGrille();
-                        conteneurGrilleAutreJoueur.updateUI();
-                    }
-                }else {
-                    ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
-
-                    fenetre.setContentPane(conteneurAttente);
-                    fenetre.validate();
-                }
+                recreerContenuFenetre();
             }
             catch(SauvegardeException e1) {
                 showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
@@ -123,7 +79,7 @@ public class EcouteurMenu implements ActionListener {
 
         }
         // nouvelle partie
-        else if (e.getSource() == fenetre.getNouvellePartie())
+        else if (source == fenetre.getNouvellePartie())
         {
 
             Grille grillej1 = new Grille();
@@ -135,7 +91,7 @@ public class EcouteurMenu implements ActionListener {
             Joueur j1 = new Joueur(flottej1, grillej1);
             Joueur j2 = new Joueur(flottej2, grillej2);
 
-            jeu = new Jeu(j1, j2);
+            jeu = new Jeu(j1, j2, jeu.getLangue());
             ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
 
             ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
@@ -153,7 +109,7 @@ public class EcouteurMenu implements ActionListener {
             new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
         }
         //quitter partie
-        else if (e.getSource()==fenetre.getQuitterPartie())
+        else if (source==fenetre.getQuitterPartie())
         {
             int resultQuitter = showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
                                             texteInternational.getString("quitter"), YES_NO_OPTION);
@@ -174,6 +130,66 @@ public class EcouteurMenu implements ActionListener {
 
                 System.exit(0);
             }
+        }
+        else{
+            String langue = fenetre.getLangueSelectionne((JRadioButtonMenuItem)source);
+            jeu.setLangue(langue);
+
+            fenetre.dispose();
+            fenetre = new Fenetre(jeu);
+            recreerContenuFenetre();
+
+            new EcouteurFermeture(fenetre);
+            new EcouteurMenu(fenetre,jeu);
+            fenetre.setVisible(true);
+        }
+    }
+
+    public void recreerContenuFenetre(){
+        if (jeu.getJoueurConcerne().getIdJoueur()!=-1) {
+            if (jeu.getEstPhasePlacement()) {
+
+                ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
+                modelConteneurPlacement.setDimensionCarre(50);
+
+                ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
+                conteneurGrille.repaintBateauxDejaPlaces();
+                conteneurGrille.setModelPlacement(modelConteneurPlacement);
+                ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
+                new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
+
+                fenetre.setContentPane(conteneur);
+                fenetre.validate();
+
+            } else {
+                ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
+                ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
+
+                ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
+                TableauScores score = new TableauScores(jeu);
+                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu);
+
+                ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement);
+
+
+                new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
+
+                fenetre.setContentPane(conteneurTir);
+                fenetre.validate();
+
+
+                conteneurGrilleJoueur.afficherBateauxDeSaFlotte();
+                conteneurGrilleJoueur.afficherCaseToucheMaGrille();
+                conteneurGrilleAutreJoueur.afficherCaseTouche();
+                conteneurGrilleAutreJoueur.afficherBateauxCoulesMaGrille();
+                conteneurGrilleAutreJoueur.updateUI();
+            }
+        }else {
+            ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
+            new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+
+            fenetre.setContentPane(conteneurAttente);
+            fenetre.validate();
         }
     }
 }

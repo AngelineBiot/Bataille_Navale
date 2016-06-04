@@ -24,11 +24,17 @@ public class Fenetre extends JFrame{
     private JMenuItem		itemAide;
     private JMenuItem		itemApropos;
 
+    private JRadioButtonMenuItem itemAnglais;
+    private JRadioButtonMenuItem itemFrancais;
+    private JRadioButtonMenuItem itemItalien;
+    private JRadioButtonMenuItem itemChinois;
+
     protected Jeu jeu;
 
-    public Fenetre(String nomFenetre,Jeu jeu) {
+    public Fenetre(Jeu jeu) {
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
 
-        setTitle(nomFenetre);
+        setTitle(texteInternational.getString("titre"));
         this.jeu = jeu;
 
         Image im = Toolkit.getDefaultToolkit().getImage("ressources/images/TorpilleurHorizontal.png");
@@ -53,6 +59,7 @@ public class Fenetre extends JFrame{
 
         JMenu partie = new JMenu(texteInternational.getString("partie"));
         JMenu aide = new JMenu("?");
+        JMenu choixLangue = new JMenu(texteInternational.getString("langue"));
 
         nouvellePartie      = new JMenuItem(texteInternational.getString("nouvellePartie"));
         sauvegarderPartie   = new JMenuItem(texteInternational.getString("sauvegarderPartie"));
@@ -60,6 +67,11 @@ public class Fenetre extends JFrame{
         reprendrePartie     = new JMenuItem(texteInternational.getString("reprendrePartie"));
         itemAide            = new JMenuItem(texteInternational.getString("aide"));
         itemApropos         = new JMenuItem(texteInternational.getString("aPropos"));
+
+        itemAnglais         = new JRadioButtonMenuItem(texteInternational.getString("anglais"));
+        itemFrancais        = new JRadioButtonMenuItem(texteInternational.getString("francais"));
+        itemItalien         = new JRadioButtonMenuItem(texteInternational.getString("italien"));
+        itemChinois         = new JRadioButtonMenuItem(texteInternational.getString("chinois"));
 
         aide.add(itemAide);
         aide.add(itemApropos);
@@ -69,8 +81,23 @@ public class Fenetre extends JFrame{
         partie.add(sauvegarderPartie);
         partie.add(quitterPartie);
 
+        choixLangue.add(itemAnglais);
+        choixLangue.add(itemFrancais);
+        choixLangue.add(itemItalien);
+        choixLangue.add(itemChinois);
+
+        ButtonGroup groupeLangues = new ButtonGroup();
+        groupeLangues.add(itemAnglais);
+        groupeLangues.add(itemFrancais);
+        groupeLangues.add(itemItalien);
+        groupeLangues.add(itemChinois);
+
+        selectBonneLangue();
+
+
         menuBar.add(partie);
         menuBar.add(aide);
+        menuBar.add(choixLangue);
         setJMenuBar(menuBar);
     }
 
@@ -83,6 +110,41 @@ public class Fenetre extends JFrame{
         sauvegarderPartie.addActionListener(control);
         reprendrePartie.addActionListener(control);
         quitterPartie.addActionListener(control);
+
+        itemAnglais.addActionListener(control);
+        itemFrancais.addActionListener(control);
+        itemItalien.addActionListener(control);
+        itemChinois.addActionListener(control);
+    }
+
+    private void selectBonneLangue(){
+        if(jeu.getLangue().equals("en")){
+            itemAnglais.setSelected(true);
+        }
+        else if(jeu.getLangue().equals("fr")){
+            itemFrancais.setSelected(true);
+        }
+        if(jeu.getLangue().equals("cn")){
+            itemChinois.setSelected(true);
+        }
+        if(jeu.getLangue().equals("it")){
+            itemItalien.setSelected(true);
+        }
+    }
+
+    public String getLangueSelectionne(JRadioButtonMenuItem button){
+        if(button == itemAnglais){
+            return "en";
+        }
+        else if(button == itemFrancais){
+            return "fr";
+        }
+        else if(button == itemItalien){
+            return "it";
+        }
+        else{
+            return "cn";
+        }
     }
 
 
