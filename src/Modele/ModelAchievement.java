@@ -22,6 +22,8 @@ public class ModelAchievement {
                 order=" ORDER BY idJoueur DESC";
             }
 
+            System.out.println(5555555);
+            System.out.println(idJ1+" "+idJ2);
             ResultSet resultat = instruction.executeQuery("SELECT * FROM joueur WHERE idJoueur="+idJ1+" OR idJoueur="+idJ2+order);
             ResultSetMetaData rsmd= resultat.getMetaData();
             int columncount = rsmd.getColumnCount();

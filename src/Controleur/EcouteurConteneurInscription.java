@@ -69,7 +69,7 @@ public class EcouteurConteneurInscription implements ActionListener {
             }
             jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
             if (!pseudoJoueur2.equals("GLaDAS")){
-                if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()<=0){
+                if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()<0){
                     jeu.getJoueur2().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount()+increm-1][0]);
                 }else {
                     jeu.getJoueur2().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()+1][0]);
