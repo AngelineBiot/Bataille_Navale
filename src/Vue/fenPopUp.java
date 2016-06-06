@@ -1,7 +1,6 @@
 package Vue;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ResourceBundle;
 
 /**

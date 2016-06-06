@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  * Created by fparty2 on 29/04/16.
  *
@@ -47,17 +49,23 @@ public class EcouteurConteneurInscription implements ActionListener {
                                         texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
         } else {
             int increm=0;
-            if (!pseudoJoueur2.equals("GLaDAS")){
-                if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur1)){
-                    model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '"+pseudoJoueur1+"')");
-                    increm++;
+            try {
+                if (!pseudoJoueur2.equals("GLaDAS")) {
+                    if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur1)) {
+                        model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '" + pseudoJoueur1 + "')");
+                        increm++;
+                    }
+                    if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur2)) {
+                        model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '" + pseudoJoueur2 + "')");
+                        increm++;
+                    }
                 }
-                if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur2)){
-                    model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '"+pseudoJoueur2+"')");
-                    increm++;
-                }
+                model.initJoueur();
             }
-            model.initJoueur();
+            catch(BDDException e1){
+                showMessageDialog(null,"The database is not accessible. Please try later.","Database error", JOptionPane.ERROR_MESSAGE);
+                System.exit(2);
+            }
             if (model.getJoueur()!=null){
                 model.initListPseudo(model.getJoueur());
             }

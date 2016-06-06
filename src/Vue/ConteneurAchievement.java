@@ -5,9 +5,9 @@ import Modele.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * Created by michael on 21/05/2016.
@@ -30,10 +30,16 @@ public class ConteneurAchievement extends JPanel{
     private void InitAttributs() {
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAchievement");
 
+        try {
+            model.initJoueur(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
+            model.initAchievement();
+            model.initJoueurAchievement();
+        }
+        catch(BDDException e){
+            showMessageDialog(null,"The database is not accessible. Please try later.","Database error", JOptionPane.ERROR_MESSAGE);
+            System.exit(2);
+        }
 
-        model.initJoueur(jeu.getJoueur1().getIdJoueur(),jeu.getJoueur2().getIdJoueur());
-        model.initAchievement();
-        model.initJoueurAchievement();
         jPanelGlobal=new JPanel();
         jPanelGlobal.setLayout(new BoxLayout(jPanelGlobal,BoxLayout.Y_AXIS));
         jProgressBarExp=new JProgressBar(0,1000);

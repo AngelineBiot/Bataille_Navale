@@ -18,7 +18,7 @@ public class ModelConteneurTir {
 
     //Utilisation du constructeur vide par defaut
 
-    public void execRequeteNonQuery(String requete){
+    public void execRequeteNonQuery(String requete) throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -33,11 +33,10 @@ public class ModelConteneurTir {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote : "+e);
-            System.exit(1);
+            throw new BDDException();
         }
     }
-    public Object[][] execQuery(String requete){
+    public Object[][] execQuery(String requete) throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -66,7 +65,7 @@ public class ModelConteneurTir {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote : "+e);
+            throw new BDDException();
         }
         return result;
     }

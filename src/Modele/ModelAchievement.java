@@ -6,7 +6,7 @@ import java.sql.*;
  * Created by michael on 21/05/2016.
  */
 public class ModelAchievement {
-    public void initJoueur(int idJ1,int idJ2){
+    public void initJoueur(int idJ1,int idJ2) throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -41,11 +41,11 @@ public class ModelAchievement {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote sur joueur: "+e);
+            throw new BDDException();
         }
     }
 
-    public void initAchievement(){
+    public void initAchievement()  throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -74,10 +74,10 @@ public class ModelAchievement {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote sur achievement: "+e);
+            throw new BDDException();
         }
     }
-    public void initJoueurAchievement(){
+    public void initJoueurAchievement() throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -106,8 +106,7 @@ public class ModelAchievement {
 
         }
         catch (Exception e){
-
-            System.out.println("echec pilote sur joueurachievement : "+e);
+            throw new BDDException();
         }
     }
 

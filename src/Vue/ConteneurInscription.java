@@ -5,7 +5,10 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurInscription;
+import Modele.BDDException;
 import Modele.ModelConteneurInscription;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * Created by Florian on 14/04/2016.
@@ -23,7 +26,14 @@ public class ConteneurInscription extends JPanel{
     public ConteneurInscription(ModelConteneurInscription m){
         model=m;
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
-        model.initJoueur();
+        try{
+            model.initJoueur();
+        }
+        catch(BDDException e){
+            showMessageDialog(null,"The database is not accessible. Please try later.","Database error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+
         if (model.getJoueur()!=null){
             model.initListPseudo(model.getJoueur());
         }

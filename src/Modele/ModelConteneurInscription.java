@@ -6,7 +6,7 @@ import java.sql.*;
  * Created by michael on 18/05/2016.
  */
 public class ModelConteneurInscription {
-    public void execRequeteNonQuery(String requete){
+    public void execRequeteNonQuery(String requete) throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -22,14 +22,13 @@ public class ModelConteneurInscription {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote : "+e);
-            System.exit(1);
+            throw new BDDException();
         }
     }
     public Object[][] getJoueur(){
         return joueur;
     }
-    public void initJoueur(){
+    public void initJoueur() throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -57,10 +56,10 @@ public class ModelConteneurInscription {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote : "+e);
+            throw new BDDException();
         }
     }
-    public Object[][] execQuery(String requete){
+    public Object[][] execQuery(String requete) throws BDDException{
         String pilote = "com.mysql.jdbc.Driver";
         String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
         String user="root";
@@ -89,7 +88,7 @@ public class ModelConteneurInscription {
         }
         catch (Exception e){
 
-            System.out.println("echec pilote : "+e);
+            throw new BDDException();
         }
         return result;
     }

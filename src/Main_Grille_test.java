@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class Main_Grille_test {
     public static void main(String[] args) {
