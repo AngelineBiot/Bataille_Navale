@@ -116,8 +116,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                                 }
                             }
                             catch(BDDException e3){
-                                showMessageDialog(null,"The database is not accessible. Please try later.","Database error", JOptionPane.ERROR_MESSAGE);
-                                System.exit(3);
+                                showMessageDialog(null,"The database is not accessible. The changements can't be save.","Database error", JOptionPane.ERROR_MESSAGE);
                             }
 
 
