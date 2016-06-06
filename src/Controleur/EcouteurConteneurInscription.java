@@ -63,7 +63,8 @@ public class EcouteurConteneurInscription implements ActionListener {
                 model.initJoueur();
             }
             catch(BDDException e1){
-                showMessageDialog(null,"The database is not accessible. Please try later.","Database error", JOptionPane.ERROR_MESSAGE);
+                ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");
+                showMessageDialog(null,texteBDDInternational.getString("pas_accessible")+" "+texteBDDInternational.getString("plus_tard"),texteBDDInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
                 System.exit(2);
             }
             if (model.getJoueur()!=null){

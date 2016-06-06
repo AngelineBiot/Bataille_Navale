@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -116,7 +117,9 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                                 }
                             }
                             catch(BDDException e3){
-                                showMessageDialog(null,"The database is not accessible. The changements can't be save.","Database error", JOptionPane.ERROR_MESSAGE);
+                                ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Database");
+                                showMessageDialog(null,texteInternational.getString("pas_accessible")+" "+texteInternational.getString("peut_pas_sauvegarder"),
+                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
                             }
 
 
