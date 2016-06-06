@@ -96,8 +96,8 @@ public class Fenetre extends JFrame{
 
 
         menuBar.add(partie);
-        menuBar.add(aide);
         menuBar.add(choixLangue);
+        menuBar.add(aide);
         setJMenuBar(menuBar);
     }
 

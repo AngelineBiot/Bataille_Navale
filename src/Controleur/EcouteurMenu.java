@@ -139,7 +139,26 @@ public class EcouteurMenu implements ActionListener {
 
             fenetre.dispose();
             fenetre = new Fenetre(jeu);
-            recreerContenuFenetre();
+            if(jeu.getJoueur1().getNomJoueur() == null || jeu.getJoueur2().getNomJoueur() == null){
+                ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
+
+                ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
+                int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
+                int hauteurBox = (700-hauteurConteneur)/2;
+
+                JPanel conteneurGlobal = new JPanel();
+                conteneurGlobal.setLayout(new BoxLayout(conteneurGlobal, BoxLayout.Y_AXIS));
+                conteneurGlobal.add(Box.createVerticalStrut(hauteurBox));
+                conteneurGlobal.add(conteneurInscription);
+
+                fenetre.setContentPane(conteneurGlobal);
+                fenetre.validate();
+
+                new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
+            }
+            else{
+                recreerContenuFenetre();
+            }
 
             new EcouteurFermeture(fenetre);
             new EcouteurMenu(fenetre,jeu);
