@@ -13,7 +13,7 @@ public class Main_Grille_test {
     public static void main(String[] args) {
 
         ImageBateau.initTableauImagesBateau();
-        String langue = "en";
+        String langue = "fr";
 
         try{
             BufferedReader fichierSauvegardeLangue = new BufferedReader(new FileReader("ressources/sauvegarde/choixLangue"));
