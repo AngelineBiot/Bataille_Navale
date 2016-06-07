@@ -121,5 +121,15 @@ public class ModelConteneurTir {
         setCoord1D(coordX + coordY * 10);
     }
 
+    public void debloqueAchievement1(Jeu jeu){
+        try {
+            if (execQuery("SELECT * FROM joueurAchievement WHERE idJoueur=" + jeu.getJoueurConcerne().getIdJoueur() + " AND idAchievement=2").length == 0) {
+                execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",2)");
+            }
+        }
+        catch(BDDException e1){
+
+        }
+    }
 
 }

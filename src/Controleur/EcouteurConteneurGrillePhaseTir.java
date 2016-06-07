@@ -57,17 +57,13 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 model_tir.getCaseOuEstTire().setToucher();
 
 
-                if (model_tir.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
-                    if (jeu.getJoueurConcerne().getNbCoups()==1){
-                        try {
-                            if (model_tir.execQuery("SELECT * FROM joueurAchievement WHERE idJoueur=" + jeu.getJoueurConcerne().getIdJoueur() + " AND idAchievement=2").length == 0) {
-                                model_tir.execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",2)");
-                            }
-                        }
-                        catch(BDDException e1){
+                if (model_tir.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {    //S'il y a un bateau sur la case, et que le joueur
+                                                                                            // n'a pas deja tire sur la case
 
-                        }
+                    if (jeu.getJoueurConcerne().getNbCoups()==1){   //Si le joueur touche un bateau du premier coup, il débloque un achievement
+                        model_tir.debloqueAchievement1(jeu);        //On met donc a jour la bdd
                     }
+
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
                     model_tir.getCaseOuEstTire().getBat().updateEstCoule();
 
