@@ -1,5 +1,6 @@
 package Controleur;
 
+import Modele.BaseDeDonnees;
 import Modele.Jeu;
 import Vue.*;
 
@@ -14,22 +15,26 @@ import java.awt.event.ActionListener;
 public class EcouteurFinAnimation implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
+    private BaseDeDonnees baseDeDonnees;
 
     private Animation fenetreAnimation;
     private Timer timer;
     private boolean partieFinie;
 
-    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j){
+    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, BaseDeDonnees base){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
+        baseDeDonnees = base;
         partieFinie = false;
+
     }
 
-    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, boolean fini){
+    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, BaseDeDonnees base, boolean fini){
         fenetreAnimation=fenSec;
         fenetre = fen;
         jeu=j;
+        baseDeDonnees = base;
         partieFinie = fini;
     }
 
@@ -52,7 +57,7 @@ public class EcouteurFinAnimation implements ActionListener {
             jeu.echangeConcerneJoueur1();
 
             ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-            new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+            new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
 
             fenetre.setContentPane(conteneurAttente);
             fenetre.validate();

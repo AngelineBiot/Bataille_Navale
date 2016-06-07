@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.ResourceBundle;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 /**
  * Created by michael on 21/05/2016.
  */
@@ -36,9 +34,7 @@ public class ConteneurAchievement extends JPanel{
             model.initJoueurAchievement();
         }
         catch(BDDException e){
-            ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");
-            showMessageDialog(null,texteBDDInternational.getString("pas_accessible")+" "+texteBDDInternational.getString("plus_tard"),
-                    texteBDDInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+            new PopUpErreurBDD(true);
             System.exit(2);
         }
 

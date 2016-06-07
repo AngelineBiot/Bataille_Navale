@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 /**
  * Created by fparty2 on 29/04/16.
  *
@@ -21,13 +19,15 @@ public class EcouteurConteneurInscription implements ActionListener {
     private Fenetre fenetre;
     private Jeu jeu;
     private ModelConteneurInscription model;
+    private BaseDeDonnees baseDeDonnees;
 
 
-    public EcouteurConteneurInscription(ConteneurInscription conteneur, Jeu j, Fenetre fen,ModelConteneurInscription m) {
+    public EcouteurConteneurInscription(ConteneurInscription conteneur, Jeu j, BaseDeDonnees base, Fenetre fen,ModelConteneurInscription m) {
         model=m;
         conteneurInscription = conteneur;
         jeu = j;
         fenetre = fen;
+        baseDeDonnees = base;
 
         conteneurInscription.setEcouteurConteneurInscription(this);
     }
@@ -51,47 +51,46 @@ public class EcouteurConteneurInscription implements ActionListener {
             int increm=0;
             try {
                 if (!pseudoJoueur2.equals("GLaDAS")) {
-                    if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur1)) {
-                        model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '" + pseudoJoueur1 + "')");
-                        increm++;
-                    }
-                    if (!Arrays.stream(model.getListPseudo()).anyMatch(x -> x == pseudoJoueur2)) {
-                        model.execRequeteNonQuery("INSERT INTO JOUEUR (idJoueur, pseudoJoueur) VALUES (NULL, '" + pseudoJoueur2 + "')");
-                        increm++;
-                    }
+                    int increment = baseDeDonnees.insertJoueur(model, pseudoJoueur1, pseudoJoueur2);
+                    increm += increment;
                 }
-                model.initJoueur();
+                baseDeDonnees.initJoueur();
             }
             catch(BDDException e1){
-                ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");
-                showMessageDialog(null,texteBDDInternational.getString("pas_accessible")+" "+texteBDDInternational.getString("plus_tard"),texteBDDInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+                new PopUpErreurBDD(true);
+                baseDeDonnees.fermeConnexion();
                 System.exit(2);
             }
-            if (model.getJoueur()!=null){
-                model.initListPseudo(model.getJoueur());
+
+            if (baseDeDonnees.getJoueur()!=null){
+                model.initListPseudo(baseDeDonnees.getJoueur());
             }
             jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
+
+
             if (conteneurInscription.getjComboBoxJoueur1().getSelectedIndex()<0){
-                jeu.getJoueur1().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getItemCount()][0]);
+                jeu.getJoueur1().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getItemCount()][0]);
             }else {
-                jeu.getJoueur1().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getSelectedIndex()+1][0]);
+                jeu.getJoueur1().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getSelectedIndex()+1][0]);
             }
             jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
+
+
             if (!pseudoJoueur2.equals("GLaDAS")){
                 if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()<0){
-                    jeu.getJoueur2().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount()+increm-1][0]);
+                    jeu.getJoueur2().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount()+increm-1][0]);
                 }else {
-                    jeu.getJoueur2().setIdJoueur((int)model.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()+1][0]);
+                    jeu.getJoueur2().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()+1][0]);
                 }
             }else {
                 jeu.getJoueur2().setIdJoueur(-1);
                 String[] buttons = {"EASY","MEDIUM","CANCEL"};
                 int result = JOptionPane.showOptionDialog(fenetre, "Niveau de difficulté de l'IA","Confirmation",JOptionPane.INFORMATION_MESSAGE,0,null,buttons,buttons[1]);
                 System.out.println(result);
-                jeu.getJoueur2().setComputer(new Computer(result));
+                jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
             }
             ConteneurAttente conteneur = new ConteneurAttente(jeu);
-            new EcouteurConteneurAttente(conteneur, fenetre, jeu);
+            new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
 
             fenetre.setContentPane(conteneur);
             fenetre.validate();

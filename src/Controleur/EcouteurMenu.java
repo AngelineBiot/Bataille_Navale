@@ -19,10 +19,12 @@ public class EcouteurMenu implements ActionListener {
 
     private Fenetre fenetre;
     private Jeu jeu;
+    private BaseDeDonnees baseDeDonnees;
 
-    public EcouteurMenu(Fenetre fenetre,Jeu jeu) {
+    public EcouteurMenu(Fenetre fenetre,Jeu jeu, BaseDeDonnees base) {
         this.fenetre = fenetre;
         this.jeu=jeu;
+        baseDeDonnees = base;
         fenetre.setControlMenu(this);
     }
 
@@ -35,7 +37,7 @@ public class EcouteurMenu implements ActionListener {
         if (source.equals(fenetre.getItemAide()))
         {
 
-            new fenPopUp(texteInternational.getString("aide"));
+            new PopUpAide(texteInternational.getString("aide"));
         }
         else if(source==fenetre.getItemApropos())
         {
@@ -95,7 +97,7 @@ public class EcouteurMenu implements ActionListener {
             jeu = new Jeu(j1, j2, jeu.getLangue());
             ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
 
-            ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
+            ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
             int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
             int hauteurBox = (700-hauteurConteneur)/2;
 
@@ -107,7 +109,7 @@ public class EcouteurMenu implements ActionListener {
             fenetre.setContentPane(conteneurGlobal);
             fenetre.validate();
 
-            new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
+            new EcouteurConteneurInscription(conteneurInscription, jeu, baseDeDonnees, fenetre,modelConteneurInscription);
         }
         //quitter partie
         else if (source==fenetre.getQuitterPartie())
@@ -128,7 +130,7 @@ public class EcouteurMenu implements ActionListener {
                     }
                 }
 
-
+                baseDeDonnees.fermeConnexion();
                 System.exit(0);
             }
         }
@@ -142,7 +144,7 @@ public class EcouteurMenu implements ActionListener {
             if(jeu.getJoueur1().getNomJoueur() == null || jeu.getJoueur2().getNomJoueur() == null){
                 ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
 
-                ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
+                ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
                 int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
                 int hauteurBox = (700-hauteurConteneur)/2;
 
@@ -154,14 +156,14 @@ public class EcouteurMenu implements ActionListener {
                 fenetre.setContentPane(conteneurGlobal);
                 fenetre.validate();
 
-                new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
+                new EcouteurConteneurInscription(conteneurInscription, jeu, baseDeDonnees, fenetre,modelConteneurInscription);
             }
             else{
                 recreerContenuFenetre();
             }
 
-            new EcouteurFermeture(fenetre);
-            new EcouteurMenu(fenetre,jeu);
+            new EcouteurFermeture(fenetre, baseDeDonnees);
+            new EcouteurMenu(fenetre,jeu, baseDeDonnees);
             fenetre.setVisible(true);
         }
     }
@@ -177,7 +179,7 @@ public class EcouteurMenu implements ActionListener {
                 conteneurGrille.repaintBateauxDejaPlaces();
                 conteneurGrille.setModelPlacement(modelConteneurPlacement);
                 ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
-                new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
+                new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu, baseDeDonnees);
 
                 fenetre.setContentPane(conteneur);
                 fenetre.validate();
@@ -193,7 +195,7 @@ public class EcouteurMenu implements ActionListener {
                 ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 
 
-                new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
+                new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, baseDeDonnees, jeu, fenetre);
 
                 fenetre.setContentPane(conteneurTir);
                 fenetre.validate();
@@ -207,7 +209,7 @@ public class EcouteurMenu implements ActionListener {
             }
         }else {
             ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-            new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+            new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
 
             fenetre.setContentPane(conteneurAttente);
             fenetre.validate();

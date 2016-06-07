@@ -14,9 +14,10 @@ public class EcouteurConteneurAttente implements ActionListener {
 
     private Fenetre fenetre;
     private Jeu jeu;
+    private BaseDeDonnees baseDeDonnees;
 
-    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j){
-
+    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j, BaseDeDonnees base){
+        baseDeDonnees = base;
         conteneurAttente =conteneur;
         fenetre = fen;
         jeu = j;
@@ -35,7 +36,7 @@ public class EcouteurConteneurAttente implements ActionListener {
                 ConteneurGrille conteneurGrille = new ConteneurGrille(jeu.getJoueurConcerne());
                 conteneurGrille.setModelPlacement(modelConteneurPlacement);
                 ConteneurPlacement conteneur = new ConteneurPlacement(jeu.getJoueurConcerne().getFlotte(), conteneurGrille, modelConteneurPlacement);
-                new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu);
+                new EcouteurConteneurGrillePhasePlacement(modelConteneurPlacement, conteneur, fenetre, jeu, baseDeDonnees);
 
                 fenetre.setContentPane(conteneur);
                 fenetre.validate();
@@ -59,7 +60,7 @@ public class EcouteurConteneurAttente implements ActionListener {
                 ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 
 
-                new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);
+                new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, baseDeDonnees, jeu, fenetre);
 
                 fenetre.setContentPane(conteneurTir);
                 fenetre.validate();

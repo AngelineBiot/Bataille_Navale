@@ -1,8 +1,6 @@
 package Modele;
 
 
-import java.sql.*;
-
 /**
  * Created by michael on 28/04/2016.
  *
@@ -18,69 +16,12 @@ public class ModelConteneurTir {
 
     //Utilisation du constructeur vide par defaut
 
-    public void execRequeteNonQuery(String requete) throws BDDException{
-        String pilote = "com.mysql.jdbc.Driver";
-        String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
-        String user="root";
-        String pass ="";
-        try{
-            Class.forName(pilote);
-
-            Connection connexion = DriverManager.getConnection(url,user,pass);
-
-            Statement instruction = connexion.createStatement();
-            instruction.executeUpdate(requete);
-        }
-        catch (Exception e){
-
-            throw new BDDException();
-        }
-    }
-    public Object[][] execQuery(String requete) throws BDDException{
-        String pilote = "com.mysql.jdbc.Driver";
-        String url="jdbc:mysql://localhost/Bataille_navale?useSSL=false";
-        String user="root";
-        String pass ="";
-        Object[][] result=null;
-        try{
-            Class.forName(pilote);
-
-            Connection connexion = DriverManager.getConnection(url,user,pass);
-
-            Statement instruction = connexion.createStatement();
-
-            ResultSet resultat = instruction.executeQuery(requete);
-            ResultSetMetaData rsmd= resultat.getMetaData();
-            int columncount = rsmd.getColumnCount();
-            int rowcount = 0;
-            if (resultat.last()) {
-                rowcount = resultat.getRow();
-                resultat.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
-            }
-            result = new Object[rowcount][columncount];
-            while(resultat.next()){
-                result[resultat.getRow()-1][0]=resultat.getObject(1);
-                result[resultat.getRow()-1][1]=resultat.getObject(2);
-            }
-        }
-        catch (Exception e){
-
-            throw new BDDException();
-        }
-        return result;
-    }
-
-    public int getCoordX() {
-        return coordX;
-    }
 
     public void setCoordX(int coordX) {
         this.coordX = coordX;
     }
 
-    public int getCoordY() {
-        return coordY;
-    }
+
 
     public void setCoordY(int coordY) {
         this.coordY = coordY;
@@ -121,15 +62,6 @@ public class ModelConteneurTir {
         setCoord1D(coordX + coordY * 10);
     }
 
-    public void debloqueAchievement1(Jeu jeu){
-        try {
-            if (execQuery("SELECT * FROM joueurAchievement WHERE idJoueur=" + jeu.getJoueurConcerne().getIdJoueur() + " AND idAchievement=2").length == 0) {
-                execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",2)");
-            }
-        }
-        catch(BDDException e1){
 
-        }
-    }
 
 }

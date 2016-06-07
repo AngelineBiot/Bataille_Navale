@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Controleur.EcouteurConteneurInscription;
 import Modele.BDDException;
+import Modele.BaseDeDonnees;
 import Modele.ModelConteneurInscription;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -21,13 +22,16 @@ public class ConteneurInscription extends JPanel{
     private JButton valider;
     private JComboBox jComboBoxJoueur1;
     private JComboBox jComboBoxJoueur2;
+    private BaseDeDonnees baseDeDonnees;
 
 
-    public ConteneurInscription(ModelConteneurInscription m){
+    public ConteneurInscription(ModelConteneurInscription m, BaseDeDonnees base){
         model=m;
+        baseDeDonnees = base;
+
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
         try{
-            model.initJoueur();
+            baseDeDonnees.initJoueur();
         }
         catch(BDDException e){
             ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");
@@ -36,8 +40,8 @@ public class ConteneurInscription extends JPanel{
             System.exit(1);
         }
 
-        if (model.getJoueur()!=null){
-            model.initListPseudo(model.getJoueur());
+        if (baseDeDonnees.getJoueur()!=null){
+            model.initListPseudo(baseDeDonnees.getJoueur());
         }
         initAttributs(texteInternational.getString("valider"));
         addwidgets(texteInternational.getString("pseudo1"), texteInternational.getString("pseudo2"));

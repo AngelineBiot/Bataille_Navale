@@ -43,13 +43,21 @@ public class Main_Grille_test {
         Joueur j2 = new Joueur(flottej2, grillej2);
 
         Jeu jeu = new Jeu(j1, j2, langue);
+        BaseDeDonnees baseDeDonnees = null;
+        try {
+            baseDeDonnees = new BaseDeDonnees(jeu);
+        }
+        catch(BDDException e){
+            new PopUpErreurBDD(true);
+            System.exit(0);
+        }
 
 
 
 
         Fenetre fenetre = new Fenetre(jeu);
         ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
-        ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription);
+        ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
         int hauteurBox = (700-hauteurConteneur)/2;
 
@@ -61,9 +69,9 @@ public class Main_Grille_test {
         fenetre.setContentPane(conteneurGlobal);
         fenetre.validate();
 
-        new EcouteurConteneurInscription(conteneurInscription, jeu, fenetre,modelConteneurInscription);
-        new EcouteurFermeture(fenetre);
-        new EcouteurMenu(fenetre,jeu);
+        new EcouteurConteneurInscription(conteneurInscription, jeu, baseDeDonnees, fenetre,modelConteneurInscription);
+        new EcouteurFermeture(fenetre, baseDeDonnees);
+        new EcouteurMenu(fenetre,jeu, baseDeDonnees);
         fenetre.setVisible(true);
 
     }

@@ -24,12 +24,14 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
     private Jeu jeu;
     private Flotte flotte;
     private Grille grille;
+    private BaseDeDonnees baseDeDonnees;
 
 
-    EcouteurConteneurGrillePhasePlacement(ModelConteneurPlacement model, ConteneurPlacement panPlace, Fenetre fen, Jeu j) {
+    EcouteurConteneurGrillePhasePlacement(ModelConteneurPlacement model, ConteneurPlacement panPlace, Fenetre fen, Jeu j, BaseDeDonnees base) {
         model_place=model;
         fenetre = fen;
         jeu = j;
+        baseDeDonnees = base;
 
         flotte = j.getJoueurConcerne().getFlotte();
         grille = j.getJoueurConcerne().getGrille();
@@ -122,7 +124,7 @@ public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implemen
                     jeu.echangeConcerneJoueur1();
 
                     ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+                    new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
 
                     fenetre.setContentPane(conteneurAttente);
                     fenetre.validate();

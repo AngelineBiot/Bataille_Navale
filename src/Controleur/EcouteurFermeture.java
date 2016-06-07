@@ -1,5 +1,6 @@
 package Controleur;
 
+import Modele.BaseDeDonnees;
 import Modele.Jeu;
 import Modele.SauvegardeException;
 import Vue.Fenetre;
@@ -16,8 +17,10 @@ import java.util.ResourceBundle;
  */
 public class EcouteurFermeture extends WindowAdapter {
     private Fenetre fenetre;
+    private BaseDeDonnees baseDeDonnees;
 
-    public EcouteurFermeture(Fenetre fen){
+    public EcouteurFermeture(Fenetre fen, BaseDeDonnees base){
+        baseDeDonnees = base;
         fenetre = fen;
         fenetre.addWindowListener(this);
     }
@@ -45,7 +48,7 @@ public class EcouteurFermeture extends WindowAdapter {
 
             }
 
-
+            baseDeDonnees.fermeConnexion();
             System.exit(0);
         }
 

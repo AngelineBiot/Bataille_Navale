@@ -15,14 +15,20 @@ import java.util.Random;
  */
 public class Computer  implements Serializable {
     private int niveau;
+    private BaseDeDonnees baseDeDonnees;
     private List<Integer> casePossible;
     private List<Integer> caseImpossible;
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
     public static final int HARD = 2;
     public static final Random random = new Random();
-    public Computer(int niveau){
+
+
+
+    public Computer(BaseDeDonnees base, int niveau){
         this.niveau=niveau;
+        baseDeDonnees = base;
+
         casePossible=new ArrayList();
         for (int i=0;i<100;i++){
             casePossible.add(i);
@@ -51,7 +57,7 @@ public class Computer  implements Serializable {
         jeu.echangeConcerneJoueur1();
         jeu.echangeEstPhasePlacement();
         ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-        new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu);
+        new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
 
         fenetre.setContentPane(conteneurAttente);
         fenetre.validate();
@@ -76,17 +82,10 @@ public class Computer  implements Serializable {
 
 
         if (model_tire.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
-            if (jeu.getJoueurConcerne().getNbCoups()==1){
-                try{
-                    if (model_tire.execQuery("SELECT * FROM joueurAchievement WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur()+" AND idAchievement=2").length==0) {
-                        model_tire.execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",2)");
-                    }
-                }
-                catch(BDDException e){
-
-                }
-
+            if (jeu.getJoueurConcerne().getNbCoups()==1){   //Si le joueur touche un bateau du premier coup, il débloque un achievement
+                baseDeDonnees.debloqueLuckyShot(jeu);        //On met donc a jour la bdd
             }
+
             jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
             model_tire.getCaseOuEstTire().getBat().updateEstCoule();
 
@@ -116,48 +115,21 @@ public class Computer  implements Serializable {
 
                 if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
                     if (jeu.getJoueurConcerne().getNbCoups()==jeu.getJoueurNonConcerne().getFlotte().getNbTouches()){
-                        try{
-                            if (model_tire.execQuery("SELECT * FROM joueurAchievement WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur()+" AND idAchievement=1").length==0) {
-                               model_tire.execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",1)");
-                            }
-                        }
-                        catch(BDDException e){
-
-                        }
+                        baseDeDonnees.debloqueSharpshooter();
                     }
                     jeu.setPartieFinie();
 
                     try{
-                        Object[][] experienceJoueur=model_tire.execQuery("SELECT idJoueur,expJoueur,levelJoueur FROM joueur WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur()+" OR "+jeu.getJoueurNonConcerne().getIdJoueur());
-                        float expJConcerne=0;
-                        float expJNonConcerne=0;
-                        for (int i=0;i<experienceJoueur.length;i++){
-                            if ((int)experienceJoueur[i][0]==jeu.getJoueurConcerne().getIdJoueur()){
-                                expJConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*100+(float)experienceJoueur[i][1]);
-                                if (expJConcerne>1000){
-                                    expJConcerne=expJConcerne%1000;
-                                    float niveauJoueur=(float)experienceJoueur[i][2]+1;
-                                    model_tire.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
-                                }
-                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJConcerne+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
-                            }
-                            if ((int)experienceJoueur[i][0]==jeu.getJoueurNonConcerne().getIdJoueur()){
-                                expJNonConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*50+(float)experienceJoueur[i][1]);
-                                if (expJNonConcerne>1000){
-                                    expJNonConcerne=expJNonConcerne%1000;
-                                    float niveauJoueur=(float)experienceJoueur[i][2]+1;
-                                    model_tire.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
-                                }
-                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJNonConcerne+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
-                            }
-                        }
-                    }
-                    catch(BDDException e){
+                        Object[][] experienceJoueur= baseDeDonnees.recupereExperienceJoueur();
 
+                        baseDeDonnees.updateExperience(experienceJoueur);
+                    }
+                    catch(BDDException e3){
+                        new PopUpErreurBDD(false);
                     }
 
                     AnimationFin ac = new AnimationFin();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, true);
+                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees, true);
                     Timer timer=new Timer(4700, ecouteurFinAnimation);
                     ecouteurFinAnimation.setTimer(timer);
                     timer.start();
@@ -165,7 +137,7 @@ public class Computer  implements Serializable {
                 }
                 else{
                     AnimationCoule ac = new AnimationCoule();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
                     Timer timer=new Timer(2250, ecouteurFinAnimation);
                     ecouteurFinAnimation.setTimer(timer);
                     timer.start();
@@ -176,7 +148,7 @@ public class Computer  implements Serializable {
             else{
 
                 AnimationTouche ac = new AnimationTouche();
-                EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
                 Timer timer=new Timer(1530, ecouteurFinAnimation);
                 ecouteurFinAnimation.setTimer(timer);
                 timer.start();
@@ -185,7 +157,7 @@ public class Computer  implements Serializable {
         } else {
 
             AnimationRate at = new AnimationRate();
-            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu);
+            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu, baseDeDonnees);
             Timer timer=new Timer(3000, ecouteurFinAnimation);
             ecouteurFinAnimation.setTimer(timer);
             timer.start();

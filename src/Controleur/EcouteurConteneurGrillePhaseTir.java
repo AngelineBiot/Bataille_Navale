@@ -8,9 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ResourceBundle;
 
-import static javax.swing.JOptionPane.showMessageDialog;
 
 
 /**
@@ -22,11 +20,13 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
     private ConteneurTir panelTir;
     private Jeu jeu;
     private Fenetre fenetre;
+    private BaseDeDonnees baseDeDonnees;
 
 
 
-    EcouteurConteneurGrillePhaseTir(ConteneurTir panTir, ModelConteneurTir model, Jeu j, Fenetre fen) {
+    EcouteurConteneurGrillePhaseTir(ConteneurTir panTir, ModelConteneurTir model, BaseDeDonnees base, Jeu j, Fenetre fen) {
         jeu = j;
+        baseDeDonnees = base;
         fenetre = fen;
         model_tir =model;
         panelTir =panTir;
@@ -61,7 +61,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                                                                                             // n'a pas deja tire sur la case
 
                     if (jeu.getJoueurConcerne().getNbCoups()==1){   //Si le joueur touche un bateau du premier coup, il débloque un achievement
-                        model_tir.debloqueAchievement1(jeu);        //On met donc a jour la bdd
+                        baseDeDonnees.debloqueLuckyShot(jeu);        //On met donc a jour la bdd
                     }
 
                     jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
@@ -74,50 +74,21 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                         if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
                             if (jeu.getJoueurConcerne().getNbCoups()==jeu.getJoueurNonConcerne().getFlotte().getNbTouches()){
-                                try {
-                                    if (model_tir.execQuery("SELECT * FROM joueurAchievement WHERE idJoueur=" + jeu.getJoueurConcerne().getIdJoueur() + " AND idAchievement=1").length == 0) {
-                                        model_tir.execRequeteNonQuery("INSERT INTO joueurachievement (idJoueur, idAchievement) VALUES (" + jeu.getJoueurConcerne().getIdJoueur() + ",1)");
-                                    }
-                                }
-                                catch(BDDException e2){
-
-                                }
+                                baseDeDonnees.debloqueSharpshooter();
                             }
                             jeu.setPartieFinie();
                             try{
-                                Object[][] experienceJoueur= model_tir.execQuery("SELECT idJoueur,expJoueur,levelJoueur FROM joueur WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur()+" OR "+jeu.getJoueurNonConcerne().getIdJoueur());
-                                float expJConcerne=0;
-                                float expJNonConcerne=0;
-                                for (int i=0;i<experienceJoueur.length;i++){
-                                    if ((int)experienceJoueur[i][0]==jeu.getJoueurConcerne().getIdJoueur()){
-                                        expJConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*100+(float)experienceJoueur[i][1]);
-                                        if (expJConcerne>1000){
-                                            expJConcerne=expJConcerne%1000;
-                                            float niveauJoueur=(float)experienceJoueur[i][2]+1;
-                                            model_tir.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
-                                        }
-                                        model_tir.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJConcerne+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
-                                    }
-                                    if ((int)experienceJoueur[i][0]==jeu.getJoueurNonConcerne().getIdJoueur()){
-                                        expJNonConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*50+(float)experienceJoueur[i][1]);
-                                        if (expJNonConcerne>1000){
-                                            expJNonConcerne=expJNonConcerne%1000;
-                                            float niveauJoueur=(float)experienceJoueur[i][2]+1;
-                                            model_tir.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
-                                        }
-                                        model_tir.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJNonConcerne+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
-                                    }
-                                }
+                                Object[][] experienceJoueur= baseDeDonnees.recupereExperienceJoueur();
+
+                                baseDeDonnees.updateExperience(experienceJoueur);
                             }
                             catch(BDDException e3){
-                                ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Database");
-                                showMessageDialog(null,texteInternational.getString("pas_accessible")+" "+texteInternational.getString("peut_pas_sauvegarder"),
-                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+                                new PopUpErreurBDD(false);
                             }
 
 
                             AnimationFin ac = new AnimationFin();
-                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, true);
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees, true);
                             Timer timer=new Timer(4400, ecouteurFinAnimation);
                             ecouteurFinAnimation.setTimer(timer);
                             timer.start();
@@ -125,7 +96,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                         }
                         else{
                             AnimationCoule ac = new AnimationCoule();
-                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
                             Timer timer=new Timer(2250, ecouteurFinAnimation);
                             ecouteurFinAnimation.setTimer(timer);
                             timer.start();
@@ -136,7 +107,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                     else{
 
                         AnimationTouche ac = new AnimationTouche();
-                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu);
+                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
                         Timer timer=new Timer(1530, ecouteurFinAnimation);
                         ecouteurFinAnimation.setTimer(timer);
                         timer.start();
@@ -145,7 +116,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 } else {
 
                     AnimationRate at = new AnimationRate();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu);
+                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu, baseDeDonnees);
                     Timer timer=new Timer(3000, ecouteurFinAnimation);
                     ecouteurFinAnimation.setTimer(timer);
                     timer.start();
