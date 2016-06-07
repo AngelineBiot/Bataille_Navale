@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import static javax.swing.JOptionPane.*;
 
@@ -30,40 +29,23 @@ public class EcouteurMenu implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu");
         Object source = e.getSource();
 
 
         if (source.equals(fenetre.getItemAide()))
         {
-
-            new PopUpAide(texteInternational.getString("aide"));
+            new PopUpAide("aide");
         }
         else if(source==fenetre.getItemApropos())
         {
-            ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
-            String msgApropos = texteInternational.getString("jeuCree") +
-                    "BIOT Angeline\n" +
-                    "GUERRE Michael\n" +
-                    "LIAO Zuzhi\n" +
-                    "PARTY Florian\n" +
-                    "PY Antoine\n" +
-                    "SURLEAU Etienne\n" +
-                    texteInternational.getString("etudiants");
-
-            showMessageDialog(null,msgApropos,texteInternational.getString("aPropos"), INFORMATION_MESSAGE, icon);
-
-
-
+            fenetre.affichePopupAPropos();
         }
         else if (source.equals(fenetre.getSauvegarderPartie())){
             try{
                 Jeu.Sauvegarde(jeu);
             }
             catch(SauvegardeException e2){
-                showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
-                                            texteInternational.getString("erreur"), INFORMATION_MESSAGE);
-
+                fenetre.affichePopupErreur("erreurSauvegarde");
             }
 
         }
@@ -74,8 +56,8 @@ public class EcouteurMenu implements ActionListener {
                 recreerContenuFenetre();
             }
             catch(SauvegardeException e1) {
-                showMessageDialog(fenetre,texteInternational.getString("sauvegardeAbsente"),
-                                            texteInternational.getString("erreur"), INFORMATION_MESSAGE);
+                fenetre.affichePopupErreur("sauvegardeAbsente");
+
 
             }
 
@@ -114,19 +96,15 @@ public class EcouteurMenu implements ActionListener {
         //quitter partie
         else if (source==fenetre.getQuitterPartie())
         {
-            int resultQuitter = showConfirmDialog(fenetre,texteInternational.getString("demandeQuitter"),
-                                            texteInternational.getString("quitter"), YES_NO_OPTION);
+            int resultQuitter = fenetre.affichePopupDemande("demandeQuitter");
             if  (resultQuitter== YES_OPTION){
-                int resultSauvegarde = showConfirmDialog(fenetre,texteInternational.getString("demandeSauvegarde"),
-                                                                    texteInternational.getString("quitter"), YES_NO_OPTION);
+                int resultSauvegarde = fenetre.affichePopupDemande("demandeSauvegarde");
                 if  (resultSauvegarde== YES_OPTION){
                     try {
                         Jeu.Sauvegarde(fenetre.getJeu());
                     }
                     catch(SauvegardeException e1){
-                        showMessageDialog(fenetre,texteInternational.getString("erreurSauvegarde"),
-                                                texteInternational.getString("erreur"), INFORMATION_MESSAGE);
-
+                        fenetre.affichePopupErreur("erreurSauvegarde");
                     }
                 }
 

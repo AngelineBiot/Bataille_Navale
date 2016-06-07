@@ -3,11 +3,9 @@ package Controleur;
 import Modele.*;
 import Vue.*;
 
-import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.ResourceBundle;
 
 /**
  * Created by fparty2 on 29/04/16.
@@ -39,9 +37,9 @@ public class EcouteurConteneurInscription implements ActionListener {
         String pseudoJoueur2 = (String)conteneurInscription.getjComboBoxJoueur2().getSelectedItem();
 
         if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
-            fenetre.affichePopupErreurPseudo("pseudoVide");
+            fenetre.affichePopupErreur("pseudoVide");
         } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
-            fenetre.affichePopupErreurPseudo("memePseudos");
+            fenetre.affichePopupErreur("memePseudos");
         } else {
             int increm=0;
             try {
@@ -79,9 +77,8 @@ public class EcouteurConteneurInscription implements ActionListener {
                 }
             }else {
                 jeu.getJoueur2().setIdJoueur(-1);
-                String[] buttons = {"EASY","MEDIUM","CANCEL"};
-                int result = JOptionPane.showOptionDialog(fenetre, "Niveau de difficulté de l'IA","Confirmation",JOptionPane.INFORMATION_MESSAGE,0,null,buttons,buttons[1]);
-                System.out.println(result);
+
+                int result = fenetre.affichePopupChoixDifficulteIA();
                 jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
             }
             ConteneurAttente conteneur = new ConteneurAttente(jeu);

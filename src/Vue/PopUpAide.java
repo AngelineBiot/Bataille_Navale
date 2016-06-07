@@ -11,11 +11,11 @@ public class PopUpAide extends JFrame{
 
     private Icon icon = null;
     ImageIcon im = new ImageIcon("ressources/images/help.png");
-    ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurMenu");
+    ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
 
     public PopUpAide(String nomFenetre) {
 
-        setTitle(nomFenetre);
+        setTitle(texteInternational.getString(nomFenetre));
 
         this.icon = im;
 
@@ -32,7 +32,6 @@ public class PopUpAide extends JFrame{
 
     private void initContenu() {
 
-        String[] tabAide = texteInternational.getString("messageAide").split("<br>");
 
         JPanel panelPopup = new JPanel();
         JLabel texte1 = new JLabel("<html><body>" + texteInternational.getString("messageAide") + "</body></html>");

@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ResourceBundle;
 
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 
 /**
  * Created by Florian on 14/04/2016.
@@ -147,11 +150,47 @@ public class Fenetre extends JFrame{
         }
     }
 
-    public void affichePopupErreurPseudo(String messageErreur){
+    public void affichePopupErreur(String messageErreur){
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
 
         JOptionPane.showMessageDialog(this, texteInternational.getString(messageErreur),
                 texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+    }
+
+
+
+    public int affichePopupDemande(String messageErreur){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
+
+        return JOptionPane.showConfirmDialog(this,texteInternational.getString(messageErreur),
+                texteInternational.getString("quitter"),JOptionPane.YES_NO_OPTION);
+    }
+
+
+    public void affichePopupAPropos(){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
+
+        ImageIcon icon = new ImageIcon("ressources/images/dep_info.png");
+        String msgApropos = texteInternational.getString("jeuCree") +
+                "BIOT Angeline\n" +
+                "GUERRE Michael\n" +
+                "LIAO Zuzhi\n" +
+                "PARTY Florian\n" +
+                "PY Antoine\n" +
+                "SURLEAU Etienne\n" +
+                texteInternational.getString("etudiants");
+
+        showMessageDialog(this,msgApropos,texteInternational.getString("aPropos"), INFORMATION_MESSAGE, icon);
+    }
+
+    public int affichePopupChoixDifficulteIA(){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
+
+        String[] buttons = {texteInternational.getString("EASY"),texteInternational.getString("MEDIUM"),
+                texteInternational.getString("CANCEL")};
+        return JOptionPane.showOptionDialog(this, texteInternational.getString("niveau_difficulte"),
+                texteInternational.getString("confirmation"),
+                JOptionPane.INFORMATION_MESSAGE,0,null,buttons,buttons[1]);
     }
 
 
