@@ -31,7 +31,7 @@ public class ConteneurInscription extends JPanel{
 
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
         try{
-            baseDeDonnees.initJoueur();
+            baseDeDonnees.initListeJoueurs();
         }
         catch(BDDException e){
             ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");

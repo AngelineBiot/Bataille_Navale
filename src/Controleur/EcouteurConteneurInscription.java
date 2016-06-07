@@ -47,10 +47,10 @@ public class EcouteurConteneurInscription implements ActionListener {
                     int increment = baseDeDonnees.insertJoueur(model, pseudoJoueur1, pseudoJoueur2);
                     increm += increment;
                 }
-                baseDeDonnees.initJoueur();
+                baseDeDonnees.initListeJoueurs();
             }
             catch(BDDException e1){
-                new PopUpErreurBDD(true);
+                fenetre.affichePopupErreurBDD(true);
                 baseDeDonnees.fermeConnexion();
                 System.exit(2);
             }

@@ -43,19 +43,18 @@ public class Main_Grille_test {
         Joueur j2 = new Joueur(flottej2, grillej2);
 
         Jeu jeu = new Jeu(j1, j2, langue);
+        Fenetre fenetre = new Fenetre(jeu);
         BaseDeDonnees baseDeDonnees = null;
+
         try {
             baseDeDonnees = new BaseDeDonnees(jeu);
         }
         catch(BDDException e){
-            new PopUpErreurBDD(true);
+            fenetre.affichePopupErreurBDD(true);
             System.exit(2);
         }
 
 
-
-
-        Fenetre fenetre = new Fenetre(jeu);
         ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
         ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());

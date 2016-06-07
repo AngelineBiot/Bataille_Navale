@@ -63,7 +63,7 @@ public class EcouteurConteneurAttente implements ActionListener {
 
                 ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
                 TableauScores score = new TableauScores(jeu);
-                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu);
+                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu, baseDeDonnees, fenetre);
                 ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 
 
@@ -104,7 +104,7 @@ public class EcouteurConteneurAttente implements ActionListener {
 
                                 baseDeDonnees.updateExperience(experienceJoueur);
                             } catch (BDDException e3) {
-                                new PopUpErreurBDD(false);
+                                fenetre.affichePopupErreurBDD(false);
                             }
 
                             fenetreAnimation = new AnimationFin();

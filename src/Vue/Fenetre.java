@@ -157,6 +157,23 @@ public class Fenetre extends JFrame{
                 texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
     }
 
+    public void affichePopupErreurBDD(boolean afficheReessayerPlusTrad){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Database");
+
+        String partieDeuxduTexte;
+
+        if(afficheReessayerPlusTrad){
+            partieDeuxduTexte = texteInternational.getString("plus_tard");
+        }
+        else{
+            partieDeuxduTexte = texteInternational.getString("peut_pas_sauvegarder");
+        }
+
+
+        showMessageDialog(null,texteInternational.getString("pas_accessible")+" "+partieDeuxduTexte,
+                texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+    }
+
 
 
     public int affichePopupDemande(String messageErreur){

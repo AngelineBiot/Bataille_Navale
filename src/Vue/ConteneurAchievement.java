@@ -12,16 +12,19 @@ import java.util.ResourceBundle;
  */
 public class ConteneurAchievement extends JPanel{
    private Jeu jeu;
-    private ModelAchievement model;
     private JPanel jPanelGlobal;
     private JPanel jPanelniveau;
     private JLabel jLabelniveau;
     private JProgressBar jProgressBarExp;
     private JScrollPane jScrollPaneTableau;
     private JTable jTableAchievement;
-    public ConteneurAchievement(Jeu j){
+    private BaseDeDonnees baseDeDonnees;
+    private Fenetre fenetre;
+
+    public ConteneurAchievement(Jeu j, BaseDeDonnees base, Fenetre fen){
+        fenetre = fen;
+        baseDeDonnees = base;
         jeu=j;
-        model=new ModelAchievement();
         InitAttributs();
     }
 
@@ -29,12 +32,12 @@ public class ConteneurAchievement extends JPanel{
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAchievement");
 
         try {
-            model.initJoueur(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
-            model.initAchievement();
-            model.initJoueurAchievement();
+            baseDeDonnees.initJoueurs(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
+            baseDeDonnees.initAchievement();
+            baseDeDonnees.initJoueurAchievement();
         }
         catch(BDDException e){
-            new PopUpErreurBDD(true);
+            fenetre.affichePopupErreurBDD(true);
             System.exit(2);
         }
 
@@ -44,10 +47,10 @@ public class ConteneurAchievement extends JPanel{
         jPanelniveau=new JPanel(new GridBagLayout());
         long niveau=-1;
         float exp=0;
-        for (int i=0; i<model.getJoueur().length;i++){
-            if ((int)model.getJoueur()[i][0]==jeu.getJoueurConcerne().getIdJoueur()){
-                niveau=(long)model.getJoueur()[i][2];
-                exp=(float)model.getJoueur()[i][3];
+        for (int i=0; i<baseDeDonnees.getJoueur().length;i++){
+            if ((int)baseDeDonnees.getJoueur()[i][0]==jeu.getJoueurConcerne().getIdJoueur()){
+                niveau=(long)baseDeDonnees.getJoueur()[i][2];
+                exp=(float)baseDeDonnees.getJoueur()[i][3];
             }
         }
 
@@ -61,15 +64,16 @@ public class ConteneurAchievement extends JPanel{
         jProgressBarExp.setBorderPainted(true);
 
 
-        Object[][] data=new Object[model.getAchievement().length][3];
+        Object[][] data=new Object[baseDeDonnees.getAchievement().length][3];
         String[]  title =new String[]{"Succes",jeu.getJoueur1().getNomJoueur(),jeu.getJoueur2().getNomJoueur()};
         for (int i=0; i<data.length;i++){
-            String nomSucces = supprEspace((String)model.getAchievement()[i][1]);
+            String nomSucces = supprEspace((String)baseDeDonnees.getAchievement()[i][1]);
             data[i][0]=texteInternational.getString(nomSucces);
 
             boolean gotAch=false;
-            for (int j=0;j<model.getJoueurAchievement().length;j++){
-                if (((int)model.getAchievement()[i][0])==(int)(model.getJoueurAchievement()[j][1]) && ((int)model.getJoueur()[0][0])==((int)model.getJoueurAchievement()[j][0] ) || gotAch){
+            for (int j=0;j<baseDeDonnees.getJoueurAchievement().length;j++){
+                if (((int)baseDeDonnees.getAchievement()[i][0])==(int)(baseDeDonnees.getJoueurAchievement()[j][1]) &&
+                        ((int)baseDeDonnees.getJoueur()[0][0])==((int)baseDeDonnees.getJoueurAchievement()[j][0] ) || gotAch){
                     data[i][1]=texteInternational.getString("valide");
                     gotAch=true;
                 }else {
@@ -77,8 +81,9 @@ public class ConteneurAchievement extends JPanel{
                 }
             }
             gotAch=false;
-            for (int j=0;j<model.getJoueurAchievement().length;j++){
-                if (((int)model.getAchievement()[i][0])==((int)model.getJoueurAchievement()[j][1]) && ((int)model.getJoueur()[1][0])==((int)model.getJoueurAchievement()[j][0] ) || gotAch){
+            for (int j=0;j<baseDeDonnees.getJoueurAchievement().length;j++){
+                if (((int)baseDeDonnees.getAchievement()[i][0])==((int)baseDeDonnees.getJoueurAchievement()[j][1]) &&
+                        ((int)baseDeDonnees.getJoueur()[1][0])==((int)baseDeDonnees.getJoueurAchievement()[j][0] ) || gotAch){
                     data[i][2]=texteInternational.getString("valide");
                     gotAch=true;
                 }else {

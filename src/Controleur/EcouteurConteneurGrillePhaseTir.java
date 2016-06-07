@@ -89,7 +89,7 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                                 baseDeDonnees.updateExperience(experienceJoueur);
                             }
                             catch(BDDException e3){
-                                new PopUpErreurBDD(false);
+                                fenetre.affichePopupErreurBDD(false);
                             }
 
 

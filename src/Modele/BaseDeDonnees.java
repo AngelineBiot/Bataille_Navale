@@ -9,7 +9,11 @@ import java.util.Arrays;
 public class BaseDeDonnees {
     private Connection connexion;
     private Jeu jeu;
+
+
     private Object[][] joueur;
+    private Object[][] achievement;
+    private Object[][] joueurAchievement;
 
 
     public BaseDeDonnees(Jeu j) throws BDDException {
@@ -145,7 +149,7 @@ public class BaseDeDonnees {
         }
     }
 
-    public void initJoueur() throws BDDException{
+    public void initListeJoueurs() throws BDDException{
 
         try{
             Statement instruction = connexion.createStatement();
@@ -171,8 +175,106 @@ public class BaseDeDonnees {
     }
 
 
+    public void initJoueurs(int idJ1, int idJ2) throws BDDException{
+
+        try{
+
+            Statement instruction = connexion.createStatement();
+            String order="";
+            if (idJ2>idJ1){
+                order=" ORDER BY idJoueur DESC";
+            }
+
+
+            ResultSet resultat = instruction.executeQuery("SELECT * FROM joueur WHERE idJoueur="+idJ1+" OR idJoueur="+idJ2+order);
+            ResultSetMetaData rsmd= resultat.getMetaData();
+            int columncount = rsmd.getColumnCount();
+            int rowcount = 0;
+            if (resultat.last()) {
+                rowcount = resultat.getRow();
+                resultat.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+            }
+
+            joueur = new Object[rowcount][columncount];
+            while(resultat.next()){
+                for (int i=0;i<columncount;i++) {
+                    joueur[resultat.getRow() - 1][i] = resultat.getObject(i+1);
+                }
+            }
+        }
+        catch (Exception e){
+
+            throw new BDDException();
+        }
+    }
+
+
+    public void initAchievement()  throws BDDException{
+
+        try{
+
+            Statement instruction = connexion.createStatement();
+
+            ResultSet resultat = instruction.executeQuery("SELECT * FROM achievement");
+            ResultSetMetaData rsmd= resultat.getMetaData();
+            int columncount = rsmd.getColumnCount();
+            int rowcount = 0;
+            if (resultat.last()) {
+                rowcount = resultat.getRow();
+                resultat.beforeFirst();
+            }
+            achievement = new Object[rowcount][columncount];
+            while(resultat.next()){
+                for (int i=0;i<columncount;i++) {
+                    achievement[resultat.getRow() - 1][i] = resultat.getObject(i+1);
+                }
+            }
+        }
+        catch (Exception e){
+
+            throw new BDDException();
+        }
+    }
+
+
+    public void initJoueurAchievement() throws BDDException{
+
+        try{
+
+            Statement instruction = connexion.createStatement();
+
+            ResultSet resultat = instruction.executeQuery("SELECT * FROM joueurachievement");
+            ResultSetMetaData rsmd= resultat.getMetaData();
+            int columncount = rsmd.getColumnCount();
+            int rowcount = 0;
+            if (resultat.last()) {
+                rowcount = resultat.getRow();
+                resultat.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+            }
+            joueurAchievement = new Object[rowcount][columncount];
+            while(resultat.next()){
+                for (int i=0;i<columncount;i++) {
+                    joueurAchievement[resultat.getRow() - 1][i] = resultat.getObject(i+1);
+                }
+            }
+
+        }
+        catch (Exception e){
+            throw new BDDException();
+        }
+    }
+
+
     public Object[][] getJoueur(){
         return joueur;
+    }
+
+    public Object[][] getAchievement() {
+        return achievement;
+    }
+
+    public Object[][] getJoueurAchievement() {
+        return joueurAchievement;
     }
 
 
