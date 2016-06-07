@@ -21,14 +21,7 @@ public class EcouteurFinAnimation implements ActionListener {
     private Timer timer;
     private boolean partieFinie;
 
-    public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, BaseDeDonnees base){
-        fenetreAnimation=fenSec;
-        fenetre = fen;
-        jeu=j;
-        baseDeDonnees = base;
-        partieFinie = false;
 
-    }
 
     public EcouteurFinAnimation(Animation fenSec, Fenetre fen, Jeu j, BaseDeDonnees base, boolean fini){
         fenetreAnimation=fenSec;

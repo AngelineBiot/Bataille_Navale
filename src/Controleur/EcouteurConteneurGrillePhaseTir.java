@@ -56,6 +56,10 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                 jeu.getJoueurConcerne().setNbcoups();
                 model_tir.getCaseOuEstTire().setToucher();
 
+                Animation fenetreAnimation;
+                boolean partieFinie = false;
+                int tempsAnimation;
+
 
                 if (model_tir.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {    //S'il y a un bateau sur la case, et que le joueur
                                                                                             // n'a pas deja tire sur la case
@@ -72,6 +76,8 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
 
                         jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
 
+
+
                         if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
                             if (jeu.getJoueurConcerne().getNbCoups()==jeu.getJoueurNonConcerne().getFlotte().getNbTouches()){
                                 baseDeDonnees.debloqueSharpshooter();
@@ -87,40 +93,34 @@ public class EcouteurConteneurGrillePhaseTir extends MouseAdapter implements Act
                             }
 
 
-                            AnimationFin ac = new AnimationFin();
-                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees, true);
-                            Timer timer=new Timer(4400, ecouteurFinAnimation);
-                            ecouteurFinAnimation.setTimer(timer);
-                            timer.start();
+                            fenetreAnimation = new AnimationFin();
+                            partieFinie = true;
+                            tempsAnimation = 4400;
 
                         }
                         else{
-                            AnimationCoule ac = new AnimationCoule();
-                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
-                            Timer timer=new Timer(2250, ecouteurFinAnimation);
-                            ecouteurFinAnimation.setTimer(timer);
-                            timer.start();
+                            fenetreAnimation = new AnimationCoule();
+                            tempsAnimation = 2250;
                         }
 
 
                     }
                     else{
 
-                        AnimationTouche ac = new AnimationTouche();
-                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
-                        Timer timer=new Timer(1530, ecouteurFinAnimation);
-                        ecouteurFinAnimation.setTimer(timer);
-                        timer.start();
+                        fenetreAnimation = new AnimationTouche();
+                        tempsAnimation = 1530;
                     }
 
                 } else {
 
-                    AnimationRate at = new AnimationRate();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu, baseDeDonnees);
-                    Timer timer=new Timer(3000, ecouteurFinAnimation);
-                    ecouteurFinAnimation.setTimer(timer);
-                    timer.start();
+                    fenetreAnimation = new AnimationRate();
+                    tempsAnimation = 3000;
                 }
+
+                EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(fenetreAnimation, fenetre, jeu, baseDeDonnees, partieFinie);
+                Timer timer = new Timer(tempsAnimation, ecouteurFinAnimation);
+                ecouteurFinAnimation.setTimer(timer);
+                timer.start();
 
 
             }
