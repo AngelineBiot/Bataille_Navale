@@ -3,6 +3,7 @@ package Controleur;
 import Modele.*;
 import Vue.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,9 +17,9 @@ public class EcouteurConteneurAttente implements ActionListener {
     private Jeu jeu;
     private BaseDeDonnees baseDeDonnees;
 
-    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j, BaseDeDonnees base){
+    public EcouteurConteneurAttente(ConteneurAttente conteneur, Fenetre fen, Jeu j, BaseDeDonnees base) {
         baseDeDonnees = base;
-        conteneurAttente =conteneur;
+        conteneurAttente = conteneur;
         fenetre = fen;
         jeu = j;
 
@@ -28,8 +29,8 @@ public class EcouteurConteneurAttente implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(jeu.getEstPhasePlacement()){
-            if(jeu.getJoueurConcerne().getIdJoueur()!=-1){
+        if (jeu.getEstPhasePlacement()) {
+            if (jeu.getJoueurConcerne().getIdJoueur() != -1) {
                 ModelConteneurPlacement modelConteneurPlacement = new ModelConteneurPlacement();
                 modelConteneurPlacement.setDimensionCarre(50);
 
@@ -43,13 +44,19 @@ public class EcouteurConteneurAttente implements ActionListener {
 
                 conteneur.setFocusable(true);
                 conteneur.requestFocus();
-            }else {
-                jeu.getJoueurConcerne().getComputer().placerBateau(fenetre,jeu);
+            } else {
+                jeu.getJoueurConcerne().getComputer().placerBateau(jeu);
+                jeu.echangeConcerneJoueur1();
+                jeu.echangeEstPhasePlacement();
+                ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
+                new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
+
+                fenetre.setContentPane(conteneurAttente);
+                fenetre.validate();
             }
 
-        }
-        else{
-            if(jeu.getJoueurConcerne().getIdJoueur()!=-1) {
+        } else {
+            if (jeu.getJoueurConcerne().getIdJoueur() != -1) {
 
                 ConteneurGrille conteneurGrilleAutreJoueur = new ConteneurGrille(jeu.getJoueurNonConcerne());
                 ConteneurGrille conteneurGrilleJoueur = new ConteneurGrille(jeu.getJoueurConcerne());
@@ -71,9 +78,65 @@ public class EcouteurConteneurAttente implements ActionListener {
                 conteneurGrilleAutreJoueur.afficherCaseTouche();
                 conteneurGrilleAutreJoueur.afficherBateauxCoulesMaGrille();
                 conteneurGrilleAutreJoueur.updateUI();
-            }else {
-                jeu.getJoueurConcerne().getComputer().tirer(conteneurAttente,fenetre,jeu);
+            } else {
+                conteneurAttente.desactivePret();
+
+                ModelConteneurTir modele_tir = new ModelConteneurTir();
+                boolean estPasRate = jeu.getJoueurConcerne().getComputer().tirer(jeu, modele_tir);
+
+                if (estPasRate) {
+                    if (modele_tir.getCaseOuEstTire().getBat().getCoule()) {
+
+                        jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
+
+                        if (jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()) {
+                            if (jeu.getJoueurConcerne().getNbCoups() == jeu.getJoueurNonConcerne().getFlotte().getNbTouches()) {
+                                baseDeDonnees.debloqueSharpshooter();
+                            }
+                            jeu.setPartieFinie();
+
+                            try {
+                                Object[][] experienceJoueur = baseDeDonnees.recupereExperienceJoueur();
+
+                                baseDeDonnees.updateExperience(experienceJoueur);
+                            } catch (BDDException e3) {
+                                new PopUpErreurBDD(false);
+                            }
+
+                            AnimationFin ac = new AnimationFin();
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees, true);
+                            Timer timer = new Timer(4700, ecouteurFinAnimation);
+                            ecouteurFinAnimation.setTimer(timer);
+                            timer.start();
+
+                        } else {
+                            AnimationCoule ac = new AnimationCoule();
+                            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
+                            Timer timer = new Timer(2250, ecouteurFinAnimation);
+                            ecouteurFinAnimation.setTimer(timer);
+                            timer.start();
+                        }
+
+
+                    } else {
+
+                        AnimationTouche ac = new AnimationTouche();
+                        EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
+                        Timer timer = new Timer(1530, ecouteurFinAnimation);
+                        ecouteurFinAnimation.setTimer(timer);
+                        timer.start();
+                    }
+                } else {
+
+                    AnimationRate at = new AnimationRate();
+                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu, baseDeDonnees);
+                    Timer timer = new Timer(3000, ecouteurFinAnimation);
+                    ecouteurFinAnimation.setTimer(timer);
+                    timer.start();
+                }
+
             }
+
         }
     }
 }

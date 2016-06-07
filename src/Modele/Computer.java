@@ -1,10 +1,7 @@
 package Modele;
 
-import Controleur.EcouteurConteneurAttente;
-import Controleur.EcouteurFinAnimation;
-import Vue.*;
 
-import javax.swing.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.Random;
  */
 public class Computer  implements Serializable {
     private int niveau;
-    private BaseDeDonnees baseDeDonnees;
+    private transient BaseDeDonnees baseDeDonnees;
     private List<Integer> casePossible;
     private List<Integer> caseImpossible;
     public static final int EASY = 0;
@@ -36,7 +33,7 @@ public class Computer  implements Serializable {
         caseImpossible=new ArrayList<>();
     }
 
-    public void placerBateau(Fenetre fenetre,Jeu jeu){
+    public void placerBateau(Jeu jeu){
         ModelConteneurPlacement model =new ModelConteneurPlacement();
         model.setCaseOuEstBateauEnCoursPlacement(null);
 
@@ -54,17 +51,9 @@ public class Computer  implements Serializable {
             jeu.getJoueurConcerne().getFlotte().getFlotte()[jeu.getJoueurConcerne().getFlotte().getNbBateauxPlaces()].initPosition(model, jeu.getJoueurConcerne().getGrille());
             jeu.getJoueurConcerne().getFlotte().incrementeNbBateauxPlaces();
         }
-        jeu.echangeConcerneJoueur1();
-        jeu.echangeEstPhasePlacement();
-        ConteneurAttente conteneurAttente = new ConteneurAttente(jeu);
-        new EcouteurConteneurAttente(conteneurAttente, fenetre, jeu, baseDeDonnees);
 
-        fenetre.setContentPane(conteneurAttente);
-        fenetre.validate();
     }
-    public void tirer(ConteneurAttente conteneurAttente,Fenetre fenetre,Jeu jeu){
-        conteneurAttente.desactivePret();
-        ModelConteneurTir model_tire = new ModelConteneurTir();
+    public boolean tirer(Jeu jeu, ModelConteneurTir model_tir){
         int randomCase=random.nextInt(casePossible.size());
         while (caseImpossible.contains(casePossible.get(randomCase))) {
             randomCase = random.nextInt(casePossible.size());
@@ -72,25 +61,27 @@ public class Computer  implements Serializable {
         for (int i=0; i<casePossible.size();i++){
             System.out.println(casePossible.get(i));
         }
-        model_tire.updateCaseOuEstTire(jeu);
+        System.out.println(randomCase);
+
+        model_tir.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[randomCase]);
         int caseTouche=casePossible.get(randomCase);
         casePossible.remove(randomCase);
         caseImpossible.add(randomCase);
-        boolean dejaTirSurCase = model_tire.getCaseOuEstTire().getToucher();
+        boolean dejaTirSurCase = model_tir.getCaseOuEstTire().getToucher();
         jeu.getJoueurConcerne().setNbcoups();
-        model_tire.getCaseOuEstTire().setToucher();
+        model_tir.getCaseOuEstTire().setToucher();
 
-
-        if (model_tire.getCaseOuEstTire().getBat() != null && !dejaTirSurCase) {
-            if (jeu.getJoueurConcerne().getNbCoups()==1){   //Si le joueur touche un bateau du premier coup, il débloque un achievement
+        boolean estPasRate = model_tir.getCaseOuEstTire().getBat() != null && !dejaTirSurCase;
+        if (estPasRate) {
+            if (jeu.getJoueurConcerne().getNbCoups() == 1) {   //Si le joueur touche un bateau du premier coup, il débloque un achievement
                 baseDeDonnees.debloqueLuckyShot(jeu);        //On met donc a jour la bdd
             }
 
             jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
-            model_tire.getCaseOuEstTire().getBat().updateEstCoule();
+            model_tir.getCaseOuEstTire().getBat().updateEstCoule();
 
-            if(niveau==MEDIUM) {
-                System.out.println("test : " + jeu.getJoueurNonConcerne().getFlotte().getNbTouches());
+            if (niveau == MEDIUM) {
+
                 if (jeu.getJoueurNonConcerne().getFlotte().getNbTouches() == 1) {
                     if (jeu.getJoueurConcerne().getNbCoups() == 1) {
                         casePossible.clear();
@@ -109,58 +100,13 @@ public class Computer  implements Serializable {
                     casePossible.add(caseTouche - 10);
                 }
             }
-            if(model_tire.getCaseOuEstTire().getBat().getCoule()){
-
-                jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxCoule();
-
-                if(jeu.getJoueurNonConcerne().getFlotte().flotteCoulee()){
-                    if (jeu.getJoueurConcerne().getNbCoups()==jeu.getJoueurNonConcerne().getFlotte().getNbTouches()){
-                        baseDeDonnees.debloqueSharpshooter();
-                    }
-                    jeu.setPartieFinie();
-
-                    try{
-                        Object[][] experienceJoueur= baseDeDonnees.recupereExperienceJoueur();
-
-                        baseDeDonnees.updateExperience(experienceJoueur);
-                    }
-                    catch(BDDException e3){
-                        new PopUpErreurBDD(false);
-                    }
-
-                    AnimationFin ac = new AnimationFin();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees, true);
-                    Timer timer=new Timer(4700, ecouteurFinAnimation);
-                    ecouteurFinAnimation.setTimer(timer);
-                    timer.start();
-
-                }
-                else{
-                    AnimationCoule ac = new AnimationCoule();
-                    EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
-                    Timer timer=new Timer(2250, ecouteurFinAnimation);
-                    ecouteurFinAnimation.setTimer(timer);
-                    timer.start();
-                }
-
-
-            }
-            else{
-
-                AnimationTouche ac = new AnimationTouche();
-                EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(ac, fenetre, jeu, baseDeDonnees);
-                Timer timer=new Timer(1530, ecouteurFinAnimation);
-                ecouteurFinAnimation.setTimer(timer);
-                timer.start();
-            }
-
-        } else {
-
-            AnimationRate at = new AnimationRate();
-            EcouteurFinAnimation ecouteurFinAnimation = new EcouteurFinAnimation(at, fenetre, jeu, baseDeDonnees);
-            Timer timer=new Timer(3000, ecouteurFinAnimation);
-            ecouteurFinAnimation.setTimer(timer);
-            timer.start();
         }
+
+        return estPasRate;
+
+    }
+
+    public void setBaseDeDonnees(BaseDeDonnees base){
+        baseDeDonnees = base;
     }
 }

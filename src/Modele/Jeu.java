@@ -44,7 +44,7 @@ public class Jeu implements Serializable{
             throw new SauvegardeException();
         }
     }
-    public static Jeu resumeGame() throws SauvegardeException{
+    public static Jeu resumeGame(BaseDeDonnees baseDeDonnees) throws SauvegardeException{
         ObjectInputStream ois;
         Jeu jeu;
         try {
@@ -55,6 +55,13 @@ public class Jeu implements Serializable{
         }
         catch (Exception e){
             throw new SauvegardeException();
+        }
+
+        Joueur j2 = jeu.getJoueur2();
+
+        if(j2.getComputer() != null){
+            Computer computer = j2.getComputer();
+            computer.setBaseDeDonnees(baseDeDonnees);
         }
         return jeu;
     }

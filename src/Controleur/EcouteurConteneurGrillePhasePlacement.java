@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
  *
  */
 public class EcouteurConteneurGrillePhasePlacement extends MouseAdapter implements ActionListener, KeyListener {
-    /*Note : il est possible que certains traitements soient à deplacer dans le modele*/
 
 
     private ModelConteneurPlacement model_place;

@@ -69,7 +69,7 @@ public class EcouteurMenu implements ActionListener {
         }
         else if (source.equals(fenetre.getReprendrePartie())) {
             try{
-                this.jeu=Jeu.resumeGame();
+                this.jeu=Jeu.resumeGame(baseDeDonnees);
                 fenetre.setJeu(this.jeu);
                 recreerContenuFenetre();
             }
