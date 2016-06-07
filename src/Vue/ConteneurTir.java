@@ -1,8 +1,10 @@
 package Vue;
 
 import Controleur.EcouteurConteneurGrillePhaseTir;
+import Modele.ModelConteneurTir;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
@@ -16,9 +18,11 @@ public class ConteneurTir extends JTabbedPane {
     private ConteneurGrille conteneurGrilleAutreJoueur;
     private TableauScores score;
     private ConteneurAchievement conteneurAchievement;
+    private ModelConteneurTir modeleTir;
 
 
-    public ConteneurTir(ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc, ConteneurAchievement cA) {
+    public ConteneurTir(ConteneurGrille contGrJoueur, ConteneurGrille contGrAutreJoueur, TableauScores sc, ConteneurAchievement cA, ModelConteneurTir m) {
+        modeleTir = m;
         conteneurGrilleAutreJoueur = contGrAutreJoueur;
         conteneurGrilleJoueur = contGrJoueur;
         conteneurAchievement=cA;
@@ -79,5 +83,13 @@ public class ConteneurTir extends JTabbedPane {
         boutonValidation.setEnabled(false);
     }
 
+    public void effaceContourCaseSelectionnee(){
+        conteneurGrilleAutreJoueur.getGridPanel()[modeleTir.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.black));
+    }
+
+    public void creeContourCaseSelectionnee(){
+        getConteneurGrille().getGridPanel()[modeleTir.getCoord1D()].setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
+        getConteneurGrille().getGridPanel()[modeleTir.getCoord1D()].setOpaque(true);
+    }
 
 }

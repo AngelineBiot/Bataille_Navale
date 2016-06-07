@@ -190,7 +190,7 @@ public class EcouteurMenu implements ActionListener {
                 TableauScores score = new TableauScores(jeu);
                 ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu);
 
-                ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement);
+                ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 
 
                 new EcouteurConteneurGrillePhaseTir(conteneurTir, modelConteneurTir, jeu, fenetre);

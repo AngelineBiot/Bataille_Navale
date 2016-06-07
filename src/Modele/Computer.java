@@ -66,7 +66,7 @@ public class Computer  implements Serializable {
         for (int i=0; i<casePossible.size();i++){
             System.out.println(casePossible.get(i));
         }
-        model_tire.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[casePossible.get(randomCase)]);
+        model_tire.updateCaseOuEstTire(jeu);
         int caseTouche=casePossible.get(randomCase);
         casePossible.remove(randomCase);
         caseImpossible.add(randomCase);
