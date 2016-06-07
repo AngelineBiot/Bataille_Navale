@@ -13,7 +13,7 @@ public class Main_Grille_test {
     public static void main(String[] args) {
 
         ImageBateau.initTableauImagesBateau();
-        String langue = "fr";
+        String langue = "en";
 
         try{
             BufferedReader fichierSauvegardeLangue = new BufferedReader(new FileReader("ressources/sauvegarde/choixLangue"));
@@ -49,7 +49,7 @@ public class Main_Grille_test {
         }
         catch(BDDException e){
             new PopUpErreurBDD(true);
-            System.exit(0);
+            System.exit(2);
         }
 
 

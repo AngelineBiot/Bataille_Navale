@@ -35,18 +35,13 @@ public class EcouteurConteneurInscription implements ActionListener {
     public void actionPerformed(ActionEvent e){
 
 
-        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.EcouteurConteneurInscription");
-
-
         String pseudoJoueur1 =(String) conteneurInscription.getjComboBoxJoueur1().getSelectedItem();
         String pseudoJoueur2 = (String)conteneurInscription.getjComboBoxJoueur2().getSelectedItem();
 
         if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
-            JOptionPane.showMessageDialog(null, texteInternational.getString("pseudoVide"),
-                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+            fenetre.affichePopupErreurPseudo("pseudoVide");
         } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
-            JOptionPane.showMessageDialog(null, texteInternational.getString("memePseudos"),
-                                        texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+            fenetre.affichePopupErreurPseudo("memePseudos");
         } else {
             int increm=0;
             try {

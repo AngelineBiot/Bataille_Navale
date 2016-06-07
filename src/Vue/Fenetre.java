@@ -147,6 +147,13 @@ public class Fenetre extends JFrame{
         }
     }
 
+    public void affichePopupErreurPseudo(String messageErreur){
+        ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.Fenetre");
+
+        JOptionPane.showMessageDialog(this, texteInternational.getString(messageErreur),
+                texteInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
+    }
+
 
 
     public JMenuItem getItemApropos() {
