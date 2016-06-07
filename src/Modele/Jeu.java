@@ -110,6 +110,14 @@ public class Jeu implements Serializable{
 
     public void setPartieFinie(){
         partieFinie = true;
+
+        try{
+            File file = new File("ressources/sauvegarde/Jeu");    //On vide le fichier de sauvegarde a la fin de partie
+            file.delete();
+            file.createNewFile();
+        }
+        catch(IOException e){
+        }
     }
 
     public boolean isPartieFinie(){
