@@ -79,6 +79,18 @@ public class EcouteurMenu implements ActionListener {
             jeu = new Jeu(j1, j2, jeu.getLangue());
             ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
 
+            try{
+                baseDeDonnees.initListeJoueurs();
+            }
+            catch(BDDException e2){
+                fenetre.affichePopupErreurBDD(true);
+                System.exit(1);
+            }
+
+            if (baseDeDonnees.getJoueur()!=null){
+                modelConteneurInscription.initListPseudo(baseDeDonnees.getJoueur());
+            }
+
             ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
             int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
             int hauteurBox = (700-hauteurConteneur)/2;
@@ -121,6 +133,18 @@ public class EcouteurMenu implements ActionListener {
             fenetre = new Fenetre(jeu);
             if(jeu.getJoueur1().getNomJoueur() == null || jeu.getJoueur2().getNomJoueur() == null){
                 ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
+
+                try{
+                    baseDeDonnees.initListeJoueurs();
+                }
+                catch(BDDException e2){
+                    fenetre.affichePopupErreurBDD(true);
+                    System.exit(1);
+                }
+
+                if (baseDeDonnees.getJoueur()!=null){
+                    modelConteneurInscription.initListPseudo(baseDeDonnees.getJoueur());
+                }
 
                 ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
                 int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
@@ -168,7 +192,18 @@ public class EcouteurMenu implements ActionListener {
 
                 ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
                 TableauScores score = new TableauScores(jeu);
-                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu, baseDeDonnees, fenetre);
+
+                try {
+                    baseDeDonnees.initJoueurs(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
+                    baseDeDonnees.initAchievement();
+                    baseDeDonnees.initJoueurAchievement();
+                }
+                catch(BDDException e){
+                    fenetre.affichePopupErreurBDD(true);
+                    System.exit(2);
+                }
+
+                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu, baseDeDonnees);
 
                 ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 

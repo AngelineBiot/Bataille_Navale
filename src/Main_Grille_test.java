@@ -56,6 +56,19 @@ public class Main_Grille_test {
 
 
         ModelConteneurInscription modelConteneurInscription=new ModelConteneurInscription();
+
+        try{
+            baseDeDonnees.initListeJoueurs();
+        }
+        catch(BDDException e){
+            fenetre.affichePopupErreurBDD(true);
+            System.exit(1);
+        }
+
+        if (baseDeDonnees.getJoueur()!=null){
+            modelConteneurInscription.initListPseudo(baseDeDonnees.getJoueur());
+        }
+
         ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
         int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
         int hauteurBox = (700-hauteurConteneur)/2;

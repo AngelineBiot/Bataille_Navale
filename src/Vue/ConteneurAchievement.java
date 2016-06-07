@@ -19,10 +19,9 @@ public class ConteneurAchievement extends JPanel{
     private JScrollPane jScrollPaneTableau;
     private JTable jTableAchievement;
     private BaseDeDonnees baseDeDonnees;
-    private Fenetre fenetre;
 
-    public ConteneurAchievement(Jeu j, BaseDeDonnees base, Fenetre fen){
-        fenetre = fen;
+    public ConteneurAchievement(Jeu j, BaseDeDonnees base){
+
         baseDeDonnees = base;
         jeu=j;
         InitAttributs();
@@ -31,15 +30,6 @@ public class ConteneurAchievement extends JPanel{
     private void InitAttributs() {
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurAchievement");
 
-        try {
-            baseDeDonnees.initJoueurs(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
-            baseDeDonnees.initAchievement();
-            baseDeDonnees.initJoueurAchievement();
-        }
-        catch(BDDException e){
-            fenetre.affichePopupErreurBDD(true);
-            System.exit(2);
-        }
 
         jPanelGlobal=new JPanel();
         jPanelGlobal.setLayout(new BoxLayout(jPanelGlobal,BoxLayout.Y_AXIS));

@@ -63,7 +63,18 @@ public class EcouteurConteneurAttente implements ActionListener {
 
                 ModelConteneurTir modelConteneurTir = new ModelConteneurTir();
                 TableauScores score = new TableauScores(jeu);
-                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu, baseDeDonnees, fenetre);
+
+                try {
+                    baseDeDonnees.initJoueurs(jeu.getJoueur1().getIdJoueur(), jeu.getJoueur2().getIdJoueur());
+                    baseDeDonnees.initAchievement();
+                    baseDeDonnees.initJoueurAchievement();
+                }
+                catch(BDDException e2){
+                    fenetre.affichePopupErreurBDD(true);
+                    System.exit(2);
+                }
+
+                ConteneurAchievement conteneurAchievement = new ConteneurAchievement(jeu, baseDeDonnees);
                 ConteneurTir conteneurTir = new ConteneurTir(conteneurGrilleJoueur, conteneurGrilleAutreJoueur, score, conteneurAchievement, modelConteneurTir);
 
 

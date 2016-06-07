@@ -28,21 +28,8 @@ public class ConteneurInscription extends JPanel{
     public ConteneurInscription(ModelConteneurInscription m, BaseDeDonnees base){
         model=m;
         baseDeDonnees = base;
-
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
-        try{
-            baseDeDonnees.initListeJoueurs();
-        }
-        catch(BDDException e){
-            ResourceBundle texteBDDInternational = ResourceBundle.getBundle("traductions.Database");
-            showMessageDialog(null,texteBDDInternational.getString("pas_accessible")+" "+texteBDDInternational.getString("plus_tard"),
-                    texteBDDInternational.getString("erreur"), JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
 
-        if (baseDeDonnees.getJoueur()!=null){
-            model.initListPseudo(baseDeDonnees.getJoueur());
-        }
         initAttributs(texteInternational.getString("valider"));
         addwidgets(texteInternational.getString("pseudo1"), texteInternational.getString("pseudo2"));
 
