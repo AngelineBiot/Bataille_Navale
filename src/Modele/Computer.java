@@ -134,21 +134,21 @@ public class Computer  implements Serializable {
                         for (int i=0;i<experienceJoueur.length;i++){
                             if ((int)experienceJoueur[i][0]==jeu.getJoueurConcerne().getIdJoueur()){
                                 expJConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*100+(float)experienceJoueur[i][1]);
-                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJConcerne+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
                                 if (expJConcerne>1000){
                                     expJConcerne=expJConcerne%1000;
                                     float niveauJoueur=(float)experienceJoueur[i][2]+1;
                                     model_tire.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
                                 }
+                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJConcerne+" WHERE idJoueur="+jeu.getJoueurConcerne().getIdJoueur());
                             }
                             if ((int)experienceJoueur[i][0]==jeu.getJoueurNonConcerne().getIdJoueur()){
                                 expJNonConcerne=((jeu.getJoueurNonConcerne().getFlotte().getNbTouches()/(float)jeu.getJoueurConcerne().getNbCoups())*50+(float)experienceJoueur[i][1]);
-                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJNonConcerne+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
                                 if (expJNonConcerne>1000){
                                     expJNonConcerne=expJNonConcerne%1000;
                                     float niveauJoueur=(float)experienceJoueur[i][2]+1;
                                     model_tire.execRequeteNonQuery("UPDATE JOUEUR SET levelJoueur ="+niveauJoueur+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
                                 }
+                                model_tire.execRequeteNonQuery("UPDATE JOUEUR SET expJoueur ="+expJNonConcerne+" WHERE idJoueur="+jeu.getJoueurNonConcerne().getIdJoueur());
                             }
                         }
                     }
