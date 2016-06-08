@@ -91,7 +91,7 @@ public class EcouteurMenu implements ActionListener {
                 modelConteneurInscription.initListPseudo(baseDeDonnees.getJoueur());
             }
 
-            ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
+            ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription,false, baseDeDonnees);
             int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
             int hauteurBox = (700-hauteurConteneur)/2;
 
@@ -146,7 +146,7 @@ public class EcouteurMenu implements ActionListener {
                     modelConteneurInscription.initListPseudo(baseDeDonnees.getJoueur());
                 }
 
-                ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription, baseDeDonnees);
+                ConteneurInscription conteneurInscription = new ConteneurInscription(modelConteneurInscription,false, baseDeDonnees);
                 int hauteurConteneur = (int)(conteneurInscription.getPreferredSize().getHeight());
                 int hauteurBox = (700-hauteurConteneur)/2;
 

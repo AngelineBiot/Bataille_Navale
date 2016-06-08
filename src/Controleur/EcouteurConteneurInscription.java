@@ -30,61 +30,83 @@ public class EcouteurConteneurInscription implements ActionListener {
         conteneurInscription.setEcouteurConteneurInscription(this);
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
+        if (jeu.isOnline()){
+            if (e.getSource().equals(conteneurInscription.getOnline())) {
+
+                String pseudoJoueur1 = (String) conteneurInscription.getjComboBoxJoueur1().getSelectedItem();
+                String pseudoJoueur2 = (String) conteneurInscription.getjComboBoxJoueur2().getSelectedItem();
+
+                if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
+                    fenetre.affichePopupErreur("pseudoVide");
+                } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
+                    fenetre.affichePopupErreur("memePseudos");
+                } else {
+                    int increm = 0;
+                    try {
+                        if (!pseudoJoueur2.equals("GLaDAS")) {
+                            int increment = baseDeDonnees.insertJoueur(model, pseudoJoueur1, pseudoJoueur2);
+                            increm += increment;
+                        }
+                        baseDeDonnees.initListeJoueurs();
+                    } catch (BDDException e1) {
+                        fenetre.affichePopupErreurBDD(true);
+                        baseDeDonnees.fermeConnexion();
+                        System.exit(2);
+                    }
+
+                    if (baseDeDonnees.getJoueur() != null) {
+                        model.initListPseudo(baseDeDonnees.getJoueur());
+                    }
+                    jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
 
 
-        String pseudoJoueur1 =(String) conteneurInscription.getjComboBoxJoueur1().getSelectedItem();
-        String pseudoJoueur2 = (String)conteneurInscription.getjComboBoxJoueur2().getSelectedItem();
-
-        if (pseudoJoueur1.equals("") || pseudoJoueur2.equals("")) {
-            fenetre.affichePopupErreur("pseudoVide");
-        } else if (pseudoJoueur1.equals(pseudoJoueur2)) {
-            fenetre.affichePopupErreur("memePseudos");
-        } else {
-            int increm=0;
-            try {
-                if (!pseudoJoueur2.equals("GLaDAS")) {
-                    int increment = baseDeDonnees.insertJoueur(model, pseudoJoueur1, pseudoJoueur2);
-                    increm += increment;
-                }
-                baseDeDonnees.initListeJoueurs();
-            }
-            catch(BDDException e1){
-                fenetre.affichePopupErreurBDD(true);
-                baseDeDonnees.fermeConnexion();
-                System.exit(2);
-            }
-
-            if (baseDeDonnees.getJoueur()!=null){
-                model.initListPseudo(baseDeDonnees.getJoueur());
-            }
-            jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
+                    if (conteneurInscription.getjComboBoxJoueur1().getSelectedIndex() < 0) {
+                        jeu.getJoueur1().setIdJoueur((int) baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getItemCount()][0]);
+                    } else {
+                        jeu.getJoueur1().setIdJoueur((int) baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getSelectedIndex() + 1][0]);
+                    }
+                    jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
 
 
-            if (conteneurInscription.getjComboBoxJoueur1().getSelectedIndex()<0){
-                jeu.getJoueur1().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getItemCount()][0]);
-            }else {
-                jeu.getJoueur1().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur1().getSelectedIndex()+1][0]);
-            }
-            jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
+                    if (!pseudoJoueur2.equals("GLaDAS")) {
+                        if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex() < 0) {
+                            jeu.getJoueur2().setIdJoueur((int) baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount() + increm - 1][0]);
+                        } else {
+                            jeu.getJoueur2().setIdJoueur((int) baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getSelectedIndex() + 1][0]);
+                        }
+                    } else {
+                        jeu.getJoueur2().setIdJoueur(-1);
 
+                        int result = fenetre.affichePopupChoixDifficulteIA();
+                        jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
+                    }
+                    ConteneurAttente conteneur = new ConteneurAttente(jeu);
+                    new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
 
-            if (!pseudoJoueur2.equals("GLaDAS")){
-                if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()<0){
-                    jeu.getJoueur2().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount()+increm-1][0]);
+                        fenetre.setContentPane(conteneur);
+                        fenetre.validate();
+                    }
                 }else {
-                    jeu.getJoueur2().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()+1][0]);
+
+                    String pseudoJoueur1 = (String) conteneurInscription.getjComboBoxJoueur1().getSelectedItem();
+                    jeu.getJoueur1().setNomJoueur(pseudoJoueur1);
+                    if (jeu.getTimeServer()!=(null)){
+                        jeu.getTimeServer().open();
+                    }else {
+                        jeu.getClientConnexion().sendCommand("pseudo-"+pseudoJoueur1);
+                    }
+                    ConteneurAttente conteneur = new ConteneurAttente(jeu);
+                    new EcouteurConteneurAttente(conteneur, fenetre, jeu,baseDeDonnees);
+
+                    fenetre.setContentPane(conteneur);
+                    fenetre.validate();
                 }
-            }else {
-                jeu.getJoueur2().setIdJoueur(-1);
-
-                int result = fenetre.affichePopupChoixDifficulteIA();
-                jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
-            }
-            ConteneurAttente conteneur = new ConteneurAttente(jeu);
-            new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
-
-            fenetre.setContentPane(conteneur);
+        }else {
+            ModelEnLigne modelEnLigne = new ModelEnLigne();
+            ConteneurEnLigne conteneurEnLigne=new ConteneurEnLigne(modelEnLigne);
+            EcouteurConteneurEnLigne ecouteurConteneurEnLigne =new EcouteurConteneurEnLigne(conteneurEnLigne,modelEnLigne,jeu,fenetre);
+            fenetre.setContentPane(conteneurEnLigne);
             fenetre.validate();
         }
     }

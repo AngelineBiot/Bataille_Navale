@@ -8,6 +8,8 @@ import java.sql.*;
 public class ModelConteneurInscription {
 
 
+    private boolean online;
+
     public void initListPseudo(Object[][] j){
         listPseudo=new String[j.length-1];
         for (int i=0;i<j.length-1;i++){
@@ -23,4 +25,11 @@ public class ModelConteneurInscription {
 
     private String[] listPseudo;
 
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
 }

@@ -20,14 +20,16 @@ public class ConteneurInscription extends JPanel{
     private JTextField labelJoueur1;
     private JTextField labelJoueur2;
     private JButton valider;
+    private JButton online;
     private JComboBox jComboBoxJoueur1;
     private JComboBox jComboBoxJoueur2;
     private BaseDeDonnees baseDeDonnees;
 
 
-    public ConteneurInscription(ModelConteneurInscription m, BaseDeDonnees base){
+    public ConteneurInscription(ModelConteneurInscription m,boolean online, BaseDeDonnees base){
         model=m;
         baseDeDonnees = base;
+        model.setOnline(online);
         ResourceBundle texteInternational = ResourceBundle.getBundle("traductions.ConteneurInscription");
 
         initAttributs(texteInternational.getString("valider"));
@@ -39,24 +41,27 @@ public class ConteneurInscription extends JPanel{
         labelJoueur1 = new JTextField();
         labelJoueur2 = new JTextField();
         valider = new JButton(texteValider);
+        online = new JButton("Mode en ligne");
         if (model.getListPseudo()!=null){
             jComboBoxJoueur1 =new JComboBox(model.getListPseudo());
         }else {
             jComboBoxJoueur1=new JComboBox();
         }
         jComboBoxJoueur1.setEditable(true);
-        String[] listPseudo2=new String[model.getListPseudo().length+1];
-        for (int i=0;i<model.getListPseudo().length;i++){
-            listPseudo2[i]=model.getListPseudo()[i];
-        }
-        listPseudo2[listPseudo2.length-1]="GLaDAS";
-        if (model.getListPseudo()!=null){
-            jComboBoxJoueur2 =new JComboBox(listPseudo2);
-            jComboBoxJoueur2.setEditable(true);
-        }else {
-            jComboBoxJoueur2=new JComboBox();
-        }
-        jComboBoxJoueur2.setEditable(true);
+       if (!model.isOnline()){
+           String[] listPseudo2=new String[model.getListPseudo().length+1];
+           for (int i=0;i<model.getListPseudo().length;i++){
+               listPseudo2[i]=model.getListPseudo()[i];
+           }
+           listPseudo2[listPseudo2.length-1]="GLaDAS";
+           if (model.getListPseudo()!=null){
+               jComboBoxJoueur2 =new JComboBox(listPseudo2);
+               jComboBoxJoueur2.setEditable(true);
+           }else {
+               jComboBoxJoueur2=new JComboBox();
+           }
+           jComboBoxJoueur2.setEditable(true);
+       }
         labelJoueur1.setColumns(15);
         labelJoueur2.setColumns(15);
     }
@@ -69,8 +74,10 @@ public class ConteneurInscription extends JPanel{
 
         placementGrille.add(new JLabel(textePseudo1));
         placementGrille.add(jComboBoxJoueur1);
-        placementGrille.add(new JLabel(textePseudo2));
-        placementGrille.add(jComboBoxJoueur2);
+        if (!model.isOnline()){
+            placementGrille.add(new JLabel(textePseudo2));
+            placementGrille.add(jComboBoxJoueur2);
+        }
 
         JPanel placementGeneral = new JPanel();
         placementGeneral.setLayout(new BoxLayout(placementGeneral, BoxLayout.Y_AXIS));
@@ -78,6 +85,11 @@ public class ConteneurInscription extends JPanel{
         placementGeneral.add(Box.createVerticalStrut(30));
         valider.setAlignmentX(Component.CENTER_ALIGNMENT);
         placementGeneral.add(valider);
+        if (!model.isOnline()){
+            placementGeneral.add(Box.createVerticalStrut(30));
+            online.setAlignmentX(Component.CENTER_ALIGNMENT);
+            placementGeneral.add(online);
+        }
 
         add(placementGeneral);
     }
@@ -90,10 +102,14 @@ public class ConteneurInscription extends JPanel{
         return jComboBoxJoueur2;
     }
 
+
     public void setEcouteurConteneurInscription(EcouteurConteneurInscription ecouteur){
         valider.addActionListener(ecouteur);
+        online.addActionListener(ecouteur);
     }
 
 
-
+    public JButton getOnline() {
+        return online;
+    }
 }

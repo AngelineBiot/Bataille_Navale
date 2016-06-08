@@ -1,5 +1,8 @@
 package Modele;
 
+import Controleur.ClientConnexion;
+import Controleur.TimeServer;
+
 import java.io.*;
 import java.util.Locale;
 
@@ -15,6 +18,9 @@ public class Jeu implements Serializable{
     private boolean estPhasePlacement;
     private boolean concerneJoueur1;
     private boolean partieFinie;
+    private TimeServer timeServer;
+    private ClientConnexion clientConnexion;
+    private boolean online;
 
 
     public Jeu(Joueur j1, Joueur j2, String l){
@@ -148,5 +154,29 @@ public class Jeu implements Serializable{
         }
         catch(Exception e){
         }
+    }
+
+    public TimeServer getTimeServer() {
+        return timeServer;
+    }
+
+    public ClientConnexion getClientConnexion() {
+        return clientConnexion;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public void setTimeServer(TimeServer timeServer) {
+        this.timeServer = timeServer;
+    }
+
+    public void setClientConnexion(ClientConnexion clientConnexion) {
+        this.clientConnexion = clientConnexion;
     }
 }
