@@ -68,7 +68,7 @@ public class EcouteurConteneurInscription implements ActionListener {
             }
             jeu.getJoueur2().setNomJoueur(pseudoJoueur2);
 
-
+            int result=0;
             if (!pseudoJoueur2.equals("GLaDAS")){
                 if (conteneurInscription.getjComboBoxJoueur2().getSelectedIndex()<0){
                     jeu.getJoueur2().setIdJoueur((int)baseDeDonnees.getJoueur()[conteneurInscription.getjComboBoxJoueur2().getItemCount()+increm-1][0]);
@@ -78,14 +78,19 @@ public class EcouteurConteneurInscription implements ActionListener {
             }else {
                 jeu.getJoueur2().setIdJoueur(-1);
 
-                int result = fenetre.affichePopupChoixDifficulteIA();
+                result = fenetre.affichePopupChoixDifficulteIA();
                 jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
             }
-            ConteneurAttente conteneur = new ConteneurAttente(jeu);
-            new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
+            if (result!=2) {
+                ConteneurAttente conteneur = new ConteneurAttente(jeu);
+                new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
 
-            fenetre.setContentPane(conteneur);
-            fenetre.validate();
+                fenetre.setContentPane(conteneur);
+                fenetre.validate();
+            }else {
+                jeu.getJoueur1().setNomJoueur(null);
+                jeu.getJoueur2().setNomJoueur(null);
+            }
         }
     }
 }
