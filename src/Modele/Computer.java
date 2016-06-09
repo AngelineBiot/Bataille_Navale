@@ -58,21 +58,6 @@ public class Computer  implements Serializable {
         while (caseImpossible.contains(casePossible.get(randomCase))) {
             randomCase = random.nextInt(casePossible.size());
         }
-        System.out.println("case possible :");
-        for (int i=0; i<casePossible.size();i++){
-            System.out.println(casePossible.get(i));
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println("case touche");
-        System.out.println(casePossible.get(randomCase));
-        System.out.println();
-        System.out.println();
-        System.out.println("index");
-        System.out.println(randomCase);
-        System.out.println();
-        System.out.println();
-
         int caseTouche=casePossible.get(randomCase);
 
         model_tir.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[caseTouche]);
@@ -88,12 +73,6 @@ public class Computer  implements Serializable {
             if (jeu.getJoueurConcerne().getNbCoups() == 1) {   //Si le joueur touche un bateau du premier coup, il débloque un achievement
                 baseDeDonnees.debloqueLuckyShot(jeu);        //On met donc a jour la bdd
             }
-            System.out.println("case touché non coulé :");
-            for (int i=0; i<caseToucheNonCoule.size();i++){
-                System.out.println(caseToucheNonCoule.get(i));
-            }
-            System.out.println();
-            System.out.println();
             jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
             model_tir.getCaseOuEstTire().getBat().updateEstCoule();
 
@@ -101,8 +80,6 @@ public class Computer  implements Serializable {
                 if (model_tir.getCaseOuEstTire().getBat().getCoule()){
                     int aSuppr = (model_tir.getCaseOuEstTire().getBat().getEstOrienteVerticalement())?10:1;
                     for (int i=0;i<model_tir.getCaseOuEstTire().getBat().getTaille();i++){
-                        System.out.println("case enlevé");
-                        System.out.println(i);
                         caseToucheNonCoule.remove(new Integer(model_tir.getCaseOuEstTire().getBat().getCoordonneesPremiereCase()+i*aSuppr));
                     }
                 }

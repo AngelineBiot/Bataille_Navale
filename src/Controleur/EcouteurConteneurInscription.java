@@ -81,7 +81,7 @@ public class EcouteurConteneurInscription implements ActionListener {
                 result = fenetre.affichePopupChoixDifficulteIA();
                 jeu.getJoueur2().setComputer(new Computer(baseDeDonnees, result));
             }
-            if (result!=2) {
+            if (result!=2 && result!=-1) {
                 ConteneurAttente conteneur = new ConteneurAttente(jeu);
                 new EcouteurConteneurAttente(conteneur, fenetre, jeu, baseDeDonnees);
 
