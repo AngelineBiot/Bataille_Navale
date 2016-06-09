@@ -58,15 +58,17 @@ public class Computer  implements Serializable {
         while (caseImpossible.contains(casePossible.get(randomCase))) {
             randomCase = random.nextInt(casePossible.size());
         }
+        System.out.println("5555555555");
         for (int i=0; i<casePossible.size();i++){
             System.out.println(casePossible.get(i));
         }
+        System.out.println("5555555555");
         System.out.println(randomCase);
-
-        model_tir.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[randomCase]);
         int caseTouche=casePossible.get(randomCase);
+
+        model_tir.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[caseTouche]);
         casePossible.remove(randomCase);
-        caseImpossible.add(randomCase);
+        caseImpossible.add(caseTouche);
         boolean dejaTirSurCase = model_tir.getCaseOuEstTire().getToucher();
         jeu.getJoueurConcerne().setNbcoups();
         model_tir.getCaseOuEstTire().setToucher();
@@ -83,9 +85,8 @@ public class Computer  implements Serializable {
             if (niveau == MEDIUM) {
 
                 if (jeu.getJoueurNonConcerne().getFlotte().getNbTouches() == 1) {
-                    if (jeu.getJoueurConcerne().getNbCoups() == 1) {
-                        casePossible.clear();
-                    }
+                    casePossible.clear();
+                    System.out.println("merde");
                 }
                 if (caseTouche + 1 < 100 && !caseImpossible.contains(caseTouche + 1)) {
                     casePossible.add(caseTouche + 1);
@@ -93,7 +94,7 @@ public class Computer  implements Serializable {
                 if (caseTouche - 1 > 0 && !caseImpossible.contains(caseTouche - 1)) {
                     casePossible.add(caseTouche - 1);
                 }
-                if (caseTouche + 10 < 100 && !caseImpossible.contains(randomCase + 10)) {
+                if (caseTouche + 10 < 100 && !caseImpossible.contains(caseTouche + 10)) {
                     casePossible.add(caseTouche + 10);
                 }
                 if (caseTouche - 10 > 0 && !caseImpossible.contains(caseTouche - 10)) {
