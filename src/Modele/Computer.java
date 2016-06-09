@@ -15,6 +15,7 @@ public class Computer  implements Serializable {
     private transient BaseDeDonnees baseDeDonnees;
     private List<Integer> casePossible;
     private List<Integer> caseImpossible;
+    private List<Integer> caseToucheNonCoule;
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
     public static final int HARD = 2;
@@ -27,10 +28,9 @@ public class Computer  implements Serializable {
         baseDeDonnees = base;
 
         casePossible=new ArrayList();
-        for (int i=0;i<100;i++){
-            casePossible.add(i);
-        }
         caseImpossible=new ArrayList<>();
+        caseToucheNonCoule=new ArrayList<>();
+        initCasePossible();
     }
 
     public void placerBateau(Jeu jeu){
@@ -58,12 +58,21 @@ public class Computer  implements Serializable {
         while (caseImpossible.contains(casePossible.get(randomCase))) {
             randomCase = random.nextInt(casePossible.size());
         }
-        System.out.println("5555555555");
+        System.out.println("case possible :");
         for (int i=0; i<casePossible.size();i++){
             System.out.println(casePossible.get(i));
         }
-        System.out.println("5555555555");
+        System.out.println();
+        System.out.println();
+        System.out.println("case touche");
+        System.out.println(casePossible.get(randomCase));
+        System.out.println();
+        System.out.println();
+        System.out.println("index");
         System.out.println(randomCase);
+        System.out.println();
+        System.out.println();
+
         int caseTouche=casePossible.get(randomCase);
 
         model_tir.setCaseOuEstTire(jeu.getJoueurNonConcerne().getGrille().getGrille()[caseTouche]);
@@ -75,36 +84,60 @@ public class Computer  implements Serializable {
 
         boolean estPasRate = model_tir.getCaseOuEstTire().getBat() != null && !dejaTirSurCase;
         if (estPasRate) {
+            caseToucheNonCoule.add(caseTouche);
             if (jeu.getJoueurConcerne().getNbCoups() == 1) {   //Si le joueur touche un bateau du premier coup, il débloque un achievement
                 baseDeDonnees.debloqueLuckyShot(jeu);        //On met donc a jour la bdd
             }
-
+            System.out.println("case touché non coulé :");
+            for (int i=0; i<caseToucheNonCoule.size();i++){
+                System.out.println(caseToucheNonCoule.get(i));
+            }
+            System.out.println();
+            System.out.println();
             jeu.getJoueurNonConcerne().getFlotte().incrementeNbBateauxTouche();
             model_tir.getCaseOuEstTire().getBat().updateEstCoule();
 
             if (niveau == MEDIUM) {
-
-                if (jeu.getJoueurNonConcerne().getFlotte().getNbTouches() == 1) {
-                    casePossible.clear();
-                    System.out.println("merde");
+                if (model_tir.getCaseOuEstTire().getBat().getCoule()){
+                    int aSuppr = (model_tir.getCaseOuEstTire().getBat().getEstOrienteVerticalement())?10:1;
+                    for (int i=0;i<model_tir.getCaseOuEstTire().getBat().getTaille();i++){
+                        System.out.println("case enlevé");
+                        System.out.println(i);
+                        caseToucheNonCoule.remove(new Integer(model_tir.getCaseOuEstTire().getBat().getCoordonneesPremiereCase()+i*aSuppr));
+                    }
                 }
-                if (caseTouche + 1 < 100 && !caseImpossible.contains(caseTouche + 1)) {
-                    casePossible.add(caseTouche + 1);
-                }
-                if (caseTouche - 1 > 0 && !caseImpossible.contains(caseTouche - 1)) {
-                    casePossible.add(caseTouche - 1);
-                }
-                if (caseTouche + 10 < 100 && !caseImpossible.contains(caseTouche + 10)) {
-                    casePossible.add(caseTouche + 10);
-                }
-                if (caseTouche - 10 > 0 && !caseImpossible.contains(caseTouche - 10)) {
-                    casePossible.add(caseTouche - 10);
-                }
+                initCasePossible();
             }
         }
 
         return estPasRate;
 
+    }
+
+    public void initCasePossible(){
+        casePossible.clear();
+        if (caseToucheNonCoule.size()==0){
+            for (int i=0;i<100;i++){
+                if (caseImpossible.size()==0 || !caseImpossible.contains(i)) {
+                    casePossible.add(i);
+                }
+            }
+        }else {
+            for (int i=0;i<caseToucheNonCoule.size();i++){
+                if (caseToucheNonCoule.get(i) + 1 < 100 && !caseImpossible.contains(caseToucheNonCoule.get(i) + 1) && !(caseToucheNonCoule.get(i)%10==9 && (caseToucheNonCoule.get(i)+1)%10==0)) {
+                    casePossible.add(caseToucheNonCoule.get(i) + 1);
+                }
+                if (caseToucheNonCoule.get(i) - 1 > 0 && !caseImpossible.contains(caseToucheNonCoule.get(i) - 1) && !(caseToucheNonCoule.get(i)%10==0 && (caseToucheNonCoule.get(i)-1)%10==9)) {
+                    casePossible.add(caseToucheNonCoule.get(i) - 1);
+                }
+                if (caseToucheNonCoule.get(i) + 10 < 100 && !caseImpossible.contains(caseToucheNonCoule.get(i) + 10)) {
+                    casePossible.add(caseToucheNonCoule.get(i) + 10);
+                }
+                if (caseToucheNonCoule.get(i) - 10 > 0 && !caseImpossible.contains(caseToucheNonCoule.get(i) - 10)) {
+                    casePossible.add(caseToucheNonCoule.get(i) - 10);
+                }
+            }
+        }
     }
 
     public void setBaseDeDonnees(BaseDeDonnees base){
